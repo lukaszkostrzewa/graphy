@@ -41,3 +41,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.log
+*.aux
+thesis/tex/thesis.synctex.gz
+thesis/tex/thesis.toc
