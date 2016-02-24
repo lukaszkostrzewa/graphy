@@ -45,3 +45,4 @@ Temporary Items
 *.aux
 thesis/tex/thesis.synctex.gz
 thesis/tex/thesis.toc
+thesis/tex/thesis.out
