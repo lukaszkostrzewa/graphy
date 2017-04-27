@@ -4,45 +4,30 @@
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
 \usepackage[hidelinks]{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{tabu}
 
 \begin{document}
+\definecolor{light-gray}{gray}{0.95}
+\rowcolors{1}{white}{light-gray}
 \include{title-page}
 \include{declarations}
 
 \tableofcontents
 \thispagestyle{empty}
 
-\chapter{Wprowadzenie}
-\section{Czym są grafy}
-\section{Zastosowania grafów}
-
-\chapter{Opis problemu}
-\section{Cele}
-\subsection{Wczytywanie}
-\subsection{Tworzenie nowych grafów}
-\subsection{Generowanie grafów}
-\subsection{Edycja}
-\subsection{Wizualizacja}
-\subsection{Przetwarzanie}
-\subsection{Rozszerzalność}
-\subsection{Eksport}
-
-\chapter{Istniejące rozwiązania}
-\section{Programy}
-\section{Platformy programistyczne}
-
-\chapter{Projekt i analiza}
-\section{Interfejs użytkownika}
-\section{Część serwerowa}
-
-\chapter{Implementacja}
-
-\chapter{Testy}
-
-\chapter{Wnioski}
+\include{introduction}
+\include{aims}
+\include{existing-solutions}
+\include{analysis}
+\include{implementation}
+\include{tests}
+\include{conclusions}
+\include{bibliography}
 
 \appendix
-\chapter{Instrukcje dla programistów}
-\chapter{Użyte narzędzia}
+\include{user-instructions}
+\include{developer-instructions}
+\include{used-tools}
 
 \end{document}
