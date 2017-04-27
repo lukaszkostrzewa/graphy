@@ -7,6 +7,15 @@
 \usepackage[table]{xcolor}
 \usepackage{tabu}
 
+\usepackage[threshold=1]{csquotes}
+\DeclareQuoteStyle{polish}
+  {\itshape\quotedblbase}
+  {\itshape\textquotedblright}
+  [0.05em]
+  {\guillemotright}
+  {\guillemotleft}
+\setquotestyle{polish}  
+
 \begin{document}
 \definecolor{light-gray}{gray}{0.95}
 \rowcolors{1}{white}{light-gray}
@@ -16,6 +25,7 @@
 \tableofcontents
 \thispagestyle{empty}
 
+\include{preface}
 \include{introduction}
 \include{aims}
 \include{existing-solutions}
