@@ -47,3 +47,7 @@ thesis/tex/thesis.synctex.gz
 thesis/tex/thesis.toc
 thesis/tex/thesis.out
 thesis/tex/*.dvi
+thesis/tex/*.bbl
+thesis/tex/*.bcf
+thesis/tex/*.blg
+thesis/tex/thesis.run.xml

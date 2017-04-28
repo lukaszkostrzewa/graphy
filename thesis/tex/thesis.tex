@@ -1,13 +1,16 @@
 \documentclass[a4paper,12pt]{report}
 
 \usepackage{polski}
+\usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{indentfirst}
 \usepackage[hidelinks]{hyperref}
 \usepackage[table]{xcolor}
 \usepackage{tabu}
+\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
+\addbibresource{bibliography.bib}
 
-\usepackage[threshold=1]{csquotes}
+\usepackage{csquotes}
 \DeclareQuoteStyle{polish}
   {\itshape\quotedblbase}
   {\itshape\textquotedblright}
@@ -33,11 +36,12 @@
 \include{implementation}
 \include{tests}
 \include{conclusions}
-\include{bibliography}
 
 \appendix
 \include{user-instructions}
 \include{developer-instructions}
 \include{used-tools}
+
+\include{bibliography}
 
 \end{document}
