@@ -6,7 +6,7 @@
 \usepackage{indentfirst}
 \usepackage[hidelinks]{hyperref}
 \usepackage[table]{xcolor}
-\usepackage{tabu}
+\usepackage{tabularx}
 \usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
 \addbibresource{bibliography.bib}
 
@@ -23,9 +23,16 @@
   {\guillemotleft}
 \setquotestyle{polish}  
 
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\usepackage{pifont}
+\newcommand{\checkmark}{\ding{51}}
+
+\usepackage{threeparttable}
+
 \begin{document}
 \definecolor{light-gray}{gray}{0.95}
-\rowcolors{1}{white}{light-gray}
 \include{title-page}
 \include{declarations}
 

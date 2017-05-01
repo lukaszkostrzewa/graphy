@@ -1,3 +1,203 @@
 \chapter{Istniejące rozwiązania}
+
+W tym rozdziale przedstawię istniejące aplikacje internetowe i desktopowe służące do tworzenia i wizualizacji grafów. Tabela \ref{tab:app-comparison} zawiera porównanie funkcjonalności opisywanych aplikacji internetowych.
+
 \section{Aplikacje internetowe}
+
+\subsection*{Graph Creator}
+\bigskip
+\noindent\begin{tabularx}{\textwidth}{r|X|}
+\cline{2-2}
+  Adres URL & http://illuminations.nctm.org/Activity.aspx?id=3550 \\ 
+\cline{2-2}
+ Autor & National Council of Teachers of Mathematics \\ 
+\cline{2-2}
+\end{tabularx} 
+\bigskip
+
+Aplikacja pozwala tworzyć grafy skierowane i nieskierowane. Posiada możliwość kolorowania wierzchołków, wyrównania ich do siatki oraz ustawienia wag na krawędziach i etykiet w wierzchołkach. Ponadto użytkownik może wyświetlić stopnie wierzchołków oraz wyginać krawędzie. Dodatkową funkcjonalnością jest możliwość zaznaczenia kilku wierzchołków na raz. 
+
+\textit{Graph Creator} nie daje możliwości eksportowania i importowania grafów. Nie można również przesuwać widoku ani oddalać oraz przybliżać grafu. Aplikacja posiada ograniczenie liczby wierzchołków -- maksymalna dozwolona ilość to 52 wierzchołki.
+
+\begin{figure}[H]
+\caption{Zrzut ekranu z aplikacji Graph Creator}
+\centering
+\includegraphics[width=\textwidth]{graph-creator.png}
+\end{figure}
+
+\subsection*{Graph Online}
+\bigskip
+\noindent\begin{tabularx}{\textwidth}{r|X|}
+\cline{2-2}
+  Adres URL & http://graphonline.ru/en/ \\ 
+\cline{2-2}
+ Autor & Unick-soft \\ 
+\cline{2-2}
+\end{tabularx} 
+\bigskip
+
+Aplikacja również daje możliwość stworzenia grafów zarówno skierowanych jak i nieskierowanych. Podobnie jak poprzednia aplikacja pozwala na zmianę etykiet wierzchołków, nadanie wag krawędziom oraz na wyświetlenie stopnia wierzchołków. Ponadto użytkownik ma możliwość przesuwania widoku oraz jego przybliżania i oddalania. Dodatkowo \textit{Graph Online} pozwala zapisać graf jako macierz sąsiedztwa lub incydencji oraz wczytać graf zapisany w takiej postaci. Użytkownik może również zapisać graf na serwerze -- po zapisaniu wyświetlany jest ogólnodostępny adres URL do grafu. Ciekawą funkcjonalnością jest eksport grafu do obrazka (plik \texttt{PNG}).
+
+\textit{Graph Online} posiada możliwość wykonania podstawowych algorytmów na grafie, takich jak: znajdowanie najkrótszej ścieżki pomiędzy dwoma wierzchołkami, znajdowanie cyklu Eulera, znajdowanie spójnych składowych, znajdowanie minimalnego drzewa rozpinającego.  
+
+W przeciwieństwie do poprzedniej aplikacji nie mamy możliwości kolorowania wierzchołków, zaznaczania kilku wierzchołków na raz oraz wyginania krawędzi. Maksymalna dozwolona ilość wierzchołków to 299. 
+
+\begin{figure}[H]
+\caption{Zrzut ekranu z aplikacji Graph Online}
+\centering
+\includegraphics[width=\textwidth]{graph-online.png}
+\end{figure}
+
+\subsection*{GraphJS}
+\bigskip
+\noindent\begin{tabularx}{\textwidth}{r|X|}
+\cline{2-2}
+  Adres URL & https://dl.dropboxusercontent.com/u/4189520/GraphJS/ graphjs.html \\ 
+\cline{2-2} 
+ Autor & David Kofoed Wind \\ 
+\cline{2-2}
+\end{tabularx}
+\bigskip
+
+Aplikacja pozwala na tworzenie grafów nieskierowanych. Podobnie jak w poprzednich aplikacjach możemy nadawać etykiety wierzchołkom i krawędziom. Niespotykaną funkcjonalnością jest możliwość stworzenia kilku grafów i przełączania się pomiędzy nimi oraz możliwość eksportu grafu do formatu \LaTeX (pakiet Ti\textit{k}Z). Ponadto użytkownik ma możliwość eksportu do własnego formatu \texttt{JSON} oraz importu grafu z tego formatu. Aplikacja posiada funkcjonalność zaznaczania wielu wierzchołków na raz.
+
+W \textit{GraphJS} nie ma możliwości przesuwania widoku oraz przybliżania i~oddalania grafu. Nie ma również możliwości kolorowania wierzchołków oraz wyginania krawędzi. Aplikacja zdaje się nie mieć limitu na liczbę wierzchołków -- udało się wczytać graf $C_{1000}$ jednakże dodanie kolejnego wierzchołka zajmuje około 10 sekund.
+
+\begin{figure}[H]
+\caption{Zrzut ekranu z aplikacji GraphJS}
+\centering
+\includegraphics[width=\textwidth]{graphjs.png}
+\end{figure}
+
+
+\subsection*{Graphrel}
+\bigskip
+\noindent\begin{tabularx}{\textwidth}{r|X|}
+\cline{2-2}
+  Adres URL & https://yiboyang.github.io/graphrel/ \\ 
+\cline{2-2} 
+ Autor & Yibo Yang \\ 
+\cline{2-2}
+\end{tabularx} 
+\bigskip
+
+Aplikacja daje możliwość tworzenia grafów skierowanych. W przeciwieństwie do poprzednio opisywanych aplikacji posiada układ kierowany siłą (ang. \textit{force-directed layout}), choć istnieje również opcja samodzielnego rozstawienia wierzchołków -- poprzez przytrzymanie klawisza \texttt{Ctrl}. Użytkownik może zaimportować graf z formatu stworzonego przez aplikację (tablice list sąsiedztwa dla każdego wierzchołka). Bardzo przydatną i niespotykaną funkcjonalnością jest możliwość cofania oraz ponawiania ostatnich akcji. 
+
+W \textit{Graphrel} nie możemy nadawać własnych etykiet na krawędziach ani w wierzchołkach, nie możemy przesuwać widoku ani zmieniać przybliżenia grafu. Nie ma również możliwości wyginania krawędzi, zaznaczania kliku wierzchołków na raz oraz kolorowania wierzchołków. Do aplikacji udało się wczytać graf $C_{100}$, przy próbie wczytania $C_{101}$ pojawia się informacja o niepoprawnym formacie.
+
+\begin{figure}[H]
+\caption{Zrzut ekranu z aplikacji Graphrel}
+\centering
+\includegraphics[width=\textwidth]{graphrel.png}
+\end{figure}
+
+
+\subsection*{VisuAlgo}
+\bigskip
+\noindent\begin{tabularx}{\textwidth}{r|X|}
+\cline{2-2}
+  Adres URL & https://visualgo.net/en/ \\ 
+\cline{2-2} 
+ Autor & Dr Steven Halim \\ 
+\cline{2-2}
+\end{tabularx} 
+\bigskip
+
+Aplikacja stworzona przez Dr Stevena Halima z National University of Singapore. Posiada możliwość tworzenia prostych grafów, jednak jej głównym celem jest wizualizacja algorytmów przez animację (nie tylko na grafach, ale również na strukturach danych). Użytkownik wraz z przebiegiem algorytmu może obserwować przebieg kodu, może zatrzymać się w dowolnym jego kroku, cofnąć się do kroku poprzedniego albo przejść do następnego.
+
+\begin{figure}[H]
+\caption{Zrzut ekranu z aplikacji VisuAlgo}
+\centering
+\includegraphics[width=\textwidth]{visualgo.png}
+\end{figure}
+
+
+\subsection*{Linkurious}
+\bigskip
+\noindent\begin{tabularx}{\textwidth}{r|X|}
+\cline{2-2}
+  Adres URL & http://linkurio.us \\ 
+\cline{2-2} 
+ Autor & Linkurious\\ 
+\cline{2-2}
+\end{tabularx}
+\bigskip
+
+\begin{figure}[H]
+\caption{Zrzut ekranu z aplikacji Linkurious}
+\centering
+\includegraphics[width=\textwidth]{linkurious.png}
+\end{figure}
+
+\subsection*{yEd Live}
+\bigskip
+\noindent\begin{tabularx}{\textwidth}{r|X|}
+\cline{2-2}
+  Adres URL & https://www.yworks.com/yed-live/ \\ 
+\cline{2-2} 
+ Autor & yWorks\\ 
+\cline{2-2}
+\end{tabularx}
+\bigskip
+
+\begin{figure}[H]
+\caption{Zrzut ekranu z aplikacji yEd Live}
+\centering
+\includegraphics[width=\textwidth]{yed-live.png}
+\end{figure}
+
+\begin{table}
+\centering
+\begin{threeparttable}
+\caption{Porównanie aplikacji \textit{Graph Creator}, \textit{Graph Online}, \textit{GraphJS} i \textit{Graphrel}}
+\label{tab:app-comparison}
+\begin{tabular}{ r|c|c|c|c| } 
+\multicolumn{1}{r}{}
+ &  \multicolumn{1}{c}{\rotatebox{60}{Graph Creator}}
+ & \multicolumn{1}{c}{\rotatebox{60}{Graph Online}} 
+ & \multicolumn{1}{c}{\rotatebox{60}{GraphJS}} 
+ & \multicolumn{1}{c}{\rotatebox{60}{Graphrel}} \\
+\cline{2-5}
+graf nieskierowany & \checkmark & \checkmark  & \checkmark  & --  \\
+\cline{2-5}
+graf skierowany  & \checkmark & \checkmark  & --  & \checkmark \\
+\cline{2-5}
+etykiety na krawędziach  & \checkmark & \checkmark  & \checkmark  & -- \\
+\cline{2-5}
+etykiety w wierzchołkach & \checkmark & \checkmark  & \checkmark  & -- \\
+\cline{2-5}
+kolorowanie wierzchołków & \checkmark & --  & --  & -- \\
+\cline{2-5}
+wyginanie krawędzi & \checkmark & --  & --  & -- \\
+\cline{2-5}
+zaznaczanie kilku wierzchołków & \checkmark & --  & \checkmark  & -- \\
+\cline{2-5}
+przesuwanie widoku & -- & \checkmark  & --  & -- \\
+\cline{2-5}
+przybliżanie/oddalanie & -- & \checkmark  & --  & -- \\
+\cline{2-5}
+zapisywanie/wczytywanie & -- & \checkmark\tnote{1}  & \checkmark\tnote{2}  & \checkmark\tnote{3} \\
+\cline{2-5}
+\end{tabular}
+\begin{tablenotes}
+{\footnotesize\bigskip
+\item[1] jako macierz sąsiedztwa lub jako obrazek
+\item[2] własny format \texttt{JSON} lub jako \LaTeX
+\item[3] własny format (listy sąsiedztwa)}
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
 \section{Aplikacje desktopowe}
+
+\subsection*{Gephi}
+https://gephi.org/
+
+\subsection*{GraphTea}
+http://www.graphtheorysoftware.com/
+
+\subsection*{Cytoscape}
+http://www.cytoscape.org/
+
+\subsection*{yEd Graph Editor}
+https://www.yworks.com
