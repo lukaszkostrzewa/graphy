@@ -51,3 +51,4 @@ thesis/tex/*.bbl
 thesis/tex/*.bcf
 thesis/tex/*.blg
 thesis/tex/thesis.run.xml
+thesis/tex/_minted-thesis/*
