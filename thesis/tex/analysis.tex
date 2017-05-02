@@ -1,4 +1,46 @@
-\chapter{Projekt i analiza}
+\chapter{Analiza}
+\section{Formaty zapisu grafów} \label{sec:graph-formats}
+Istnieje wiele formatów służących do opisu grafów. Do najpopularniejszych należą \cite{bernard,gephi}
+
+\begin{itemize}
+\setlength\itemsep{0em}
+\item \texttt{GraphML} -- \textit{Graph Markup Language}
+\item \texttt{GEXF} -- \textit{Graph Exchange XML Format}
+\item \texttt{JGF} -- \textit{JSON Graph Format}
+\item \texttt{DOT} -- format programu Graphviz
+\item \texttt{GML} -- \textit{Graph Modeling Language }
+\item \texttt{DGML} -- \textit{Directed Graph Markup Language}
+\item \texttt{XGMML} -- \textit{eXtensible Graph Markup and Modeling Language}
+\end{itemize}
+
+\subsubsection{Graph Markup Language (GraphML)}
+\begin{listing}[H]
+    \caption{Przykład grafu w formacie GraphML}
+    \inputminted{xml}{example.graphml}
+    \label{lst:graphml-example}
+\end{listing}
+
+\subsubsection{Graph Exchange XML Format (GEXF)}
+\begin{listing}[H]
+    \caption{Przykład grafu w formacie GEXF}
+    \inputminted{xml}{example.gexf}
+    \label{lst:gexf-example}
+\end{listing}
+
+\subsubsection{JSON Graph Format (JGF)} 
+\begin{listing}[H]
+    \caption{Przykład grafu w formacie JGF}
+    \inputminted{json}{example.json}
+    \label{lst:jgf-example}
+\end{listing}
+
+\subsubsection{DOT Graphviz} 
+\begin{listing}[H]
+    \caption{Przykład grafu w formacie DOT}
+    \inputminted{text}{example.gv}
+    \label{lst:dot-example}
+\end{listing}
+
 \section{Biblioteki do wizualizacji grafów w JavaScript}
 
 \begin{tabularx}{\textwidth}{|r|c|c|c}
@@ -25,6 +67,4 @@ Rozszerzalność & • & • & • \\
 \subsection{sigma.js}
 \subsection{VivaGraph.js}
 \subsection{Linkurious.js}
-
-\section{Interfejs użytkownika}
-\section{Część serwerowa}
+\section{Grafowe bazy danych}
