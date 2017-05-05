@@ -9,8 +9,6 @@ W tym rozdziale omówię czym są grafy -- na początku przedstawię intuicyjne 
 \subsection*{Graf ogólny, graf prosty}
 \textbf{Graf} (\textbf{graf ogólny}, \textbf{multigraf}) $G$ jest parą $(V(G),E(G))$, gdzie $V(G)$ jest skończonym, niepustym zbiorem elementów zwanych \textbf{wierzchołkami}, a $E(G)$ jest skończoną rodziną nieuporządkowanych par elementów zbioru $V(G)$ zwanych \textbf{krawędziami} \footcite[20]{wilson} (tj. $E(G) \subseteq \{\{u,v\} : u,v \in V(G)\}$). Zbiór $V(G)$ nazywamy zbiorem wierzchołków, a rodzinę $E(G)$ -- \textbf{rodziną krawędzi} grafu $G$; gdy nie ma możliwości pomyłki często są skracane do odpowiednio $V$ oraz $E$. (Niektóre definicje nie wymagają, aby zbiory $V$ oraz $E$ były skończone\footcite[143]{ross}, ale ponieważ w naszych zastosowaniach będziemy mieli do czynienia ze zbiorami skończonymi, przyjmiemy, że zbiory te są skończone).  Wierzchołki $u,v \in V$ są \textbf{połączone} krawędzią $\{u,v\}$ (lub krócej $uv$), gdy $\{u,v\} \in E$. 
 
-\tikzset{every node/.style={fill,circle,scale=0.5,font=\huge}}
-
 Zauważmy, że taka definicja dopuszcza sytuację, w której dwa wierzchołki są połączone więcej niż jedną krawędzią (tzw. \textbf{krawędź wielokrotna}) oraz gdy wierzchołek jest połączony z samym sobą (tzw. \textbf{pętla}). Graf, który nie posiada krawędzi wielokrotnych oraz pętli nazywamy \textbf{grafem prostym}\footcite[19]{wilson}.
 
 \begin{figure}[h]
@@ -195,12 +193,12 @@ Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem
 (1,1) node(2){}
 (1,2) node(3){}
 (0,2) node(4){};
-\path[draw,color=gray] (1)--(2);
-\path[draw,color=gray] (1)--(3);
-\path[draw,color=gray] (1)--(4);
-\path[draw,color=gray] (2)--(3);
-\path[draw,color=gray] (2)--(4);
-\path[draw,color=gray] (3)--(4); 
+\path[draw] (1)--(2);
+\path[draw] (1)--(3);
+\path[draw] (1)--(4);
+\path[draw] (2)--(3);
+\path[draw] (2)--(4);
+\path[draw] (3)--(4); 
 \end{tikzpicture}
 \captionsetup{justification=centering}
 \caption{Przykład grafu $K_4$} \label{fig:complete-graph-example}
@@ -224,21 +222,21 @@ Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem
 (2,2.7) node(8){}
 (2.8,0.2) node(9){}
 (3.4,1.7) node(10){};
-\path[draw,color=gray] (1)--(4);
-\path[draw,color=gray] (1)--(5);
-\path[draw,color=gray] (2)--(3);
-\path[draw,color=gray] (2)--(5);
-\path[draw,color=gray] (3)--(4);
-\path[draw,color=gray] (6)--(1);
-\path[draw,color=gray] (6)--(7);
-\path[draw,color=gray] (6)--(8);
-\path[draw,color=gray] (8)--(3);
-\path[draw,color=gray] (8)--(10);
-\path[draw,color=gray] (7)--(9);
-\path[draw,color=gray] (7)--(2);
-\path[draw,color=gray] (9)--(10);
-\path[draw,color=gray] (9)--(4);
-\path[draw,color=gray] (10)--(5);
+\path[draw] (1)--(4);
+\path[draw] (1)--(5);
+\path[draw] (2)--(3);
+\path[draw] (2)--(5);
+\path[draw] (3)--(4);
+\path[draw] (6)--(1);
+\path[draw] (6)--(7);
+\path[draw] (6)--(8);
+\path[draw] (8)--(3);
+\path[draw] (8)--(10);
+\path[draw] (7)--(9);
+\path[draw] (7)--(2);
+\path[draw] (9)--(10);
+\path[draw] (9)--(4);
+\path[draw] (10)--(5);
 \end{tikzpicture}
 \captionsetup{justification=centering}
 \caption{Graf Petersena} \label{fig:petersen-graph}
@@ -246,7 +244,9 @@ Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem
 
 \subsection*{Graf cykliczny, graf liniowy, koło}
 
-\textbf{Graf cykliczny} to spójny graf regularny stopnia 2. Graf cykliczny mający $n$ wierzchołków oznacza się symbolem $C_n$. Graf liniowy o $n$ wierzchołkach (oznaczany symbolem $P_n$) to graf powstały przez usunięcie jednej krawędzi z $C_n$. tbc
+\textbf{Graf cykliczny} to spójny graf regularny stopnia 2. Graf cykliczny mający $n$ wierzchołków oznacza się symbolem $C_n$. \textbf{Graf liniowy} o $n$ wierzchołkach (oznaczany symbolem $P_n$) to graf powstały przez usunięcie jednej krawędzi z $C_n$.
+
+Graf powstający z grafu $C_{n-1}$ poprzez dodanie dodatkowego wierzchołka i połączenie go ze wszystkimi pozostałymi nazywany jest \textbf{kołem} i oznaczany jest symbolem $W_n$. 
 
 \begin{figure}[h]
 \centering
@@ -256,13 +256,75 @@ Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem
 (1,1) node(2){}
 (1,2) node(3){}
 (0,2) node(4){};
-\path[draw,color=gray] (1)--(2);
-\path[draw,color=gray] (1)--(4);
-\path[draw,color=gray] (2)--(3);
-\path[draw,color=gray] (3)--(4); 
+\path[draw] (1)--(2);
+\path[draw] (1)--(4);
+\path[draw] (2)--(3);
+\path[draw] (3)--(4); 
+\filldraw 
+(2,1) node(5){}
+(3,1) node(6){}
+(4,1) node(7){}
+(5,1) node(8){};
+\path[draw] (5)--(6);
+\path[draw] (6)--(7);
+\path[draw] (7)--(8); 
+
+\filldraw 
+(6,1.1) node(9){}
+(6.5,2) node(10){}
+(7,1.1) node(11){}
+(6.5,1.45) node(12){};
+
+\path[draw] (12)--(9);
+\path[draw] (12)--(10);
+\path[draw] (12)--(11); 
+
+  \path
+    (9) edge[bend left] (10)
+    (10) edge[bend left](11)
+    (11) edge[bend left] (9);
 \end{tikzpicture}
 \captionsetup{justification=centering}
-\caption{Przykład grafu $C_4$} \label{fig:cycle-graph-example}
+\caption{Przykład grafu $C_4$, $P_4$ i $W_4$} \label{fig:cycle-graph-example}
+\end{figure}
+
+
+\subsection*{Grafy dwudzielne}
+
+\textbf{Graf dwudzielny} to graf, którego zbiór wierzchołków może być podzielony na dwa rozłączne zbiory $U$ i $V$ w taki sposób, że krawędzie nie łączą wierzchołków z tego samego zbioru. 
+
+Ponadto jeśli każdy wierzchołek ze zbioru $U$ jest połączony dokładnie jedną krawędzią z każdym wierzchołkiem ze zbioru $V$, to taki graf jest nazywany \textbf{pełnym grafem dwudzielnym}. Jeśli moc zbioru $U$ wynosi $n$, a moc zbioru $V$ wynosi $m$, to taki graf jest oznaczany symbolem $K_{n,m}$.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\draw[lighter-gray] (0,2.5) circle [x radius=1cm, y radius=20mm];
+\draw[lighter-gray] (3,2.5) circle [x radius=1cm, y radius=20mm];
+\node[draw=none,label=$U$,fill=none] at (0,-0.3) {};
+\node[draw=none,label=$V$,fill=none] at (3,-0.3) {};
+\filldraw 
+(0,1.5) node(1){}
+(0,2.5) node(2){}
+(0,3.5) node(3){}
+(3,1) node(4){}
+(3,2) node(5){}
+(3,3) node(6){}
+(3,4) node(7){};
+\path[draw] (1)--(4);
+\path[draw] (1)--(5);
+\path[draw] (1)--(6);
+\path[draw] (1)--(7); 
+\path[draw] (2)--(4);
+\path[draw] (2)--(5);
+\path[draw] (2)--(6);
+\path[draw] (2)--(7);
+\path[draw] (3)--(4);
+\path[draw] (3)--(5);
+\path[draw] (3)--(6);
+\path[draw] (3)--(7);
+\end{tikzpicture}
+\captionsetup{justification=centering}
+\caption{Przykład grafu $K_{3,4}$} \label{fig:k-3-4-graph-example}
 \end{figure}
 
 \section{Zastosowania grafów}
