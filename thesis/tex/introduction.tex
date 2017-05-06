@@ -49,7 +49,7 @@ Zauważmy, że taka definicja dopuszcza sytuację, w której dwa wierzchołki s�
 
 Wierzchołki $u,v \in V$ są \textbf{sąsiednie} jeśli istnieje krawędź $uv$ (wówczas wierzchołki $u$ i $v$ są \textbf{incydentne} z tą krawędzią). Dwie krawędzie są \textbf{sąsiednie}, jeśli są incydentne z tym samym wierzchołkiem. 
 
-\textbf{Stopień} wierzchołka $v \in V$ jest liczbą krawędzi incydentnych z $v$. \textbf{Wierzchołek izolowany} to wierzchołek stopnia 0, a \textbf{wierzchołek końcowy} -- stopnia 1.
+\textbf{Stopień} wierzchołka $v \in V$ (oznaczany jako $deg(v)$) jest liczbą krawędzi incydentnych z $v$. \textbf{Wierzchołek izolowany} to wierzchołek stopnia 0, a \textbf{wierzchołek końcowy} -- stopnia 1.
 
 Istnieją dwie standardowe reprezentacje grafów w pamięci komputera: jako \textbf{listy sąsiedztwa} lub jako \textbf{macierze sąsiedztwa}\footcites[29]{banachowski}[600]{cormen}. Pierwsza z nich polega na zapamiętaniu dla każdego wierzchołka listy wierzchołków z nim sąsiadujących. Druga zakłada, że wierzchołki są ponumerowane liczbami ze zbioru $\{1, 2,\ldots,n\}$ (gdzie $n$ oznacza moc zbioru $V$) i opiera się na stworzeniu macierzy wymiaru $n \times n$, której wyraz o indeksach $i,j$ jest równy liczbie krawędzi łączących wierzchołek o numerze $i$ z wierzchołkiem o numerze $j$.
 
@@ -87,6 +87,11 @@ Macierz sąsiedztwa $A$ i macierz incydencji $M$ dla grafu z rysunku \ref{fig:gr
  \end{pmatrix}
 \]
 
+\subsection*{Podgraf}
+\textbf{Podgraf} $G'=(V',E')$ grafu $G=(V,E)$ to graf, którego wszystkie wierzchołki nalezą do $V$, a krawędzie należą do $E$ (tj. $V' \subseteq V$ oraz $E' \subseteq E$).Jeśli $V' = V$, to podgraf $G'$ nazywany jest \textbf{podgrafem rozpinającym}\footcite[229]{banachowski}. 
+
+Podgraf jest \textbf{indukowany} przez $V'$, jeśli zawiera wszystkie krawędzie z grafu $G$ o końcach w wierzchołkach z $V'$ (tj. $E'=\{(u,v) \in E: u,v \in V' \}$)\footcite[1195]{cormen}.
+
 \subsection*{Trasa, ścieżka, droga, cykl}
 
 \textbf{Trasa} w grafie $G$ to skończony ciąg krawędzi $v_0v_1,v_1v_2\ldots v_{m-1}v_m$ (zapisywany również w postaci $v_0 \rightarrow v_1 \rightarrow \ldots \rightarrow v_m$), w którym każde dwie kolejne krawędzie są albo sąsiednie, albo identyczne\footcite[41]{wilson}. Trasa wyznacza ciąg wierzchołków $v_0,v_1,\ldots,v_m$ -- pierwszy z nich nazywamy \textbf{wierzchołkiem początkowym}, a ostatni \textbf{wierzchołkiem końcowym}. Liczba krawędzi na trasie to \textbf{długość trasy}. 
@@ -94,6 +99,40 @@ Macierz sąsiedztwa $A$ i macierz incydencji $M$ dla grafu z rysunku \ref{fig:gr
 \textbf{Ścieżka} to trasa, w której wszystkie krawędzie są różne. Jeśli również wszystkie wierzchołki $v_0,v_1,\ldots,v_m$ są różne (dopuszczając jedynie możliwość, aby wierzchołek początkowy był równy wierzchołkowi końcowemu), to ścieżka nazywana jest \textbf{drogą}. Droga (lub ścieżka) jest \textbf{zamknięta}, jeśli $v_0 = v_m$; ścieżka zamknięta, która posiada co najmniej jedną krawędź to \textbf{cykl}; droga zamknięta, która posiada co najmniej jedną krawędź to \textbf{cykl prosty}.
 
 Jeśli istnieje ścieżka z $u$ do $v$, to mówimy, że $v$ jest \textbf{osiągalny} z $u$.
+
+\subsubsection*{Cykl Eulera}
+
+\textbf{Cykl Eulera} to taki cykl w grafie, który przechodzi przez każdą jego krawędź dokładnie jeden raz. Graf spójny, który posiada cykl Eulera nazywany jest \textbf{grafem eulerowskim}. 
+
+\begin{theorem}[Euler, 1736]
+Graf spójny $G$ jest grafem eulerowskim wtedy i tylko wtedy, gdy stopień każdego wierzchołka grafu $G$ jest liczbą parzystą.
+\end{theorem}
+
+\begin{theorem}
+Skierowany graf spójny $G$ jest eulerowski wtedy i tylko wtedy, gdy każdy wierzchołek grafu $G$ ma tyle samo krawędzi wchodzących i wychodzących.
+\end{theorem}
+	
+\subsubsection*{Cykl Hamiltona}
+
+\textbf{Cykl Hamiltona} to taki cykl w grafie, który przechodzi przez każdy jego wierzchołek dokładnie jeden raz. Graf spójny posiadający cykl Hamiltona nazywany jest \textbf{grafem hamiltonowskim}.
+
+W przeciwieństwie do problemu stwierdzenia czy graf jest eulerowski, nie jest znany warunek konieczny i wystarczający na to, aby graf był hamiltonowksi. Problem stwierdzania czy graf jest hamiltonowski należy do jednych z najważniejszych nierozwiązanych problemów teorii grafów\footcite[54]{wilson}. 
+
+Istnieją twierdzenia (np. Twierdzenie \ref{theorem:dirac}, \ref{theorem:orego}), które na podstawie cech grafu pozwalają stwierdzić, czy graf jest hamiltonowski. Mają one postać: ,,jeśli graf ma wystarczająco dużo krawędzi, to ma cykl Hamiltona''\footcite[54]{wilson}. Są to jednak implikacje jednostronne -- istnieją grafy hamiltonowskie, które nie spełniają poprzedników tych implikacji. 
+
+\begin{theorem}[Dirac, 1952]\label{theorem:dirac}
+Jeśli w grafie prostym $G$, który ma $n$ wierzchołków (gdzie $n \geq 3$)
+\[deg(v) \geq \frac{n}{2}\] 
+dla każdego wierzchołka $v$, to graf $G$ jest hamiltonowski.
+\end{theorem}
+
+\begin{theorem}[Orego, 1960]\label{theorem:orego}
+Jeśli graf prosty $G$ ma $n$ wierzchołków (gdzie $n\geq 3$), oraz
+\[
+deg(v) + deg(w) \geq n
+\]
+dla każdej pary wierzchołków niesąsiednich $v$ i $w$, to graf $G$ jest hamiltonowski.
+\end{theorem}
 
 \subsection*{Graf skierowany}
 
@@ -162,6 +201,64 @@ Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem
 \caption{Przykład grafu zawierającego trzy dwuspójne składowe -- punkty artykulacji i mosty zostały zaznaczone na czarno.} \label{fig:biconnected-copoments-example}
 \end{figure}
 
+\subsection*{Drzewo, las, drzewo rozpinające}
+
+\textbf{Drzewo} to graf spójny nie posiadający cykli. \textbf{Las} to graf, którego spójnymi składowymi są drzewa.
+
+Drzewem rozpinającym graf $G$ nazywamy podgraf rozpinający $G$, który nie zawiera cykli\footcite[10]{wilson-beineke}. 
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\filldraw 
+(0,0) node(1){}
+(1,1) node(2){} 
+(2,0) node(3){}
+(2,2) node(4){}
+(3,1) node(5){};
+\path[draw] (1)--(2);
+\path[draw] (2)--(3);
+\path[draw] (2)--(4);
+\path[draw] (4)--(5);
+\end{tikzpicture}
+\caption{Przykład grafu będącego drzewem} \label{fig:tree-example}
+\end{figure}
+
+\subsection*{Planarność}
+
+\textbf{Graf planarny} to graf, który można narysować na płaszczyźnie tak, aby żadne dwie krzywe obrazujące krawędzie nie przecinały się ze sobą. Odwzorowanie grafu na płaszczyźnie o tej własności nazywane jest \textbf{rysunkiem płaskim} (lub \textbf{grafem płaskim})\footcite[82]{wilson}. 
+
+Na rysunku \ref{fig:planar-graph-example} jest narysowany na dwa sposoby graf pełny $K_4$ (opisany w następnej podsekcji \ref{sec:common-graphs}) -- drugi sposób jest przykładem rysunku płaskiego. 
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\filldraw 
+(0,0) node(1){}
+(1,0) node(2){} 
+(1,1) node(3){}
+(0,1) node(4){};
+\path[draw] (1)--(2);
+\path[draw] (2)--(3);
+\path[draw] (3)--(4);
+\path[draw] (4)--(1);
+\path[draw] (2)--(4);
+\path[draw] (1)--(3);
+\filldraw 
+(2,0) node(5){}
+(3,0) node(6){} 
+(3,1) node(7){}
+(2,1) node(8){};
+\path[draw] (5)--(6);
+\path[draw] (6)--(7);
+\path[draw] (7)--(8);
+\path[draw] (8)--(5);
+\path[draw] (6)--(8);
+\draw [-] (5) to [out=-20,in=-140] (3.15,-0.15) to [out=40, in=-70 ] (7);
+\end{tikzpicture}
+\caption{$K_4$ -- przykład grafu planarnego} \label{fig:planar-graph-example}
+\end{figure}
+
 \section{Przykłady grafów} \label{sec:common-graphs}
 
 \subsection*{Graf pusty}
@@ -183,7 +280,7 @@ Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem
 
 \subsection*{Graf pełny}
 
-\textbf{Graf pełny} to graf prosty, którego każda para różnych wierzchołków jest połączona krawędzią. Graf pełny mający $n$ wierzchołków oznacza się symbolem $K_n$. 
+\textbf{Graf pełny} to graf prosty, którego każda para różnych wierzchołków jest połączona krawędzią. Graf pełny mający $n$ wierzchołków (oraz $\frac{n(n-1)}{2}$ krawędzi) oznacza się symbolem $K_n$. 
 
 \begin{figure}[h]
 \centering
@@ -288,12 +385,11 @@ Graf powstający z grafu $C_{n-1}$ poprzez dodanie dodatkowego wierzchołka i po
 \caption{Przykład grafu $C_4$, $P_4$ i $W_4$} \label{fig:cycle-graph-example}
 \end{figure}
 
-
 \subsection*{Grafy dwudzielne}
 
 \textbf{Graf dwudzielny} to graf, którego zbiór wierzchołków może być podzielony na dwa rozłączne zbiory $U$ i $V$ w taki sposób, że krawędzie nie łączą wierzchołków z tego samego zbioru. 
 
-Ponadto jeśli każdy wierzchołek ze zbioru $U$ jest połączony dokładnie jedną krawędzią z każdym wierzchołkiem ze zbioru $V$, to taki graf jest nazywany \textbf{pełnym grafem dwudzielnym}. Jeśli moc zbioru $U$ wynosi $n$, a moc zbioru $V$ wynosi $m$, to taki graf jest oznaczany symbolem $K_{n,m}$.
+Ponadto jeśli każdy wierzchołek ze zbioru $U$ jest połączony dokładnie jedną krawędzią z każdym wierzchołkiem ze zbioru $V$, to taki graf jest nazywany \textbf{pełnym grafem dwudzielnym}. Jeśli moc zbioru $U$ wynosi $r$, a moc zbioru $V$ wynosi $s$, to taki graf jest oznaczany symbolem $K_{r,s}$ (ma on $r+s$ wierzchołków oraz $rs$ krawędzi).
 
 \begin{figure}[h]
 \centering
