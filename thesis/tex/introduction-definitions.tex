@@ -1,9 +1,9 @@
 \section{Definicje}
 
 \subsection*{Graf ogólny, graf prosty}
-\textbf{Graf} (\textbf{graf ogólny}, \textbf{multigraf}) $G$ jest parą $(V(G),E(G))$, gdzie $V(G)$ jest skończonym, niepustym zbiorem elementów zwanych \textbf{wierzchołkami}, a $E(G)$ jest skończoną rodziną nieuporządkowanych par elementów zbioru $V(G)$ zwanych \textbf{krawędziami} \footcite[20]{wilson} (tj. $E(G) \subseteq \{\{u,v\} : u,v \in V(G)\}$). Zbiór $V(G)$ nazywamy zbiorem wierzchołków, a rodzinę $E(G)$ -- \textbf{rodziną krawędzi} grafu $G$; gdy nie ma możliwości pomyłki często są skracane do odpowiednio $V$ oraz $E$. (Niektóre definicje nie wymagają, aby zbiory $V$ oraz $E$ były skończone\footcite[143]{ross}, ale ponieważ w naszych zastosowaniach będziemy mieli do czynienia ze zbiorami skończonymi, przyjmiemy, że zbiory te są skończone).  Wierzchołki $u,v \in V$ są \textbf{połączone} krawędzią $\{u,v\}$ (lub krócej $uv$), gdy $\{u,v\} \in E$. 
+\textbf{Graf} (\textbf{graf ogólny}, \textbf{multigraf}) $G$ jest parą $(V(G),E(G))$, gdzie $V(G)$ jest skończonym, niepustym zbiorem elementów zwanych \textbf{wierzchołkami}, a $E(G)$ jest skończoną rodziną nieuporządkowanych par elementów zbioru $V(G)$ zwanych \textbf{krawędziami} \cite[20]{wilson} (tj. $E(G) \subseteq \{\{u,v\} : u,v \in V(G)\}$). Zbiór $V(G)$ nazywamy zbiorem wierzchołków, a rodzinę $E(G)$ -- \textbf{rodziną krawędzi} grafu $G$; gdy nie ma możliwości pomyłki często są skracane do odpowiednio $V$ oraz $E$. (Niektóre definicje nie wymagają, aby zbiory $V$ oraz $E$ były skończone\cite[143]{ross}, ale ponieważ w naszych zastosowaniach będziemy mieli do czynienia ze zbiorami skończonymi, przyjmiemy, że zbiory te są skończone).  Wierzchołki $u,v \in V$ są \textbf{połączone} krawędzią $\{u,v\}$ (lub krócej $uv$), gdy $\{u,v\} \in E$. 
 
-Zauważmy, że taka definicja dopuszcza sytuację, w której dwa wierzchołki są połączone więcej niż jedną krawędzią (tzw. \textbf{krawędź wielokrotna}) oraz gdy wierzchołek jest połączony z samym sobą (tzw. \textbf{pętla}). Graf, który nie posiada krawędzi wielokrotnych oraz pętli nazywamy \textbf{grafem prostym}\footcite[19]{wilson}.
+Zauważmy, że taka definicja dopuszcza sytuację, w której dwa wierzchołki są połączone więcej niż jedną krawędzią (tzw. \textbf{krawędź wielokrotna}) oraz gdy wierzchołek jest połączony z samym sobą (tzw. \textbf{pętla}). Graf, który nie posiada krawędzi wielokrotnych oraz pętli nazywamy \textbf{grafem prostym}\cite[19]{wilson}.
 
 \begin{figure}[h]
 \centering
@@ -45,9 +45,9 @@ Wierzchołki $u,v \in V$ są \textbf{sąsiednie} jeśli istnieje krawędź $uv$ 
 
 \textbf{Stopień} wierzchołka $v \in V$ (oznaczany jako $deg(v)$) jest liczbą krawędzi incydentnych z $v$. \textbf{Wierzchołek izolowany} to wierzchołek stopnia 0, a \textbf{wierzchołek końcowy} -- stopnia 1.
 
-Istnieją dwie standardowe reprezentacje grafów w pamięci komputera: jako \textbf{listy sąsiedztwa} lub jako \textbf{macierze sąsiedztwa}\footcites[29]{banachowski}[600]{cormen}. Pierwsza z nich polega na zapamiętaniu dla każdego wierzchołka listy wierzchołków z nim sąsiadujących. Druga zakłada, że wierzchołki są ponumerowane liczbami ze zbioru $\{1, 2,\ldots,n\}$ (gdzie $n$ oznacza moc zbioru $V$) i opiera się na stworzeniu macierzy wymiaru $n \times n$, której wyraz o indeksach $i,j$ jest równy liczbie krawędzi łączących wierzchołek o numerze $i$ z wierzchołkiem o numerze $j$.
+Istnieją dwie standardowe reprezentacje grafów w pamięci komputera: jako \textbf{listy sąsiedztwa} lub jako \textbf{macierze sąsiedztwa}\cites[29]{banachowski}[600]{cormen}. Pierwsza z nich polega na zapamiętaniu dla każdego wierzchołka listy wierzchołków z nim sąsiadujących. Druga zakłada, że wierzchołki są ponumerowane liczbami ze zbioru $\{1, 2,\ldots,n\}$ (gdzie $n$ oznacza moc zbioru $V$) i opiera się na stworzeniu macierzy wymiaru $n \times n$, której wyraz o indeksach $i,j$ jest równy liczbie krawędzi łączących wierzchołek o numerze $i$ z wierzchołkiem o numerze $j$.
 
-Innym sposobem reprezentacji grafu za pomocą macierzy jest \textbf{macierz incydencji}. Jeśli krawędzie oznakujemy liczbami ze zbioru $\{1,2,\ldots,m\}$ (gdzie $m$ moc zbioru $E$), to jest to macierz o rozmiarze $n \times m$, której wyraz o indeksach $i,j$ jest równy 1, jeśli wierzchołek z numerem $i$ jest incydentny z krawędzią $j$, i jest równy 0 w przeciwnym przypadku\footcite[27]{ross}.
+Innym sposobem reprezentacji grafu za pomocą macierzy jest \textbf{macierz incydencji}. Jeśli krawędzie oznakujemy liczbami ze zbioru $\{1,2,\ldots,m\}$ (gdzie $m$ moc zbioru $E$), to jest to macierz o rozmiarze $n \times m$, której wyraz o indeksach $i,j$ jest równy 1, jeśli wierzchołek z numerem $i$ jest incydentny z krawędzią $j$, i jest równy 0 w przeciwnym przypadku\cite[27]{ross}.
 
 \begin{figure}[H]
 \centering
@@ -82,13 +82,13 @@ Macierz sąsiedztwa $A$ i macierz incydencji $M$ dla grafu z rysunku \ref{fig:gr
 \]
 
 \subsection*{Podgraf}
-\textbf{Podgraf} $G'=(V',E')$ grafu $G=(V,E)$ to graf, którego wszystkie wierzchołki nalezą do $V$, a krawędzie należą do $E$ (tj. $V' \subseteq V$ oraz $E' \subseteq E$).Jeśli $V' = V$, to podgraf $G'$ nazywany jest \textbf{podgrafem rozpinającym}\footcite[229]{banachowski}. 
+\textbf{Podgraf} $G'=(V',E')$ grafu $G=(V,E)$ to graf, którego wszystkie wierzchołki nalezą do $V$, a krawędzie należą do $E$ (tj. $V' \subseteq V$ oraz $E' \subseteq E$).Jeśli $V' = V$, to podgraf $G'$ nazywany jest \textbf{podgrafem rozpinającym}\cite[229]{banachowski}. 
 
-Podgraf jest \textbf{indukowany} przez $V'$, jeśli zawiera wszystkie krawędzie z grafu $G$ o końcach w wierzchołkach z $V'$ (tj. $E'=\{(u,v) \in E: u,v \in V' \}$)\footcite[1195]{cormen}.
+Podgraf jest \textbf{indukowany} przez $V'$, jeśli zawiera wszystkie krawędzie z grafu $G$ o końcach w wierzchołkach z $V'$ (tj. $E'=\{(u,v) \in E: u,v \in V' \}$)\cite[1195]{cormen}.
 
 \subsection*{Trasa, ścieżka, droga, cykl}
 
-\textbf{Trasa} w grafie $G$ to skończony ciąg krawędzi $v_0v_1,v_1v_2\ldots v_{m-1}v_m$ (zapisywany również w postaci $v_0 \rightarrow v_1 \rightarrow \ldots \rightarrow v_m$), w którym każde dwie kolejne krawędzie są albo sąsiednie, albo identyczne\footcite[41]{wilson}. Trasa wyznacza ciąg wierzchołków $v_0,v_1,\ldots,v_m$ -- pierwszy z nich nazywamy \textbf{wierzchołkiem początkowym}, a ostatni \textbf{wierzchołkiem końcowym}. Liczba krawędzi na trasie to \textbf{długość trasy}. 
+\textbf{Trasa} w grafie $G$ to skończony ciąg krawędzi $v_0v_1,v_1v_2\ldots v_{m-1}v_m$ (zapisywany również w postaci $v_0 \rightarrow v_1 \rightarrow \ldots \rightarrow v_m$), w którym każde dwie kolejne krawędzie są albo sąsiednie, albo identyczne\cite[41]{wilson}. Trasa wyznacza ciąg wierzchołków $v_0,v_1,\ldots,v_m$ -- pierwszy z nich nazywamy \textbf{wierzchołkiem początkowym}, a ostatni \textbf{wierzchołkiem końcowym}. Liczba krawędzi na trasie to \textbf{długość trasy}. 
 
 \textbf{Ścieżka} to trasa, w której wszystkie krawędzie są różne. Jeśli również wszystkie wierzchołki $v_0,v_1,\ldots,v_m$ są różne (dopuszczając jedynie możliwość, aby wierzchołek początkowy był równy wierzchołkowi końcowemu), to ścieżka nazywana jest \textbf{drogą}. Droga (lub ścieżka) jest \textbf{zamknięta}, jeśli $v_0 = v_m$; ścieżka zamknięta, która posiada co najmniej jedną krawędź to \textbf{cykl}; droga zamknięta, która posiada co najmniej jedną krawędź to \textbf{cykl prosty}.
 
@@ -110,9 +110,9 @@ Skierowany graf spójny $G$ jest eulerowski wtedy i tylko wtedy, gdy każdy wier
 
 \textbf{Cykl Hamiltona} to taki cykl w grafie, który przechodzi przez każdy jego wierzchołek dokładnie jeden raz. Graf spójny posiadający cykl Hamiltona nazywany jest \textbf{grafem hamiltonowskim}.
 
-W przeciwieństwie do problemu stwierdzenia czy graf jest eulerowski, nie jest znany warunek konieczny i wystarczający na to, aby graf był hamiltonowksi. Problem stwierdzania czy graf jest hamiltonowski należy do jednych z najważniejszych nierozwiązanych problemów teorii grafów\footcite[54]{wilson}. 
+W przeciwieństwie do problemu stwierdzenia czy graf jest eulerowski, nie jest znany warunek konieczny i wystarczający na to, aby graf był hamiltonowksi. Problem stwierdzania czy graf jest hamiltonowski należy do jednych z najważniejszych nierozwiązanych problemów teorii grafów\cite[54]{wilson}. 
 
-Istnieją twierdzenia (np. Twierdzenie \ref{theorem:dirac}, \ref{theorem:orego}), które na podstawie cech grafu pozwalają stwierdzić, czy graf jest hamiltonowski. Mają one postać: ,,jeśli graf ma wystarczająco dużo krawędzi, to ma cykl Hamiltona''\footcite[54]{wilson}. Są to jednak implikacje jednostronne -- istnieją grafy hamiltonowskie, które nie spełniają poprzedników tych implikacji. 
+Istnieją twierdzenia (np. Twierdzenie \ref{theorem:dirac}, \ref{theorem:orego}), które na podstawie cech grafu pozwalają stwierdzić, czy graf jest hamiltonowski. Mają one postać: ,,jeśli graf ma wystarczająco dużo krawędzi, to ma cykl Hamiltona''\cite[54]{wilson}. Są to jednak implikacje jednostronne -- istnieją grafy hamiltonowskie, które nie spełniają poprzedników tych implikacji. 
 
 \begin{theorem}[Dirac, 1952]\label{theorem:dirac}
 Jeśli w grafie prostym $G$, który ma $n$ wierzchołków (gdzie $n \geq 3$)
@@ -130,15 +130,15 @@ dla każdej pary wierzchołków niesąsiednich $v$ i $w$, to graf $G$ jest hamil
 
 \subsection*{Graf skierowany}
 
-\textbf{Graf skierowany}, \textbf{digraf} (ang. \textit{directed graph}) $G$ to para $(V(G),\ E(G))$, gdzie $V(G)$ niepusty, skończony zbiór elementów zwanych \textbf{wierzchołkami}, a $E(G)$ skończony zbiór par \emph{uporządkowanych} elementów ze zbioru $V(G)$ zwanych \textbf{krawędziami} (lub \textbf{łukami}\footcite[135]{wilson}). Digraf $G$ jest \textbf{digrafem prostym}, jeśli wszystkie krawędzie są różne oraz jeśli nie posiada pętli. 
+\textbf{Graf skierowany}, \textbf{digraf} (ang. \textit{directed graph}) $G$ to para $(V(G),\ E(G))$, gdzie $V(G)$ niepusty, skończony zbiór elementów zwanych \textbf{wierzchołkami}, a $E(G)$ skończony zbiór par \emph{uporządkowanych} elementów ze zbioru $V(G)$ zwanych \textbf{krawędziami} (lub \textbf{łukami}\cite[135]{wilson}). Digraf $G$ jest \textbf{digrafem prostym}, jeśli wszystkie krawędzie są różne oraz jeśli nie posiada pętli. 
 
 Jeśli $e = (v,w) \in E(G)$, to $v$ nazywamy \textbf{początkiem krawędzi} $e$, a $w$ -- \textbf{końcem krawędzi} $e$.
 
-Definicje z poprzedniej podsekcji w naturalny sposób uogólniają się na przypadek digrafów\footcite[136]{wilson}. 
+Definicje z poprzedniej podsekcji w naturalny sposób uogólniają się na przypadek digrafów\cite[136]{wilson}. 
 
 \subsection*{Spójność}
 
-Załóżmy, że mamy dwa grafy $G_1 = (V_1,E_1)$ oraz $G_2 = (V_2,E_2)$, gdzie $V_1 \cap V_2 = \emptyset$. Wówczas \textbf{sumą} tych grafów $G_1 \cup G_2$ jest graf $G=(V_1\cup V_2, E_1\cup E_2)$. Graf nazywamy \textbf{spójnym}, jeśli nie można przedstawić go w postaci sumy dwóch grafów, w przeciwnym razie graf jest \textbf{niespójny}\footcite[22]{wilson}. Każdy graf niespójny $G$ możemy przedstawić jako sumę grafów spójnych, nazywanych \textbf{spójnymi składowymi} grafu $G$ (rysunek \ref{fig:connected-copoments-example} przedstawia graf posiadający dwie spójne składowe). 
+Załóżmy, że mamy dwa grafy $G_1 = (V_1,E_1)$ oraz $G_2 = (V_2,E_2)$, gdzie $V_1 \cap V_2 = \emptyset$. Wówczas \textbf{sumą} tych grafów $G_1 \cup G_2$ jest graf $G=(V_1\cup V_2, E_1\cup E_2)$. Graf nazywamy \textbf{spójnym}, jeśli nie można przedstawić go w postaci sumy dwóch grafów, w przeciwnym razie graf jest \textbf{niespójny}\cite[22]{wilson}. Każdy graf niespójny $G$ możemy przedstawić jako sumę grafów spójnych, nazywanych \textbf{spójnymi składowymi} grafu $G$ (rysunek \ref{fig:connected-copoments-example} przedstawia graf posiadający dwie spójne składowe). 
 
 \begin{figure}[h]
 \centering
@@ -157,13 +157,13 @@ Załóżmy, że mamy dwa grafy $G_1 = (V_1,E_1)$ oraz $G_2 = (V_2,E_2)$, gdzie $
 \caption{Przykład grafu mającego dwie spójne składowe} \label{fig:connected-copoments-example}
 \end{figure}
 
-Niektórzy autorzy\footcite[342]{ross} podają alternatywną, równoważną\footcite[42]{wilson} definicję grafu spójnego -- jest to graf, w którym każda para różnych wierzchołków jest połączona drogą. 
+Niektórzy autorzy\cite[342]{ross} podają alternatywną, równoważną\cite[42]{wilson} definicję grafu spójnego -- jest to graf, w którym każda para różnych wierzchołków jest połączona drogą. 
 
 Graf skierowany $G$ jest \textbf{silnie spójny}, jeśli dla dowolnych dwóch wierzchołków $v$ i $w$ istnieje droga z $v$ do $w$. Każdy digraf silnie spójny jest spójny, ale nie wszystkie digrafy spójne są silnie spójne. 
 
-\textbf{Dwuspójną składową} grafu $G$ nazywamy maksymalny podzbiór krawędzi, taki że każde dwie krawędzie z tego zbioru leżą na wspólnym cyklu prostym \footcite[634]{cormen}. W dwuspójnej składowej pomiędzy każdą parą wierzchołków istnieją dwie rozłączne krawędziowo drogi. Wierzchołki należące do co najmniej dwóch różnych dwuspójnych składowych nazywamy \textbf{wierzchołkami rozdzielającymi} (lub \textbf{punktami artykulacji}\footcite[633]{cormen}). Usunięcie wierzchołka rozdzielającego ,,rozspójnia'' graf. Krawędzie, które nie należą do żadnego cyklu prostego nazywamy \textbf{mostami}. Ich usunięcie również ,,rozspójnia'' graf.
+\textbf{Dwuspójną składową} grafu $G$ nazywamy maksymalny podzbiór krawędzi, taki że każde dwie krawędzie z tego zbioru leżą na wspólnym cyklu prostym \cite[634]{cormen}. W dwuspójnej składowej pomiędzy każdą parą wierzchołków istnieją dwie rozłączne krawędziowo drogi. Wierzchołki należące do co najmniej dwóch różnych dwuspójnych składowych nazywamy \textbf{wierzchołkami rozdzielającymi} (lub \textbf{punktami artykulacji}\cite[633]{cormen}). Usunięcie wierzchołka rozdzielającego ,,rozspójnia'' graf. Krawędzie, które nie należą do żadnego cyklu prostego nazywamy \textbf{mostami}. Ich usunięcie również ,,rozspójnia'' graf.
 
-Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem dwuspójnym}\footcite[232]{banachowski}.
+Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem dwuspójnym}\cite[232]{banachowski}.
 
 \begin{figure}[H]
 \centering
@@ -199,7 +199,7 @@ Graf, który posiada tylko jedną dwuspójną składową nazywamy \textbf{grafem
 
 \textbf{Drzewo} to graf spójny nie posiadający cykli. \textbf{Las} to graf, którego spójnymi składowymi są drzewa.
 
-Drzewem rozpinającym graf $G$ nazywamy podgraf rozpinający $G$, który nie zawiera cykli\footcite[10]{wilson-beineke}. 
+Drzewem rozpinającym graf $G$ nazywamy podgraf rozpinający $G$, który nie zawiera cykli\cite[10]{wilson-beineke}. 
 
 \begin{figure}[h]
 \centering
@@ -220,7 +220,7 @@ Drzewem rozpinającym graf $G$ nazywamy podgraf rozpinający $G$, który nie zaw
 
 \subsection*{Planarność}
 
-\textbf{Graf planarny} to graf, który można narysować na płaszczyźnie tak, aby żadne dwie krzywe obrazujące krawędzie nie przecinały się ze sobą. Odwzorowanie grafu na płaszczyźnie o tej własności nazywane jest \textbf{rysunkiem płaskim} (lub \textbf{grafem płaskim})\footcite[82]{wilson}. 
+\textbf{Graf planarny} to graf, który można narysować na płaszczyźnie tak, aby żadne dwie krzywe obrazujące krawędzie nie przecinały się ze sobą. Odwzorowanie grafu na płaszczyźnie o tej własności nazywane jest \textbf{rysunkiem płaskim} (lub \textbf{grafem płaskim})\cite[82]{wilson}. 
 
 Na rysunku \ref{fig:planar-graph-example} jest narysowany na dwa sposoby graf pełny $K_4$ (opisany w następnej sekcji \ref{sec:common-graphs}) -- drugi sposób jest przykładem rysunku płaskiego. 
 
