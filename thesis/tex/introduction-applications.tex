@@ -60,7 +60,7 @@ Cayley miał zamiar znaleźć sposób na obliczanie ile jest różnych izomerów
 \chemfig{C(-[:90]H)(-[:-90]H)(-[:0]H)(-[:180]C(-[:90]H)(-[:-90]H)(-[:180]C(-[:90]H)(-[:-90]H)(-[:180]C(-[:90]H)(-[:-90]H)(-[:180]H))))}
 \captionsetup{justification=centering}
 \caption{Wzór strukturalny $n$-butanu}
-\label{fig:bridges-of-konigsberg}
+\label{fig:n-butane}
 \end{minipage}
 \begin{minipage}[b]{.45\textwidth}
   \centering
@@ -72,7 +72,7 @@ Cayley miał zamiar znaleźć sposób na obliczanie ile jest różnych izomerów
 
 Poniższa tabela przedstawia liczbę różnych alkanów $C_nH_{2n+2}$ posiadających $n$ atomów węgla, dla $n=1,\ldots,11$.
 
-\begin{table}[h]
+\begin{table}[H]
 \begin{tabularx}{\textwidth}{rXXXXXXXXXXX}
 \toprule
   $n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\ 
@@ -127,7 +127,7 @@ Dla $k=1$ problem redukuje się do problemu najkrótszych połączeń. Dla $k>1$
 
 W pewnej firmie $n$ pracowników $X_1,X_2,\ldots,X_n$ jest dostępnych do wykonania $n$ zadań $Y_1,Y_2,\ldots,Y_n$. Każdy pracownik jest wykwalifikowany do wykonania jednego lub więcej z tych zadań. Czy można przypisać każdego pracownika do jednego zadania, do którego jest wykwalifikowany? 
 
-Możemy utworzyć graf dwudzielny G z podziałem wierzchołków na rozłączne zbiory $X$ i $Y$, gdzie $X=\{x_1,x_2,\ldots,x_n\}$ oraz $Y=\{y_1,y_2,\ldots,y_n\}$, w którym wierzchołek $x_i$ jest połączony krawędzią z wierzchołkiem $y_i$, gdy pracownik $X_i$ jest zdolny wykonać zadanie $Y_j$. Problem sprowadza się do sprawdzenia czy dany graf $G$ posiada skojarzenie doskonałe (co możemy stwierdzić na mocy twierdzenia Halla \ref{theorem:hall}).
+Możemy utworzyć graf dwudzielny G z podziałem wierzchołków na rozłączne zbiory $X$ i $Y$, gdzie $X=\{x_1,x_2,\ldots,x_n\}$ oraz $Y=\{y_1,y_2,\ldots,y_n\}$, w którym wierzchołek $x_i$ jest połączony krawędzią z wierzchołkiem $y_i$, gdy pracownik $X_i$ jest zdolny wykonać zadanie $Y_j$. Problem sprowadza się do sprawdzenia czy dany graf $G$ posiada skojarzenie doskonałe (co możemy stwierdzić na mocy twierdzenia \ref{theorem:hall}).
 
 
 \subsection*{Problem rozkładu zadań}
