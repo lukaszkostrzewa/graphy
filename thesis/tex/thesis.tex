@@ -30,6 +30,22 @@
 \newcommand{\checkmark}{\ding{51}}
 
 \usepackage{threeparttable}
+\usepackage{tabu}
+\usepackage{xpatch}
+\makeatletter
+\chardef\TPT@@@asteriskcatcode=\catcode`*
+\catcode`*=11
+\xpatchcmd{\threeparttable}
+  {\TPT@hookin{tabular}}
+  {\TPT@hookin{tabular}\TPT@hookin{tabu}}
+  {}{}
+\catcode`*=\TPT@@@asteriskcatcode
+\makeatother
+\usepackage{array}
+
+\newcommand\Thickvrule[1]{%
+  \multicolumn{1}{!{\vrule width 2pt}c!{\vrule width 2pt}}{#1}%
+}
 
 \usepackage{tikz}
 \usepackage{amsmath}
@@ -57,14 +73,11 @@
 \include{preface}
 \include{introduction}
 \include{existing-solutions}
-\include{analysis}
-\include{project}
+\include{field-overview}
+\include{app-project}
 \include{implementation}
-\include{conclusions}
-
-\appendix
 \include{user-instructions}
-\include{use-case}
+\include{conclusions}
 
 \include{bibliography}
 
