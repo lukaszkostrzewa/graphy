@@ -1,43 +1,49 @@
 \chapter{Narzędzia}
 \section{Formaty zapisu grafów} \label{sec:graph-formats}
-Istnieje wiele formatów służących do opisu grafów. Do najpopularniejszych należą \cite{bernard,gephi}
+Istnieje wiele formatów służących do reprezentowania grafów. W ciągu ostatnich dwóch dekad zostało zaproponowanych lub było używanych prawie 100 różnych formatów \cite{roughan-tuke}. Różnią się one przede wszystkim strukturą (XML, JSON) oraz możliwościami (np. wsparcie dla grafów hierarchicznych czy hipergrafów).
+
+Do najpopularniejszych formatów należą \cite{bernard,gephi}:
 
 \begin{itemize}
 \setlength\itemsep{0em}
 \item GML -- \textit{Graph Modeling Language }
+\item XGMML -- \textit{eXtensible Graph Markup and Modeling Language}
 \item GraphML -- \textit{Graph Markup Language}
 \item GEXF -- \textit{Graph Exchange XML Format}
 \item JGF -- \textit{JSON Graph Format}
 \item DOT -- format programu Graphviz
 \item DGML -- \textit{Directed Graph Markup Language}
-\item XGMML -- \textit{eXtensible Graph Markup and Modeling Language}
 \end{itemize}
 
 \subsubsection{Graph Markup Language (GraphML)}
 
-GraphML jest formatem zapisu grafów bazującym na składni XML. Format ten wspiera wszystkie typy grafów (skierowane, nieskierowane, mieszane). Wspiera również hipergrafy oraz grafy hierarchiczne. Dodatkowo umożliwia przypisywanie do wierzchołków i krawędzi atrybutów zawierających dane specyficzne dla aplikacji. 
+GraphML jest formatem zapisu grafów bazującym na składni XML. Format ten wspiera wszystkie typy grafów (skierowane, nieskierowane, mieszane). Wspiera również hipergrafy oraz grafy hierarchiczne. Dodatkowo umożliwia przypisywanie do wierzchołków i krawędzi atrybutów zawierających dane specyficzne dla aplikacji.
 
 GraphML jest następcą formatu GML (nie będącego standardem XML). Prace nad formatem GML zostały zapoczątkowane przez społeczność \textit{Graph Drawing} podczas Sympozjum Rysowania Grafów w 1995 roku w Pasawie w Niemczech. Pięć lat później przed 8. Międzynarodowym Sympozjum Rysowania Grafów w 2000 roku w Williamsburgu w USA ruszyły prace nad nowym formatem GraphML \cite{graphml}.
 
-Plik w formacie GraphML zawiera element \texttt{graph} (graf), który może zawierać elementy \texttt{node} (wierzchołek), \texttt{edge} (krawędź) oraz \texttt{hyperedge} (hiperkrawędź). Każdy element \texttt{node} powinien zawierać unikalny atrybut \texttt{id} (identyfikator), który jest używany do definiowania krawędzi. Każda krawędź posiada atrybuty \texttt{source} (źródło) oraz \texttt{target} (cel), które odpowiadają identyfikatorom wierzchołków i oznaczają odpowiednio początek i koniec krawędzi. Najwyższym elementem w hierarchii jest \texttt{graphml}, który może zawierać serię elementów \texttt{key} (klucz) służących do definiowania atrybutów danych oraz elementów \texttt{graph}.
+Plik w formacie GraphML zawiera element \texttt{graph} (graf), który może zawierać elementy \texttt{node} (wierzchołek), \texttt{edge} (krawędź) oraz \texttt{hyperedge} (hiperkrawędź). Każdy element \texttt{node} powinien zawierać unikalny atrybut \texttt{id} (identyfikator), który jest używany do definiowania krawędzi. Każda krawędź posiada atrybuty \texttt{source} (źródło) oraz \texttt{target} (cel), które odpowiadają identyfikatorom wierzchołków i oznaczają odpowiednio początek i koniec krawędzi. Najwyższym elementem w hierarchii jest \texttt{graphml}, który może zawierać serię elementów \texttt{key} (klucz) służących do definiowania atrybutów danych oraz serię elementów \texttt{graph}.
 
 Z formatem tym związane są dwa rozszerzenia: \textit{attribute extension} i \textit{parseinfo extension}. Pierwsze z nich pozwala na wyspecyfikowanie typu atrybutu oraz jego nazwy. Drugie dodaje kilka atrybutów do elementów \texttt{graph} i \texttt{node}, takich jak ilość wierzchołków, ilość krawędzi, maksymalny stopień wierzchołka w grafie czy ilość krawędzi wychodzących dla wierzchołka. Metadane te mają na celu pomóc analizatorom składni (parserom) efektywniej przetwarzać pliki z grafami zapisanymi w formacie GraphML. 
 
 Format GraphML wspierają programy yEd Graph Editor oraz w ograniczonym stopniu Gephi (bez hipergrafów i grafów hierarchicznych).
 
+\vspace*{\fill}
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}
 \filldraw 
 (0,0) node[label=1](1){}
-(1,1) node[label=2](2){} 
-(2,0) node[label=3](3){};
+(2,2) node[label=2](2){} 
+(4,0) node[label=3](3){};
 \path[draw] (1)--(2);
 \path[draw] (2)--(3);
 \path[draw] (3)--(1);
 \end{tikzpicture}
 \caption{} \label{fig:example-graph}
 \end{figure}
+\vspace*{\fill}
+
+\pagebreak
 
 \begin{listing}[H]
     \caption{Reprezentacja grafu z rysunku \ref{fig:example-graph} w formacie GraphML}
@@ -47,15 +53,26 @@ Format GraphML wspierają programy yEd Graph Editor oraz w ograniczonym stopniu 
 
 \subsubsection{Graph Exchange XML Format (GEXF)}
 
-GEXF jest formatem opierającym się na XML, który służy do opisywania struktur złożonych sieci. Został stworzony w 2007 roku przez konsorcjum Gephi.  
+GEXF jest formatem opierającym się na XML, który służy do opisywania struktur złożonych sieci, związanych z nimi danych oraz zmian zachodzących w czasie. Został stworzony w 2007 roku na potrzeby aplikacji Gephi.  
+
+Format GEXF wspiera wszystkie typy grafów (skierowane, nieskierowane, mieszane). Wspiera też grafy hierarchiczne, ale nie wspiera hipergrafów. W GEXF jest możliwe przypisywanie do wierzchołków i krawędzi dowolnych atrybutów. 
+
+W formacie tym najwyższym elementem w hierarchii jest element \texttt{graphml}. Zawiera on jeden element \texttt{graph}, który zawiera elementy \texttt{attributes}, \texttt{nodes} i \texttt{edges}, służące kolejno do definiowania atrybutów, wierzchołków i krawędzi. Element \texttt{node} (znajdujący się w \texttt{nodes}) podobnie jak w formacie GraphML posiada unikalny atrybut \texttt{id}, a element \texttt{edge} (znajdujący się w \texttt{edges}) posiada atrybuty \texttt{source} oraz \texttt{target} odpowiadające wartościom atrybutów \texttt{id} elementów \texttt{node} i oznaczające odpowiednio początek i koniec krawędzi.  
 
 \begin{listing}[H]
-        \caption{Reprezentacja grafu z rysunku \ref{fig:example-graph} w formacie GEXF}
+    \caption{Reprezentacja grafu z rysunku \ref{fig:example-graph} w formacie GEXF}
     \inputminted{xml}{example.gexf}
     \label{lst:gexf-example}
 \end{listing}
 
 \subsubsection{JSON Graph Format (JGF)} 
+
+JSON Graph Format jest specyfikacją służącą do reprezentowania grafów, która korzysta z formatu JSON (ang. \textit{JavaScript Object Notation}). Specyfikacja ta powstała w 2014 roku. 
+
+Korzystając z JGF możemy przedstawiać grafy skierowane lub nieskierowane. Format ten nie wspiera grafów hierarchicznych ani hipergrafów. Podobnie jak w dwóch powyższych formatach do wierzchołków oraz krawędzi możemy przypisywać dowolne atrybuty. 
+
+W obiekcie JSON będącym w formacie JGF główną właściwością jest \texttt{graph} lub \texttt{graphs}, których wartościami są odpowiednio obiekt lub tablica obiektów reprezentujących graf. Obiekt ten (lub obiekty) posiadają właściwości \texttt{nodes} oraz \texttt{edges}. Ich wartościami są tablice zawierające obiekty opisujące odpowiednio wierzchołki oraz krawędzie grafu. Podobnie jak w dwóch poprzednich formatach wierzchołki mają właściwość \texttt{id}, a krawędzie \texttt{source} oraz \texttt{target} oznaczające początek i koniec krawędzi. 
+
 \begin{listing}[H]
     \caption{Reprezentacja grafu z rysunku \ref{fig:example-graph} w formacie JGF}
     \inputminted{json}{example.json}
@@ -63,11 +80,114 @@ GEXF jest formatem opierającym się na XML, który służy do opisywania strukt
 \end{listing}
 
 \subsubsection{DOT Graphviz} 
+
+DOT jest formatem tekstowym służącym do opisu grafu. Powstał w roku 2000. Wspiera wszystkie typy grafów (skierowane, nieskierowane, mieszane). W formacie tym możliwe jest również reprezentowanie grafów hierarchicznych, ale nie jest możliwe przedstawianie hipergrafów. W DOT możemy przypisywać do wierzchołków i krawędzi dowolne atrybuty.  
+
+Format ten jest formatem czytelnym dla człowieka. Zdefiniowana jest gramatyka bezkontekstowa opisująca ten format, która może być zapisana przy pomocy notacji BNF (ang. \textit{Backus-Naur Form}).
+
+Definicja grafu rozpoczyna się od słowa kluczowego \texttt{graph} lub \texttt{digraph}. Po nim następują nawiasy klamrowe, wewnątrz których znajduje się opis wierzchołków i krawędzi. Podwójna pauza (\texttt{-{}-}) oznacza krawędź nieskierowaną, a strzałka (\texttt{->}) oznacza krawędź skierowaną.
+
+Format ten jest obsługiwany przez program Graphviz.
+
+\bigskip
+
 \begin{listing}[H]
     \caption{Reprezentacja grafu z rysunku \ref{fig:example-graph} w formacie DOT}
     \inputminted{text}{example.gv}
     \label{lst:dot-example}
 \end{listing}
+
+\begin{table}[H]
+\caption{Porównanie formatów GraphML, GEXF, JGF oraz DOT}
+\label{tab:formats-comparison}
+\begin{tabularx}{\textwidth}{ r|Y|Y|Y|Y| } 
+\multicolumn{1}{r}{}
+ & \multicolumn{1}{c}{\rotatebox{45}{GraphML}}
+ & \multicolumn{1}{c}{\rotatebox{45}{GEXF}} 
+ & \multicolumn{1}{c}{\rotatebox{45}{JGF}} 
+ & \multicolumn{1}{c}{\rotatebox{45}{DOT}} 
+\\\cline{2-5}
+
+struktura
+ & {\footnotesize XML}
+ & {\footnotesize XML} 
+ & {\footnotesize JSON}  
+ & {\footnotesize BNF}
+\\\cline{2-5}
+
+grafy skierowane 
+ & \checkmark
+ & \checkmark  
+ & \checkmark  
+ & \checkmark 
+\\\cline{2-5}
+
+grafy nieskierowane  
+ & \checkmark 
+ & \checkmark  
+ & \checkmark  
+ & \checkmark  
+\\\cline{2-5}
+
+grafy mieszane  
+ & \checkmark 
+ & \checkmark  
+ & --  
+ & \checkmark  
+\\\cline{2-5}
+
+multigrafy 
+ & \checkmark 
+ & \checkmark  
+ & \checkmark  
+ & \checkmark  
+\\\cline{2-5}
+
+grafy hierarchiczne 
+ & \checkmark 
+ & \checkmark  
+ & --  
+ & \checkmark
+\\\cline{2-5}
+
+hipergrafy 
+ & \checkmark 
+ & --  
+ & --  
+ & -- 
+\\\cline{2-5}
+
+dowolne atrybuty 
+ & \checkmark 
+ & \checkmark  
+ & \checkmark  
+ & \checkmark 
+\\\cline{2-5}
+
+wartości domyślne atrybutów 
+ & \checkmark 
+ & \checkmark  
+ & --  
+ & \checkmark  
+\\\cline{2-5}
+
+wiele grafów 
+ & \checkmark 
+ & --  
+ & \checkmark  
+ & -- 
+\\\cline{2-5}
+
+zmiana grafu w czasie 
+ & -- 
+ & \checkmark  
+ & --  
+ & --  
+\\\cline{2-5}
+\end{tabularx}
+\end{table}
+
+\bigskip
 
 \section{Biblioteki do wizualizacji grafów w JavaScript}
 
