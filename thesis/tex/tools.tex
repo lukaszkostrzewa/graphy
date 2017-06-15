@@ -193,37 +193,37 @@ zmiana grafu w czasie
 
 \subsection{Cytoscape.js}
 
-Biblioteka z otwartym źródłem (ang. \textit{open-source}) do analizy i wizualizacji grafów. Udostępniona na zasadach licencji MIT. Została napisana w czystym JavaScript i nie posiada zależności do żadnych innych bibliotek. Cytoscape.js jest następcą porzuconego projektu Cytoscape Web korzystającego z technologii Adobe Flash \cite[309]{franz}. 
+Cytoscape.js jest biblioteką z otwartym źródłem (ang. \textit{open-source}) do analizy i wizualizacji grafów. Udostępniona na zasadach licencji MIT. Została napisana w czystym JavaScript i nie posiada zależności do żadnych innych bibliotek. Cytoscape.js jest następcą porzuconego projektu Cytoscape Web korzystającego z technologii Adobe Flash \cite[309]{franz}. 
 
-Prawa własności intelektualnej posiada do niej Cytoscape Consortium -- organizacja \textit{non-profit}, która promuje rozwój i dystrybucję oprogramowania związanego z sieciami biologicznymi. Cytoscape.js została stworzona na University of Toronto. Jej głównym kontrybutorem jest Max Franz. Biblioteka została sfinansowana przez granty NRNB (\textit{National Resource for Network Biology}) i NIH (\textit{National Institutes of Health}). Kilka innych uniwersytetów oraz firm również pomagało w rozwoju biblioteki \cite{cytoscape}. 
+Prawa własności intelektualnej posiada do niej Cytoscape Consortium -- organizacja \textit{non profit}, która promuje rozwój i dystrybucję oprogramowania związanego z sieciami biologicznymi. Cytoscape.js została stworzona na University of Toronto. Jej głównym kontrybutorem jest Max Franz. Biblioteka została sfinansowana przez granty NRNB (\textit{National Resource for Network Biology}) i NIH (\textit{National Institutes of Health}). Kilka innych uniwersytetów oraz firm również pomagało w rozwoju biblioteki \cite{cytoscape}. 
 
-Cytoscape.js jest kompatybilny z kilkoma przydatnymi bibliotekami oraz środowiskami JavaScript, takimi jak: Node.js, Browserify, webpack, RequireJS czy Bower, co pozwala na integrację z szeroką gamą systemów opartych na JS. 
+Cytoscape.js jest kompatybilny z najpopularniejszymi bibliotekami oraz środowiskami JavaScript, takimi jak: Node.js, Browserify, webpack, RequireJS czy Bower. Pozwala to na integrację z wieloma systemami napisanymi w JavaScript. 
 
 Architektura Cytoscape.js pozwala na uruchomienie zarówno bez graficznego interfejsu użytkownika oraz jako komponent graficzny, którego implementacja bazuje na elemencie HTML5 Canvas (przykład przedstawiony jest na rysunku \ref{fig:cytoscape}). Umożliwia to korzystanie z biblioteki zarówno po stronie klienta (np. przeglądarka internetowa), jak i po stronie serwera (np. Node.js).
 
-Cytoscape.js wspiera różne typy grafów: skierowane, nieskierowane, multigrafy. Pozwala na dodawanie, usuwanie i modyfikację krawędzi oraz wierzchołków. Biblioteka dostarcza również możliwość grupowania wierzchołków.
-
-W bibliotece jest zaimplementowanych kilka znanych algorytmów takich jak znajdowanie najkrótszej ścieżki, minimalnego drzewa rozpinającego czy minimalnego przekroju. 
-
-style, funkcje mapujące, 
-wsparcie dla gestów myszy i urządzeń z ekranami dotykowymi
-przesuwanie wierzchołków, zmiana widoku przez przeciąganie lub przybliżanie/oddalanie
-wiązanie zdarzeń (ang. \textit{event binding})  
-animacje
-import i eksport do obrazka (PNG/JPG), JSON (dodatek do GraphML)
-układ wierzchołków automatyczny: losowy, siatki (ang. \textit{grid}), okręgu, koncentryczny, zdefiniowany przez przeszukiwanie grafu wszerz (ang. breadth-first search), cose (\textit{Compound Spring Embedder} -- układ korzystający z symulacji fizycznej) lub zdefiniowany przez programistę
-rozszerzalność -- możliwość dopisania swoich własnych algorytmów, układów, itd. Wiele istniejących dodatków. 
-wydajność -- biblioteka jest w stanie obsłużyć i wyrenderować grafy posiadające tysiące elementów \cite[310]{franz}, wydajność zależy od urządzenia, na którym jest uruchamiany kod, od silnika JS, rozmiaru grafu oraz użytych styli. W szczególności kosztowne do wyrenderowania są grawędzie, zwłaszcza w multigrafach ze względu na konieczność narysowania krzywych beziera. W dokumnetacji online jest wiele wskazówek dotyczących optymalizacji pod kątem wydajności (sekcja \textit{Performance} \cite{cytoscape}).
-Cytoscape.js posiada obszerną dokumentację online, która zawiera szczegółowy opis API (ang. \textit{Application Programming Interface} -- interfejs programistyczny), przykłady kawałków kodu oraz działające przykłady. 
-
-
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{cytoscape.png}
+\includegraphics[width=0.5\textwidth]{cytoscape.png}
 \caption{Przykład wizualizacji grafu w Cytoscape.js -- krawędzie mogą mieć różny kolor i grubość, pomiędzy wierzchołkami może istnieć wiele krawędzi oraz wierzchołki mogą mieć różny rozmiar}\label{fig:cytoscape}
 \end{figure}
 
+Cytoscape.js wspiera różne typy grafów: skierowane, nieskierowane, multigrafy. Pozwala na dodawanie, usuwanie i modyfikację krawędzi oraz wierzchołków. Biblioteka dostarcza również możliwość grupowania wierzchołków. W Cytoscape.js istnieje możliwość nadawania wierzchołkom i krawędziom wyglądu poprzez reguły, które są zbliżone do kaskadowych arkuszy styli (CSS, ang. \textit{Cascading Style Sheets}).
+
+W bibliotece jest zaimplementowanych kilka znanych algorytmów takich jak znajdowanie najkrótszej ścieżki, minimalnego drzewa rozpinającego czy minimalnego przekroju. 
+
+Grafy możemy importować i eksportować do formatu JSON. Biblioteka umożliwia również zapis grafu do obrazka (PNG lub JPG). Istnieje też dodatek, który pozwala na zapisywanie i odczytywanie z formatu GraphML. Cytoscape.js jest rozszerzalna -- istnieje możliwość dopisania swoich własnych dodatków (algorytmów, układów, itp).  W chwili obecnej zostało napisanych 30 dodatków zwiększających możliwości biblioteki. 
+
+Cytoscape.js posiada wsparcie dla gestów myszy i gestów na urządzeniach z ekranami dotykowymi. Biblioteka daje możliwość wiązania zdarzeń (ang. \textit{event binding}), np. możemy zdefiniować jaka akcja ma się wykonać po kliknięciu na wierzchołek. 
+
+W Cytoscape.js możemy przesuwać wierzchołki, zmieniać widok przez przeciąganie lub przybliżanie i oddalanie. Istnieje również możliwość zastosowania animacji na całym widoku lub na konkretnych elementach grafu. W bibliotekę jest wbudowanych kilka automatycznych układów wierzchołków (ang. \textit{layouts}): losowy, siatki (ang. \textit{grid}), okręgu, koncentryczny, zdefiniowany przez przeszukiwanie grafu wszerz (ang. breadth-first search), układ \textit{cose} (\textit{Compound Spring Embedder} -- korzystający z symulacji fizycznej) lub zdefiniowany przez programistę. 
+
+Biblioteka jest w stanie obsłużyć i wyrenderować grafy posiadające tysiące elementów \cite[310]{franz}. Wydajność zależy od urządzenia, na którym jest uruchamiany kod, od silnika JS, rozmiaru grafu oraz użytych styli. W szczególności kosztowne do wyrenderowania są krawędzie, zwłaszcza w multigrafach ze względu na konieczność narysowania krzywych beziera. W dokumnetacji online jest wiele wskazówek dotyczących optymalizacji pod kątem wydajności (\cite{cytoscape} sekcja \textit{Performance}).
+
+Cytoscape.js posiada obszerną dokumentację online, która zawiera szczegółowy opis API (ang. \textit{Application Programming Interface} -- interfejs programistyczny), przykłady kawałków kodu oraz działające przykłady. 
+
 \subsection{sigma.js}
+
+
 \subsection{VivaGraph.js}
 \subsection{Linkurious.js}
 
