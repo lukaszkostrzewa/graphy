@@ -221,33 +221,168 @@ Biblioteka jest w stanie obsłużyć i wyrenderować grafy posiadające tysiące
 
 Cytoscape.js posiada obszerną dokumentację online, która zawiera szczegółowy opis API (ang. \textit{Application Programming Interface} -- interfejs programistyczny), przykłady kawałków kodu oraz działające przykłady. 
 
-\subsection{sigma.js}
+\subsection{Sigma}
+
+Sigma jest biblioteką dedykowaną do rysowania grafów w aplikacjach internetowych. Powstała w roku 2012. Jej głównymi twórcami są Alexis Jacomy i Guillaume Plique. Udostępniona jest na licencji MIT. 
+
+Sigma dostarcza wiele wbudowanych funkcjonalności takich jak sposób renderowania za pomocą SVG, Canvas lub WebGL czy obsługa gestów myszy i dotyku. Istnieje również możliwość rozszerzenia funkcjonalności przez dopisanie swoich własnych dodatków. 
+
+W repozytorium kodu jest dostępnych 19 oficjalnych dodatków rozszerzających możliwości biblioteki, m.in. parser JSON i GEXF, układy \textit{force atlas 2} (bazujący na oddziaływaniu sił pomiędzy wierzchołkami) i \textit{noverlap} (zapewniający, że wierzchołki nie zachodzą na siebie), algorytm A* do znajdowania najkrótszej ścieżki czy algorytm HITS do oceny stron internetowych (podział na autorytety -- strony linkowane i koncentratory -- strony linkujące). 
+
+Innym ciekawym dodatkiem jest dodatek \texttt{sigma.neo4j.cypher}, który pozwala na uruchamianie zapytań w języku Cypher na grafowej bazie danych Neo4j, zinterpretowaniu odpowiedzi i wypełnieniem grafu. Jest on szczególnie warty uwagi ze względu na rosnące znaczenie grafowych baz danych. 
+
+\bigskip
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{sigma.png}
+\caption{Przykładowy graf wyświetlony za pomocą Sigmy}\label{fig:cytoscape}
+\end{figure}
+
+\bigskip
+
+Biblioteka można używać z menedżerami pakietów (ang. \textit{package managers}) takimi jak bower czy npm oraz z systemami ładowania modułów (ang. \textit{module loaders}), np. webpack czy RequireJS. Jednakże jest związany z tym pewien problem, mianowicie nie ma łatwej możliwości ładowania osobno dodatków (bez zastosowania obejścia w postaci przypisania do globalnej przestrzeni nazw obiektu \texttt{sigma}, co w nowoczesnym JS nie jest podejściem zalecanym). Na stronie repozytorium sigmy istnieje otwarta propozycja poprawy tego problemu (\cite{sigma-repo} \textit{issue} 730 i 871).
+
+
+\subsection{Linkurious.js}
 
 
 \subsection{VivaGraph.js}
-\subsection{Linkurious.js}
+
+
 
 \begin{table}[H]
-\begin{tabularx}{\textwidth}{|r|c|c|c}
-\hline 
- & Cytoscape.js & Sigma & VivaGraphJS \\ 
-\hline 
-Licencja & MIT & MIT & BSD 3 \\ 
-\hline 
-Rozmiar & 294 & 112,9 & 60,4 \\ 
-\hline 
-Renderowanie & & & \\
-SVG & • & tak & • \\
-HTML5 Canvas & • & tak & • \\
-WebGL Canvas & • & tak & • \\ 
-\hline 
-Obsługiwane formaty & • & • & • \\ 
-\hline
-Rozszerzalność & • & • & • \\ 
-\hline 
-• & • & • & • \\ 
-\hline 
-\end{tabularx} 
+\begin{threeparttable}
+\caption{Porównanie bibliotek Cytoscape.js, Sigma, Linkurious.js i VivaGraphJS}
+\label{tab:libraries-comparison}
+{\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{ r|Y|Y|Y|Y| } 
+\multicolumn{1}{r}{}
+ & \multicolumn{1}{c}{\rotatebox{70}{Cytoscape.js}}
+ & \multicolumn{1}{c}{\rotatebox{70}{Sigma}} 
+ & \multicolumn{1}{c}{\rotatebox{70}{Linkurious.js}} 
+ & \multicolumn{1}{c}{\rotatebox{70}{VivaGraphJS}} 
+\\\cline{2-5}
+
+rok powstania
+ & 2011
+ & 2012 
+ & 2014
+ & 2011 
+\\\cline{2-5}
+
+licencja
+ & MIT
+ & MIT
+ & GPLv3\tnote{1} 
+ & BSD 3
+\\\cline{2-5}
+
+rozszerzalność 
+ & \checkmark
+ & \checkmark
+ & \checkmark   
+ & \checkmark  
+\\\cline{2-5}
+
+renderowanie SVG 
+ & --
+ & \checkmark  
+ & \checkmark  
+ & \checkmark 
+\\\cline{2-5}
+ 
+renderowanie Canvas 
+ & \checkmark
+ & \checkmark  
+ & \checkmark  
+ & \checkmark  
+\\\cline{2-5}
+
+renderowanie WebGL 
+ & --
+ & \checkmark  
+ & \checkmark  
+ & \checkmark  
+\\\cline{2-5}
+
+obsługa formatu GEXF 
+ & --
+ & \checkmark  
+ & \checkmark  
+ & \checkmark
+\\\cline{2-5}
+
+obsługa formatu GraphML 
+ & \checkmark
+ & --
+ & \checkmark
+ & --
+\\\cline{2-5}
+\end{tabularx}
+}
+\begin{tablenotes}
+{\footnotesize\medskip
+\item[1] lub licencja komercyjna dla projektów nie spełniających założeń licencji GPLv3
+}
+\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 
+\begin{table}[H]
+\caption{Biblioteki Cytoscape.js, Sigma, Linkurious.js i VivaGraphJS -- porównanie statystyk}
+\label{tab:libraries-stats-comparison}
+{\renewcommand{\arraystretch}{1.1}
+\begin{tabularx}{\textwidth}{ r|Y|Y|Y|Y| } 
+\multicolumn{1}{r}{}
+ & \multicolumn{1}{c}{\rotatebox{70}{Cytoscape.js}}
+ & \multicolumn{1}{c}{\rotatebox{70}{Sigma}} 
+ & \multicolumn{1}{c}{\rotatebox{70}{Linkurious.js}} 
+ & \multicolumn{1}{c}{\rotatebox{70}{VivaGraphJS}} 
+\\\cline{2-5}
+
+GitHub -- gwiazdki (ang. \textit{stars}) 
+ & 3194
+ & 7271
+ & 604
+ & 2292  
+\\\cline{2-5}
+
+GitHub -- kopie projektu (ang. \textit{forks})
+ & 466
+ & 1150
+ & 172  
+ & 292  
+\\\cline{2-5}
+
+GitHub -- problemy (ang. \textit{issues})
+ & 142
+ & 376  
+ & 28
+ & 55  
+\\\cline{2-5}
+
+GitHub -- współtwórcy
+ & 49
+ & 52  
+ & 58
+ & 14  
+\\\cline{2-5}
+
+npm -- instalacje na miesiąc 
+ & 12k
+ & 1k
+ & 281
+ & 691  
+\\\cline{2-5}
+
+Stack Overflow -- otagowane posty
+ & 562
+ & 154
+ & 23
+ & 26  
+\\\cline{2-5}
+\end{tabularx}
+}
+\end{table}
