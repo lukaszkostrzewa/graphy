@@ -204,6 +204,7 @@ Architektura Cytoscape.js pozwala na uruchomienie zarówno bez graficznego inter
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{cytoscape.png}
+\captionsetup{justification=centering}
 \caption{Przykład wizualizacji grafu w Cytoscape.js -- krawędzie mogą mieć różny kolor i grubość, pomiędzy wierzchołkami może istnieć wiele krawędzi oraz wierzchołki mogą mieć różny rozmiar}\label{fig:cytoscape}
 \end{figure}
 
@@ -227,7 +228,7 @@ Sigma jest biblioteką dedykowaną do rysowania grafów w aplikacjach internetow
 
 Sigma dostarcza wiele wbudowanych funkcjonalności takich jak sposób renderowania za pomocą SVG, Canvas lub WebGL czy obsługa gestów myszy i dotyku. Istnieje również możliwość rozszerzenia funkcjonalności przez dopisanie swoich własnych dodatków. 
 
-W repozytorium kodu jest dostępnych 19 oficjalnych dodatków rozszerzających możliwości biblioteki, m.in. parser JSON i GEXF, układy \textit{force atlas 2} (bazujący na oddziaływaniu sił pomiędzy wierzchołkami) i \textit{noverlap} (zapewniający, że wierzchołki nie zachodzą na siebie), algorytm A* do znajdowania najkrótszej ścieżki czy algorytm HITS do oceny stron internetowych (podział na autorytety -- strony linkowane i koncentratory -- strony linkujące). 
+W repozytorium kodu jest dostępnych 19 oficjalnych dodatków rozszerzających możliwości biblioteki, m.in. parser JSON i GEXF, układy \textit{ForceAtlas2} (bazujący na oddziaływaniu sił pomiędzy wierzchołkami) i \textit{noverlap} (zapewniający, że wierzchołki nie zachodzą na siebie), algorytm A* do znajdowania najkrótszej ścieżki czy algorytm HITS do oceny stron internetowych (podział na autorytety -- strony linkowane i koncentratory -- strony linkujące). 
 
 Innym ciekawym dodatkiem jest dodatek \texttt{sigma.neo4j.cypher}, który pozwala na uruchamianie zapytań w języku Cypher na grafowej bazie danych Neo4j, zinterpretowaniu odpowiedzi i wypełnieniem grafu. Jest on szczególnie warty uwagi ze względu na rosnące znaczenie grafowych baz danych. 
 
@@ -236,6 +237,7 @@ Innym ciekawym dodatkiem jest dodatek \texttt{sigma.neo4j.cypher}, który pozwal
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{sigma.png}
+\captionsetup{justification=centering}
 \caption{Przykładowy graf wyświetlony za pomocą Sigmy}\label{fig:cytoscape}
 \end{figure}
 
@@ -246,6 +248,22 @@ Biblioteka można używać z menedżerami pakietów (ang. \textit{package manage
 
 \subsection{Linkurious.js}
 
+Linkurious.js jest rozgałęzieniem (ang. \textit{fork}) projektu Sigma stworzonym przez francuską firmę Linkurious SAS w 2014 roku. Dostępna jest na dwóch licencjach GPLv3 oraz na licencji płatnej dla projektów komercyjnych, które nie spełniają założeń licencji GPLv3. 
+
+Biblioteka rozszerza Sigmę o ponad 20 nowych dodatków. Zostały dodane m.in. dodatki służące do eksportowania (GraphML, CSV, XLSX), nowe układy (algorytm Fruchtermana-Reingolda, \textit{dagre} -- do wyświetlania skierowanych grafów acyklicznych oraz drzew, \textit{ForceLink} -- bazujący na \textit{ForceAtlas2}), dodatek dający możliwość zaznaczania wierzchołków lassem, dodatek pozwalający na wyświetlenie grafu ze współrzędnymi geograficznymi na mapie (korzystający z biblioteki Leaflet), dodatek do wykrywania społeczności w grafie metodą Louvain oraz kilkanaście innych dodatków \cite{linkurious-diff}. 
+
+Linkurious.js została porzucona w październiku 2016 roku na rzecz nowej biblioteki o nazwie Ogma \cite{ogma}.
+
+\bigskip
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{linkurious-communities.png}
+\captionsetup{justification=centering}
+\caption{Przykładowy graf z wykrytymi społecznościami wyświetlony przy pomocy układu \textit{ForceLink} w Linkurious.js}\label{fig:cytoscape}
+\end{figure}
+
+\bigskip
 
 \subsection{VivaGraph.js}
 
