@@ -187,9 +187,15 @@ zmiana grafu w czasie
 \end{tabularx}
 \end{table}
 
-\bigskip
+\pagebreak
 
 \section{Biblioteki do wizualizacji grafów w JavaScript}
+
+W tej sekcji opiszę i porównam najbardziej znane biblioteki w JavaScript służące do wyświetlania grafów: Cytoscape.js, Sigma (oraz jej rozszerzenie Linkurious.js) i VivaGraphJS. 
+
+Istnieje wiele bibliotek, które służą do wizualizacji danych w ogólności (np. wykresów liniowych, kołowych, słupkowych, osi czasu, schematów). Dobrymi przykładami są tutaj dwie popularne biblioteki: D3.js oraz vis.js. Jednakże skupię się jedynie na tych bibliotekach, które służą tylko i wyłącznie do wizualizacji grafów. Po pierwsze dlatego, że oferują one większe możliwości do analizowania i przetwarzania grafów. Po drugie, są lepiej przystosowane do obsługi dużych grafów pod względem wydajności. 
+
+Innymi ciekawymi bibliotekami są Graphosaurus oraz ngraph.pixel. Służą one do wyświetlania grafów w trzech wymiarach. Jednakże ich opis również pozwolę sobie pominąć, ponieważ tematyka ta wchodzi poza zakres tej pracy.
 
 \subsection{Cytoscape.js}
 
@@ -203,7 +209,7 @@ Architektura Cytoscape.js pozwala na uruchomienie zarówno bez graficznego inter
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{cytoscape.png}
+\includegraphics[width=0.7\textwidth]{cytoscape.png}
 \captionsetup{justification=centering}
 \caption{Przykład wizualizacji grafu w Cytoscape.js -- krawędzie mogą mieć różny kolor i grubość, pomiędzy wierzchołkami może istnieć wiele krawędzi oraz wierzchołki mogą mieć różny rozmiar}\label{fig:cytoscape}
 \end{figure}
@@ -216,9 +222,9 @@ Grafy możemy importować i eksportować do formatu JSON. Biblioteka umożliwia 
 
 Cytoscape.js posiada wsparcie dla gestów myszy i gestów na urządzeniach z ekranami dotykowymi. Biblioteka daje możliwość wiązania zdarzeń (ang. \textit{event binding}), np. możemy zdefiniować jaka akcja ma się wykonać po kliknięciu na wierzchołek. 
 
-W Cytoscape.js możemy przesuwać wierzchołki, zmieniać widok przez przeciąganie lub przybliżanie i oddalanie. Istnieje również możliwość zastosowania animacji na całym widoku lub na konkretnych elementach grafu. W bibliotekę jest wbudowanych kilka automatycznych układów wierzchołków (ang. \textit{layouts}): losowy, siatki (ang. \textit{grid}), okręgu, koncentryczny, zdefiniowany przez przeszukiwanie grafu wszerz (ang. breadth-first search), układ \textit{cose} (\textit{Compound Spring Embedder} -- korzystający z symulacji fizycznej) lub zdefiniowany przez programistę. 
+W Cytoscape.js możemy przesuwać wierzchołki, zmieniać widok przez przeciąganie lub przybliżanie i oddalanie. Istnieje również możliwość zastosowania animacji na całym widoku lub na konkretnych elementach grafu. W~bibliotekę jest wbudowanych kilka automatycznych układów wierzchołków (ang. \textit{layouts}): losowy, siatki (ang. \textit{grid}), okręgu, koncentryczny, zdefiniowany przez przeszukiwanie grafu wszerz (ang. breadth-first search), układ \textit{cose} (\textit{Compound Spring Embedder} -- korzystający z symulacji fizycznej) lub zdefiniowany przez programistę. 
 
-Biblioteka jest w stanie obsłużyć i wyrenderować grafy posiadające tysiące elementów \cite[310]{franz}. Wydajność zależy od urządzenia, na którym jest uruchamiany kod, od silnika JS, rozmiaru grafu oraz użytych styli. W szczególności kosztowne do wyrenderowania są krawędzie, zwłaszcza w multigrafach ze względu na konieczność narysowania krzywych beziera. W dokumnetacji online jest wiele wskazówek dotyczących optymalizacji pod kątem wydajności (\cite{cytoscape} sekcja \textit{Performance}).
+Biblioteka jest w stanie obsłużyć i wyrenderować grafy posiadające tysiące elementów \cite[310]{franz}. Wydajność zależy od urządzenia, na którym jest uruchamiany kod, od silnika JS, rozmiaru grafu oraz użytych styli. W~szczególności kosztowne do wyrenderowania są krawędzie, zwłaszcza w multigrafach ze względu na konieczność narysowania krzywych beziera. W dokumnetacji online jest wiele wskazówek dotyczących optymalizacji pod kątem wydajności (\cite{cytoscape} sekcja \textit{Performance}).
 
 Cytoscape.js posiada obszerną dokumentację online, która zawiera szczegółowy opis API (ang. \textit{Application Programming Interface} -- interfejs programistyczny), przykłady kawałków kodu oraz działające przykłady. 
 
@@ -250,7 +256,7 @@ Biblioteka można używać z menedżerami pakietów (ang. \textit{package manage
 
 Linkurious.js jest rozgałęzieniem (ang. \textit{fork}) projektu Sigma stworzonym przez francuską firmę Linkurious SAS w 2014 roku. Dostępna jest na dwóch licencjach GPLv3 oraz na licencji płatnej dla projektów komercyjnych, które nie spełniają założeń licencji GPLv3. 
 
-Biblioteka rozszerza Sigmę o ponad 20 nowych dodatków. Zostały dodane m.in. dodatki służące do eksportowania (GraphML, CSV, XLSX), nowe układy (algorytm Fruchtermana-Reingolda, \textit{dagre} -- do wyświetlania skierowanych grafów acyklicznych oraz drzew, \textit{ForceLink} -- bazujący na \textit{ForceAtlas2}), dodatek dający możliwość zaznaczania wierzchołków lassem, dodatek pozwalający na wyświetlenie grafu ze współrzędnymi geograficznymi na mapie (korzystający z biblioteki Leaflet), dodatek do wykrywania społeczności w grafie metodą Louvain oraz kilkanaście innych dodatków \cite{linkurious-diff}. 
+Biblioteka rozszerza Sigmę o ponad 20 nowych dodatków. Zostały dodane m.in. dodatki służące do eksportowania (GraphML, CSV, XLSX), nowe układy (algorytm Fruchtermana-Reingolda, \textit{dagre} -- do wyświetlania skierowanych grafów acyklicznych oraz drzew, \textit{ForceLink} -- bazujący na \textit{ForceAtlas2}), dodatek dający możliwość zaznaczania wierzchołków lassem, dodatek pozwalający na wyświetlenie grafu ze współrzędnymi geograficznymi na~mapie (korzystający z biblioteki Leaflet), dodatek do wykrywania społeczności w grafie metodą Louvain oraz kilkanaście innych dodatków \cite{linkurious-diff}. 
 
 Linkurious.js została porzucona w październiku 2016 roku na rzecz nowej biblioteki o nazwie Ogma \cite{ogma}.
 
