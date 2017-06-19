@@ -244,7 +244,7 @@ Innym ciekawym dodatkiem jest dodatek \texttt{sigma.neo4j.cypher}, który pozwal
 \centering
 \includegraphics[width=0.7\textwidth]{sigma.png}
 \captionsetup{justification=centering}
-\caption{Przykładowy graf wyświetlony za pomocą Sigmy}\label{fig:cytoscape}
+\caption{Przykładowy graf wyświetlony za pomocą Sigmy}\label{fig:sigma}
 \end{figure}
 
 \bigskip
@@ -266,14 +266,30 @@ Linkurious.js została porzucona w październiku 2016 roku na rzecz nowej biblio
 \centering
 \includegraphics[width=1\textwidth]{linkurious-communities.png}
 \captionsetup{justification=centering}
-\caption{Przykładowy graf z wykrytymi społecznościami wyświetlony przy pomocy układu \textit{ForceLink} w Linkurious.js}\label{fig:cytoscape}
+\caption{Przykładowy graf z wykrytymi społecznościami wyświetlony przy pomocy układu \textit{ForceLink} w Linkurious.js}\label{fig:linkurious-communities}
 \end{figure}
 
-\bigskip
+\subsection{VivaGraphJS}
 
-\subsection{VivaGraph.js}
+VivaGraphJS jest biblioteką napisaną w JavaScript służącą do rysowania grafów. Została stworzona w 2011 roku. Jej twórcą jest Andrei Kashcha. Udostępniona jest na licencji BSD 3.
 
+Biblioteka jest zaprojektowana tak, aby wspierać różne silniki renderowania i różne algorytmy układów wierzchołków. Do wersji 0.7.x VivaGraphJS była napisana w sposób monolityczny. Począwszy od wersji 0.7.x na bibliotekę składa się szereg mniejszych modułów ngraph w npm (menedżer pakietów w JavaScript), z których każdy posiada swoje własne repozytorium kodu. Każdy moduł ma jedną odpowiedzialność, np. wykrycie społeczności metodą Louvain, obliczenie algorytmu PageRank lub sparsowanie formatu GEXF. Takie podejście jest szczególnie warte uznania z wielu powodów. Po pierwsze, promuje tworzenie kodu wielokrotnego użytku. Po drugie, taki kod łatwiej jest testować. Po trzecie, aplikacja korzystająca z biblioteki ładuje tylko te funkcjonalności, które faktycznie są używane. 
 
+Autor położył duży nacisk na wydajność biblioteki -- VivaGraphJS jest w stanie w rozsądnym czasie wyświetlić tak duże grafy, przy których inne biblioteki zawodzą \cite{libraries-comparison-yt}.
+
+\pagebreak
+
+\vspace*{\fill}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{vivagraphjs.png}
+\captionsetup{justification=centering}
+\vspace*{2em}
+\caption{Przykładowy graf wyświetlony przy pomocy biblioteki VivagraphJS}\label{fig:vivagraphjs}
+\end{figure}
+\vspace*{\fill}
+
+\pagebreak
 
 \begin{table}[H]
 \begin{threeparttable}
