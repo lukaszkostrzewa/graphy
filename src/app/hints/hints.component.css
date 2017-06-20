@@ -1,0 +1,22 @@
+.hints-slider {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 45%;
+  font-size: 32px;
+  font-family: Arial, serif;
+  color: #dddddd;
+  cursor: default;
+}
+
+.shortcut {
+  border: solid 2px #eee;
+  padding: 3px 6px;
+  border-radius: 6px;
+  margin: 3px;
+  display: inline-block;
+}

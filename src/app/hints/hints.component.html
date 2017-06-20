@@ -1,0 +1,5 @@
+<ngx-slick [config]="slickConfig" class="hints-slider">
+  <div ngxSlickItem *ngFor="let hint of hints">
+    {{hint.text}} <span class="shortcut">{{hint.shortcut}}</span>
+  </div>
+</ngx-slick>
