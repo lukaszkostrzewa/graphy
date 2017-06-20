@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {SlickModule} from "ngx-slick";
 import {HintsComponent} from './hints/hints.component';
+import {HotkeyModule} from "angular2-hotkeys";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {HintsComponent} from './hints/hints.component';
   ],
   imports: [
     BrowserModule,
-    SlickModule.forRoot()
+    SlickModule.forRoot(),
+    HotkeyModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
