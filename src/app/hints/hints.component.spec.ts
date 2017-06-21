@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {HintsComponent} from './hints.component';
+import {SlickModule} from "ngx-slick";
 
 describe('HintsComponent', () => {
   let component: HintsComponent;
@@ -8,6 +9,7 @@ describe('HintsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [SlickModule.forRoot()],
       declarations: [HintsComponent]
     })
       .compileComponents();
