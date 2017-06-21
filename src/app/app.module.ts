@@ -5,9 +5,13 @@ import {AppComponent} from './app.component';
 import {SlickModule} from "ngx-slick";
 import {HintsComponent} from './hints/hints.component';
 import {HotkeyModule} from "angular2-hotkeys";
-import {MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule} from "@angular/material";
+import {
+  MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule,
+  MdTooltipModule
+} from "@angular/material";
 import {AccountButtonComponent} from './account-button/account-button.component';
 import {MainToolbarComponent} from './main-toolbar/main-toolbar.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -18,12 +22,14 @@ import {MainToolbarComponent} from './main-toolbar/main-toolbar.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     SlickModule.forRoot(),
     HotkeyModule.forRoot(),
     MdButtonModule,
     MdToolbarModule,
     MdIconModule,
-    MdSidenavModule
+    MdSidenavModule,
+    MdTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
