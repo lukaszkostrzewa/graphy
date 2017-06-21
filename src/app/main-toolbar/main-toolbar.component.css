@@ -1,0 +1,14 @@
+.main-toolbar {
+  width: 400px;
+  background-color: white;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+.main-toolbar [md-button] {
+  height: 100%;
+  padding: 0 30px;
+  min-width: initial;
+}
