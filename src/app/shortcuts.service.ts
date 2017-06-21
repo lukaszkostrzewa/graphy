@@ -34,6 +34,4 @@ export class ShortcutsService {
     console.log("Toggle mode event");
     return false;
   };
-
-
 }
