@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {SlickModule} from "ngx-slick";
 import {HintsComponent} from './hints/hints.component';
 import {HotkeyModule} from "angular2-hotkeys";
-import {MdButtonModule, MdIconModule, MdToolbarModule} from "@angular/material";
+import {MdButtonModule, MdIconModule, MdSidenavModule, MdToolbarModule} from "@angular/material";
 import {AccountButtonComponent} from './account-button/account-button.component';
 import {MainToolbarComponent} from './main-toolbar/main-toolbar.component';
 
@@ -22,7 +22,8 @@ import {MainToolbarComponent} from './main-toolbar/main-toolbar.component';
     HotkeyModule.forRoot(),
     MdButtonModule,
     MdToolbarModule,
-    MdIconModule
+    MdIconModule,
+    MdSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

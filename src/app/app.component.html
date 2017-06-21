@@ -1,5 +1,11 @@
-<app-main-toolbar></app-main-toolbar>
+<md-sidenav-container class="sidenav-container">
 
-<app-account-button></app-account-button>
+  <app-main-toolbar (navToggle)="sidenav.toggle()"></app-main-toolbar>
+  <app-account-button></app-account-button>
+  <app-hints *ngIf="isEmptyGraph()"></app-hints>
 
-<app-hints *ngIf="isEmptyGraph()"></app-hints>
+  <md-sidenav #sidenav>
+    Menu content will be here.
+  </md-sidenav>
+
+</md-sidenav-container>

@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 
 @Component({
   selector: 'app-main-toolbar',
@@ -6,4 +6,10 @@ import {Component} from "@angular/core";
   styleUrls: ['./main-toolbar.component.css']
 })
 export class MainToolbarComponent {
+
+  @Output() navToggle = new EventEmitter<boolean>();
+
+  openSideNav() {
+    this.navToggle.emit(true);
+  }
 }
