@@ -13,6 +13,8 @@ import {AccountButtonComponent} from './account-button/account-button.component'
 import {MainToolbarComponent} from './main-toolbar/main-toolbar.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent,
