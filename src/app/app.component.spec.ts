@@ -7,13 +7,14 @@ import {AccountButtonComponent} from "./account-button/account-button.component"
 import {HintsComponent} from "./hints/hints.component";
 import {SlickModule} from "ngx-slick";
 import {HotkeyModule} from "angular2-hotkeys";
+import {GraphComponent} from "./graph/graph.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MdSidenavModule, SlickModule.forRoot(), HotkeyModule.forRoot(), MdSnackBarModule],
       declarations: [
-        AppComponent, MainToolbarComponent, AccountButtonComponent, HintsComponent
+        AppComponent, MainToolbarComponent, AccountButtonComponent, HintsComponent, GraphComponent
       ],
     }).compileComponents();
   }));
