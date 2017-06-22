@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-declare let sigma: any;
 
 @Component({
   selector: 'app-graph',
@@ -32,7 +31,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
         source: 'n' + (Math.random() * N | 0),
         target: 'n' + (Math.random() * N | 0),
         size: Math.random(),
-        color: '#ccc'
+        color: '#cfcfcf'
       });
     }
   }
