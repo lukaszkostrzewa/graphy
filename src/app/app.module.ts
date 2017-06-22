@@ -1,26 +1,32 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
 
-import {AppComponent} from './app.component';
+import {AppComponent} from "./app.component";
 import {SlickModule} from "ngx-slick";
-import {HintsComponent} from './hints/hints.component';
+import {HintsComponent} from "./hints/hints.component";
 import {HotkeyModule} from "angular2-hotkeys";
 import {
-  MdButtonModule, MdIconModule, MdSidenavModule, MdSnackBarModule, MdToolbarModule,
+  MdButtonModule,
+  MdIconModule,
+  MdSidenavModule,
+  MdSnackBarModule,
+  MdToolbarModule,
   MdTooltipModule
 } from "@angular/material";
-import {AccountButtonComponent} from './account-button/account-button.component';
-import {MainToolbarComponent} from './main-toolbar/main-toolbar.component';
+import {AccountButtonComponent} from "./account-button/account-button.component";
+import {MainToolbarComponent} from "./main-toolbar/main-toolbar.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
-import 'hammerjs';
+import "hammerjs";
+import {GraphComponent} from "./graph/graph.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HintsComponent,
     AccountButtonComponent,
-    MainToolbarComponent
+    MainToolbarComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,

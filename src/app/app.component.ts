@@ -14,6 +14,6 @@ export class AppComponent {
   }
 
   isEmptyGraph(): boolean {
-    return true;
+    return false;
   }
 }
