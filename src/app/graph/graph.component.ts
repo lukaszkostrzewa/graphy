@@ -15,6 +15,11 @@ export class GraphComponent implements OnInit, AfterViewInit {
   setEditMode(value) {
     this.editMode = value;
     this.container.nativeElement.classList.toggle('edit-mode', value);
+    if (value) {
+      this.cy.on('click', this.addNodeOnClickEvent);
+    } else {
+      this.cy.off('click', this.addNodeOnClickEvent);
+    }
   }
 
   constructor() {
@@ -35,6 +40,22 @@ export class GraphComponent implements OnInit, AfterViewInit {
         name: 'grid'
       }
     });
+  }
+
+  private addNodeOnClickEvent = (event) => {
+    if (event.target === this.cy) {
+      let pos = {
+        x: event.originalEvent.offsetX,
+        y: event.originalEvent.offsetY
+      };
+      this.cy.add({
+        group: "nodes",
+        data: {
+          id: '' + this.cy.nodes().length
+        },
+        renderedPosition: pos
+      });
+    }
   }
 
 }

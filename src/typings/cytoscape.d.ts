@@ -2272,6 +2272,13 @@ declare module Cy {
     /**
      * Remove event handlers.
      * @param events A space separated list of event names.
+     * @param handler [optional] A reference to the handler function to remove.
+     */
+    off(events: string, handler?: (evt: EventObject) => void): void;
+
+    /**
+     * Remove event handlers.
+     * @param events A space separated list of event names.
      * @param selector [optional] The same selector used to bind to the events.
      * @param handler [optional] A reference to the handler function to remove.
      */
