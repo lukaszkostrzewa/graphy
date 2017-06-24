@@ -2081,6 +2081,8 @@ declare module Cy {
      * A convenience function to explicitly destroy the instance.
      */
     destroy(): void;
+
+    edgehandles(options: any): void;
   }
 
   interface EventObject {

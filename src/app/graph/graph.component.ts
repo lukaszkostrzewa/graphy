@@ -1,4 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import cytoscape from 'cytoscape/dist/cytoscape.js';
+import edgehandles from 'cytoscape-edgehandles';
 
 @Component({
   selector: 'app-graph',
@@ -17,8 +19,10 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.container.nativeElement.classList.toggle('edit-mode', value);
     if (value) {
       this.cy.on('click', this.addNodeOnClickEvent);
+      this.cy.edgehandles('enable');
     } else {
       this.cy.off('click', this.addNodeOnClickEvent);
+      this.cy.edgehandles('disable');
     }
   }
 
@@ -26,6 +30,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    edgehandles(cytoscape);
   }
 
   ngAfterViewInit(): void {
@@ -40,6 +45,15 @@ export class GraphComponent implements OnInit, AfterViewInit {
         name: 'grid'
       }
     });
+
+    let defaults = {
+      handleHitThreshold: 12,
+      handleColor: '#3f51b5',
+      hoverDelay: 0,
+      enabled: false,
+      loopAllowed: () => true
+    };
+    this.cy.edgehandles(defaults);
   }
 
   private addNodeOnClickEvent = (event) => {
