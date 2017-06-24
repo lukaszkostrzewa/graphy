@@ -6,3 +6,7 @@
   position: absolute;
   z-index: -1;
 }
+
+#graph-container.edit-mode {
+  box-shadow: inset 0 0 0 6px rgba(124, 77, 255, 0.4);
+}

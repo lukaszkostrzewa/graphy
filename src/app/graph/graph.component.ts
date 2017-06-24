@@ -10,6 +10,13 @@ export class GraphComponent implements OnInit, AfterViewInit {
   @ViewChild('graphContainer') container: ElementRef;
   private graph = {nodes: [], edges: []};
 
+  private editMode: boolean;
+
+  setEditMode(value) {
+    this.editMode = value;
+    this.container.nativeElement.classList.toggle('edit-mode', value);
+  }
+
   constructor() {
   }
 

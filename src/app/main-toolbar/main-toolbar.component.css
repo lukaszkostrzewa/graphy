@@ -12,3 +12,16 @@
   padding: 0 30px;
   min-width: initial;
 }
+
+.main-toolbar md-button-toggle {
+  height: 100%;
+  padding: 0 14px;
+  line-height: 64px;
+  font-size: 14px;
+  color: inherit;
+}
+
+.main-toolbar .mat-button-toggle-checked {
+  background-color: #3f51b5;
+  color: rgba(255, 255, 255, .87);
+}

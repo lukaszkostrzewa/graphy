@@ -1,10 +1,11 @@
 <md-sidenav-container class="sidenav-container">
 
-  <app-main-toolbar (navToggle)="sidenav.toggle()"></app-main-toolbar>
+  <app-main-toolbar (navToggle)="sidenav.toggle()"
+                    (editToggle)="graph.setEditMode($event)"></app-main-toolbar>
   <app-account-button></app-account-button>
   <app-hints *ngIf="isEmptyGraph()"></app-hints>
 
-  <app-graph></app-graph>
+  <app-graph #graph></app-graph>
 
   <md-sidenav #sidenav>
     Menu content will be here.

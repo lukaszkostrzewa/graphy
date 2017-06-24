@@ -6,7 +6,7 @@ import {SlickModule} from "ngx-slick";
 import {HintsComponent} from "./hints/hints.component";
 import {HotkeyModule} from "angular2-hotkeys";
 import {
-  MdButtonModule,
+  MdButtonModule, MdButtonToggleModule,
   MdIconModule,
   MdSidenavModule,
   MdSnackBarModule,
@@ -34,6 +34,7 @@ import {GraphComponent} from "./graph/graph.component";
     SlickModule.forRoot(),
     HotkeyModule.forRoot(),
     MdButtonModule,
+    MdButtonToggleModule,
     MdToolbarModule,
     MdIconModule,
     MdSidenavModule,
