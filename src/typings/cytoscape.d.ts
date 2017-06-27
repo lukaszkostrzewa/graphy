@@ -2083,6 +2083,8 @@ declare module Cy {
     destroy(): void;
 
     edgehandles(options: any): void;
+
+    contextMenus(options: any): void;
   }
 
   interface EventObject {

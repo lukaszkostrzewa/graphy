@@ -10,3 +10,67 @@
 #graph-container.edit-mode {
   box-shadow: inset 0 0 0 6px rgba(124, 77, 255, 0.4);
 }
+
+:host /deep/ .cy-context-menus-cxt-menu {
+  display: none;
+  z-index: 1000;
+  position: absolute;
+  border: 1px solid #c1c1c1;
+  padding: 3px 0;
+  background: white;
+  margin: 0;
+  width: 200px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.32);
+}
+
+:host /deep/ .cy-context-menus-cxt-menuitem {
+  display: block;
+  z-index: 1000;
+  width: 100%;
+  padding: 6px 26px;
+  white-space: nowrap;
+  border: 0;
+  text-align: left;
+  background-color: #ffffff;
+  font-size: 12px;
+}
+
+:host /deep/ .cy-context-menus-cxt-menuitem:enabled {
+  color: #000000;
+}
+
+:host /deep/ .cy-context-menus-cxt-menuitem:disabled {
+  pointer-events: none;
+}
+
+:host /deep/ .cy-context-menus-ctx-operation:focus {
+  outline: none;
+}
+
+:host /deep/ .cy-context-menus-cxt-menuitem:hover {
+  background-color: #eaeaea;
+  cursor: pointer;
+}
+
+:host /deep/ .cy-context-menus-cxt-menuitem[content]:before {
+  content: attr(content);
+}
+
+:host /deep/ .cy-context-menus-cxt-menuitem:not([content]):before {
+  content: "\2630";
+}
+
+:host /deep/ .cy-context-menus-divider {
+  margin: 0 0 7px 0;
+  padding-bottom: 3px;
+}
+
+:host /deep/ .cy-context-menus-divider:after {
+  content: ' ';
+  display: block;
+  width: calc(100% + 52px);
+  margin-left: -26px;
+  position: relative;
+  top: 7px;
+  border-bottom: solid 1px #e5e5e5;
+}
