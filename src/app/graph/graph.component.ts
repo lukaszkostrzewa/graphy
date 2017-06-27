@@ -1,7 +1,12 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import cytoscape from 'cytoscape/dist/cytoscape.js';
-import edgehandles from 'cytoscape-edgehandles';
-import graphml from 'cytoscape-graphml';
+
+import {Parser} from "./parsers/parser";
+import {GraphmlParser} from "./parsers/graphml-parser";
+import {MdSnackBar} from "@angular/material";
+import {PluginHandler} from "./plugin-handlers/plugin-handler";
+import {EdgehandlesPluginHandler} from "./plugin-handlers/edgehandles-plugin-handler";
+import {NodeAdditionPluginHandler} from "./plugin-handlers/node-addition-plugin-handler";
 
 @Component({
   selector: 'app-graph',
@@ -14,30 +19,41 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   private editMode: boolean;
   private cy: Cy.Instance;
+  private parsers: Parser[] = [];
+  private pluginHandlers: PluginHandler[] = [];
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
 
   setEditMode(value) {
     this.editMode = value;
     this.container.nativeElement.classList.toggle('edit-mode', value);
+
     if (value) {
-      this.cy.on('click', this.addNodeOnClickEvent);
-      this.cy.edgehandles('enable');
+      this.pluginHandlers.forEach(handler => handler.editModeActivated());
     } else {
-      this.cy.off('click', this.addNodeOnClickEvent);
-      this.cy.edgehandles('disable');
+      this.pluginHandlers.forEach(handler => handler.editModeDeactivated());
     }
   }
 
-  constructor() {
+  constructor(private snackBar: MdSnackBar) {
   }
 
   ngOnInit() {
-    edgehandles(cytoscape);
-    graphml(cytoscape, jQuery);
   }
 
   ngAfterViewInit(): void {
-    this.cy = cytoscape({
+    this.cy = cytoscape(this.getConfig());
+
+    this.parsers = [
+      new GraphmlParser(this.cy)
+    ];
+    this.pluginHandlers = [
+      new EdgehandlesPluginHandler(this.cy),
+      new NodeAdditionPluginHandler(this.cy)
+    ];
+  }
+
+  private getConfig() {
+    return {
       container: this.container.nativeElement,
       elements: [
         {data: {id: 'a'}},
@@ -48,33 +64,8 @@ export class GraphComponent implements OnInit, AfterViewInit {
         name: 'grid'
       },
       wheelSensitivity: 0.2
-    });
-
-    let defaults = {
-      handleHitThreshold: 12,
-      handleColor: '#3f51b5',
-      hoverDelay: 0,
-      enabled: false,
-      loopAllowed: () => true
     };
-    this.cy.edgehandles(defaults);
   }
-
-  private addNodeOnClickEvent = (event) => {
-    if (event.target === this.cy) {
-      let pos = {
-        x: event.originalEvent.offsetX,
-        y: event.originalEvent.offsetY
-      };
-      this.cy.add({
-        group: "nodes",
-        data: {
-          id: '' + this.cy.nodes().length
-        },
-        renderedPosition: pos
-      });
-    }
-  };
 
   zoomIn() {
     this.zoom(GraphComponent.ZOOM_IN_OUT_FACTOR);
@@ -90,6 +81,12 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   parseAndInit(content) {
-    this.cy.graphml(content);
+    let parser = this.parsers.find(parser => parser.canParse(content));
+    if (parser) {
+      parser.parse(content);
+    } else {
+      console.error('Unable to find supporting parser', content);
+      this.snackBar.open('Unable to import selected graph - unsupported format.');
+    }
   }
 }
