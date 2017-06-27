@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import cytoscape from 'cytoscape/dist/cytoscape.js';
 import edgehandles from 'cytoscape-edgehandles';
+import graphml from 'cytoscape-graphml';
 
 @Component({
   selector: 'app-graph',
@@ -32,6 +33,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     edgehandles(cytoscape);
+    graphml(cytoscape, jQuery);
   }
 
   ngAfterViewInit(): void {
@@ -88,7 +90,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   parseAndInit(content) {
-    console.log(content);
-    //this.cy.graphml(content);
+    this.cy.graphml(content);
   }
 }

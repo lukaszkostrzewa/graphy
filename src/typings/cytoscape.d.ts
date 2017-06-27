@@ -2083,6 +2083,12 @@ declare module Cy {
     destroy(): void;
 
     edgehandles(options: any): void;
+
+    graphml(): string;
+
+    graphml(content: string): void;
+
+    graphml(options: object): Instance;
   }
 
   interface EventObject {
