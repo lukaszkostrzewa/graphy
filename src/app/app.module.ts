@@ -19,6 +19,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import "hammerjs";
 import {GraphComponent} from "./graph/graph.component";
+import {ZoomButtonsComponent} from './zoom-buttons/zoom-buttons.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {GraphComponent} from "./graph/graph.component";
     HintsComponent,
     AccountButtonComponent,
     MainToolbarComponent,
-    GraphComponent
+    GraphComponent,
+    ZoomButtonsComponent
   ],
   imports: [
     BrowserModule,

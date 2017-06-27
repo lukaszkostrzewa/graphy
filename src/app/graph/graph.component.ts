@@ -13,6 +13,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   private editMode: boolean;
   private cy: Cy.Instance;
+  private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
 
   setEditMode(value) {
     this.editMode = value;
@@ -43,7 +44,8 @@ export class GraphComponent implements OnInit, AfterViewInit {
       ],
       layout: {
         name: 'grid'
-      }
+      },
+      wheelSensitivity: 0.8
     });
 
     let defaults = {
@@ -70,6 +72,18 @@ export class GraphComponent implements OnInit, AfterViewInit {
         renderedPosition: pos
       });
     }
+  };
+
+  zoomIn() {
+    this.zoom(GraphComponent.ZOOM_IN_OUT_FACTOR);
   }
 
+  zoomOut() {
+    this.zoom(1 / GraphComponent.ZOOM_IN_OUT_FACTOR)
+  }
+
+  private zoom(factor: number) {
+    this.cy.zoom(this.cy.zoom() * factor);
+    this.cy.center();
+  }
 }
