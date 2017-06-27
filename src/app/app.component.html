@@ -8,7 +8,7 @@
   <app-graph #graph></app-graph>
 
   <md-sidenav #sidenav>
-    Menu content will be here.
+    <app-file-upload (uploaded)="graph.parseAndInit($event);sidenav.toggle();"></app-file-upload>
   </md-sidenav>
 
 </md-sidenav-container>

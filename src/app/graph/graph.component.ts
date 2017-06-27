@@ -86,4 +86,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.cy.zoom(this.cy.zoom() * factor);
     this.cy.center();
   }
+
+  parseAndInit(content) {
+    console.log(content);
+    //this.cy.graphml(content);
+  }
 }
