@@ -45,7 +45,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
       layout: {
         name: 'grid'
       },
-      wheelSensitivity: 0.8
+      wheelSensitivity: 0.2
     });
 
     let defaults = {
