@@ -94,4 +94,11 @@ export class GraphComponent implements OnInit, AfterViewInit {
   locate() {
     this.cy.fit(this.cy.nodes(), GraphComponent.FIT_PADDING);
   }
+
+  setLayout(layoutName: string) {
+    let layout: any = this.cy.layout({name: layoutName});
+    if (layout) {
+      layout.run();
+    }
+  }
 }

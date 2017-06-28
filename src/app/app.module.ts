@@ -7,7 +7,7 @@ import {HintsComponent} from "./hints/hints.component";
 import {HotkeyModule} from "angular2-hotkeys";
 import {
   MdButtonModule, MdButtonToggleModule,
-  MdIconModule,
+  MdIconModule, MdMenuModule,
   MdSidenavModule,
   MdSnackBarModule,
   MdToolbarModule,
@@ -22,6 +22,7 @@ import {GraphComponent} from "./graph/graph.component";
 import {ZoomButtonsComponent} from './zoom-buttons/zoom-buttons.component';
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {LocateButtonComponent} from './locate-button/locate-button.component';
+import {LayoutSwitchComponent} from './layout-switch/layout-switch.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {LocateButtonComponent} from './locate-button/locate-button.component';
     GraphComponent,
     ZoomButtonsComponent,
     FileUploadComponent,
-    LocateButtonComponent
+    LocateButtonComponent,
+    LayoutSwitchComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import {LocateButtonComponent} from './locate-button/locate-button.component';
     MdIconModule,
     MdSidenavModule,
     MdTooltipModule,
-    MdSnackBarModule
+    MdSnackBarModule,
+    MdMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

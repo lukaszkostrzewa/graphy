@@ -1,0 +1,9 @@
+<md-menu #appMenu="mdMenu">
+  <button md-menu-item *ngFor="let layout of layouts" (click)="layoutChanged.emit(layout.name)">
+    {{ layout.displayName }}
+  </button>
+</md-menu>
+
+<button md-icon-button class="btn-layout-switch" [mdMenuTriggerFor]="appMenu">
+  <md-icon>videocam</md-icon>
+</button>
