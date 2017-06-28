@@ -22,6 +22,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   private parsers: Parser[] = [];
   private pluginHandlers: PluginHandler[] = [];
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
+  private static readonly FIT_PADDING: number = 100;
 
   setEditMode(value) {
     this.editMode = value;
@@ -88,5 +89,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
       console.error('Unable to find supporting parser', content);
       this.snackBar.open('Unable to import selected graph - unsupported format.');
     }
+  }
+
+  locate() {
+    this.cy.fit(this.cy.nodes(), GraphComponent.FIT_PADDING);
   }
 }

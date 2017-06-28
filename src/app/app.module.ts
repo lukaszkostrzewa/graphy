@@ -21,6 +21,7 @@ import "hammerjs";
 import {GraphComponent} from "./graph/graph.component";
 import {ZoomButtonsComponent} from './zoom-buttons/zoom-buttons.component';
 import {FileUploadComponent} from './file-upload/file-upload.component';
+import {LocateButtonComponent} from './locate-button/locate-button.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {FileUploadComponent} from './file-upload/file-upload.component';
     MainToolbarComponent,
     GraphComponent,
     ZoomButtonsComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    LocateButtonComponent
   ],
   imports: [
     BrowserModule,
