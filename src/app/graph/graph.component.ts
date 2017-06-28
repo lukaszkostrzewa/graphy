@@ -7,6 +7,8 @@ import {MdSnackBar} from "@angular/material";
 import {PluginHandler} from "./plugin-handlers/plugin-handler";
 import {EdgehandlesPluginHandler} from "./plugin-handlers/edgehandles-plugin-handler";
 import {NodeAdditionPluginHandler} from "./plugin-handlers/node-addition-plugin-handler";
+import {ShortcutsHandler} from "./shortcuts-handler";
+import Position = Cy.Position;
 
 @Component({
   selector: 'app-graph',
@@ -21,6 +23,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   private cy: Cy.Instance;
   private parsers: Parser[] = [];
   private pluginHandlers: PluginHandler[] = [];
+  private shortcutsHandler: ShortcutsHandler;
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
   private static readonly FIT_PADDING: number = 100;
 
@@ -36,6 +39,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   constructor(private snackBar: MdSnackBar) {
+    this.shortcutsHandler = new ShortcutsHandler(this);
   }
 
   ngOnInit() {
@@ -64,7 +68,8 @@ export class GraphComponent implements OnInit, AfterViewInit {
       layout: {
         name: 'grid'
       },
-      wheelSensitivity: 0.2
+      wheelSensitivity: 0.2,
+      boxSelectionEnabled: true
     };
   }
 
@@ -100,5 +105,29 @@ export class GraphComponent implements OnInit, AfterViewInit {
     if (layout) {
       layout.run();
     }
+  }
+
+  deleteSelectedElements() {
+    this.cy.$(':selected').remove();
+    this.snackBar
+      .open("Selected elements deleted.", "Undo", {
+        duration: 2000,
+      })
+      .onAction()
+      .subscribe(() => {
+        console.log("Undo node deletion");
+      });
+  }
+
+  selectAll() {
+    this.cy.elements().select();
+  }
+
+  moveGraph(options: Position) {
+    this.cy.panBy(options);
+  }
+
+  keydown(event: KeyboardEvent) {
+    this.shortcutsHandler.keydown(event);
   }
 }

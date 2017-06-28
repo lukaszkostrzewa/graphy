@@ -1,16 +1,13 @@
 import {Component} from "@angular/core";
-import {ShortcutsService} from "./shortcuts.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [ShortcutsService]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
-  constructor(private shortcutsService: ShortcutsService) {
-    shortcutsService.initialize();
+  constructor() {
   }
 
   isEmptyGraph(): boolean {
