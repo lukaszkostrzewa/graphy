@@ -2,68 +2,140 @@ import {PluginHandler} from "./plugin-handler";
 import * as jquery from "jquery";
 import cytoscape from 'cytoscape/dist/cytoscape.js';
 import contextMenus from 'cytoscape-context-menus';
+import ContextMenu = Cy.ContextMenu;
 
 export class ContextMenusPluginHandler implements PluginHandler {
+
+  private static readonly ITEMS_VISIBLE_IN_EDIT_MODE = [
+    'add-node', 'add-edge', 'remove', 'edit', 'group'
+  ];
+  private contextMenu: ContextMenu;
 
   constructor(private cy: Cy.Instance) {
     contextMenus(cytoscape, jquery);
     let options = {
-      // List of initial menu items
-      menuItems: [
-        {
-          id: 'remove', // ID of menu item
-          content: 'Remove', // Display content of menu item
-          tooltipText: 'Remove', // Tooltip text for menu item
-          // Filters the elements to have this menu item on cxttap
-          // If the selector is not truthy no elements will have this menu item on cxttap
-          selector: 'node, edge',
-          onClickFunction: function () { // The function to be executed on click
-            console.log('remove element');
-          },
-          disabled: false, // Whether the item will be created as disabled
-          show: true, // Whether the item will be shown or not
-          hasTrailingDivider: true, // Whether the item will have a trailing divider
-          coreAsWell: false // Whether core instance have this item on cxttap
-        },
-        {
-          id: 'hide',
-          content: 'Hide',
-          tooltipText: 'Hide',
-          selector: 'node, edge',
-          onClickFunction: function () {
-            console.log('hide element');
-          },
-          disabled: false
-        },
-        {
-          id: 'add-node',
-          content: 'Add node',
-          tooltipText: 'Add node',
-          selector: 'node',
-          coreAsWell: true,
-          onClickFunction: function () {
-            console.log('add node');
-          },
-          show: true
-        }
-      ],
-      // css classes that menu items will have
-      menuItemClasses: [
-        // add class names to this list
-      ],
-      // css classes that context menu will have
-      contextMenuClasses: [
-        // add class names to this list
-      ],
+      menuItems: this.getMenuItems(),
       container: this.cy.container().parentElement
     };
-    this.cy.contextMenus(options);
+    this.contextMenu = this.cy.contextMenus(options);
   }
 
   editModeActivated(): void {
+    ContextMenusPluginHandler.ITEMS_VISIBLE_IN_EDIT_MODE
+      .forEach(item => this.contextMenu.showMenuItem(item));
   }
 
   editModeDeactivated(): void {
+    ContextMenusPluginHandler.ITEMS_VISIBLE_IN_EDIT_MODE
+      .forEach(item => this.contextMenu.hideMenuItem(item));
   }
 
+  private getMenuItems() {
+    return [
+      {
+        id: 'add-node',
+        content: 'Add node',
+        selector: false,
+        onClickFunction: function () {
+          console.log('Add node dialog');
+        },
+        coreAsWell: true,
+        show: false
+      },
+      {
+        id: 'add-edge',
+        content: 'Add edge',
+        selector: 'node',
+        onClickFunction: function () {
+          console.log('Add edge action');
+        },
+        show: false
+      },
+      {
+        id: 'remove',
+        content: 'Remove',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Remove element');
+        },
+        show: false
+      },
+      {
+        id: 'edit',
+        content: 'Edit',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Edit element');
+        },
+        hasTrailingDivider: true,
+        show: false
+      },
+      {
+        id: 'select-all',
+        content: 'Select all',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Select all');
+        },
+        coreAsWell: true
+      },
+      {
+        id: 'group',
+        content: 'Group',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Group all');
+        },
+        coreAsWell: true,
+        hasTrailingDivider: true,
+        show: false
+      },
+      {
+        id: 'copy',
+        content: 'Copy',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Copy');
+        },
+        coreAsWell: true,
+      },
+      {
+        id: 'cut',
+        content: 'Cut',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Cut');
+        },
+        coreAsWell: true,
+      },
+      {
+        id: 'paste',
+        content: 'Paste',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Paste');
+        },
+        coreAsWell: true,
+        hasTrailingDivider: true
+      },
+      {
+        id: 'undo',
+        content: 'Undo',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Undo');
+        },
+        coreAsWell: true
+      },
+      {
+        id: 'redo',
+        content: 'Redo',
+        selector: 'node, edge',
+        onClickFunction: function () {
+          console.log('Redo');
+        },
+        coreAsWell: true
+      }
+    ];
+  }
 }

@@ -2090,9 +2090,106 @@ declare module Cy {
 
     graphml(options: object): Instance;
 
-    contextMenus(options: any): void;
+    contextMenus(options: ContextMenuOptions): ContextMenu;
 
     container(): HTMLElement;
+  }
+
+  export interface ContextMenuOptions {
+
+    menuItems: ContextMenuItem[];
+    menuItemClasses?: string[];
+    contextMenuClasses?: string[];
+    container?: string | HTMLElement;
+  }
+
+  export interface ContextMenu {
+
+    /**
+     * Returns whether the extension is active
+     */
+    isActive(): boolean;
+
+    /**
+     * Appends given menu item to the menu items list
+     * @param item
+     */
+    appendMenuItem(item: ContextMenuItem): Cy.Instance;
+
+    /**
+     * Appends menu items in the given list to the menu items list
+     * @param items
+     */
+    appendMenuItems(items: ContextMenuItem[]): Cy.Instance;
+
+    /**
+     * Removes the menu item with given ID
+     * @param itemID
+     */
+    removeMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Sets whether the menuItem with given ID will have a following divider
+     * @param itemID
+     * @param status
+     */
+    setTrailingDivider(itemID: string, status: boolean): Cy.Instance;
+
+    /**
+     * Inserts given item before the existing item
+     * @param item
+     * @param existingItemID
+     */
+    insertBeforeMenuItem(item: ContextMenuItem, existingItemID: string): Cy.Instance;
+
+    /**
+     * Moves the item with given ID before the existing item
+     * @param itemID
+     * @param existingItemID
+     */
+    moveBeforeOtherMenuItem(itemID: string, existingItemID: string): Cy.Instance;
+
+    /**
+     * Disables the menu item with given ID
+     * @param itemID
+     */
+    disableMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Enables the menu item with given ID
+     * @param itemID
+     */
+    enableMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Shows the menu item with given ID
+     * @param itemID
+     */
+    showMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Hides the menu item with given ID
+     * @param itemID
+     */
+    hideMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Destroys the extension instance
+     */
+    destroy(): Cy.Instance;
+  }
+
+  export interface ContextMenuItem {
+
+    id: string;
+    content: string;
+    tooltipText?: string;
+    selector: string | boolean,
+    onClickFunction: () => void;
+    disabled?: boolean;
+    show?: boolean;
+    hasTrailingDivider?: boolean;
+    coreAsWell?: boolean;
   }
 
   interface EventObject {
