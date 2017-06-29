@@ -1,4 +1,4 @@
-<md-menu #appMenu="mdMenu">
+<md-menu #appMenu="mdMenu" [overlapTrigger]="false">
   <button md-menu-item *ngFor="let layout of layouts" (click)="layoutChanged.emit(layout.name)">
     {{ layout.displayName }}
   </button>
