@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import cytoscape from 'cytoscape/dist/cytoscape.js';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import cytoscape from "cytoscape/dist/cytoscape.js";
 
 import {Parser} from "./parsers/parser";
 import {GraphmlParser} from "./parsers/graphml-parser";
@@ -8,6 +8,7 @@ import {PluginHandler} from "./plugin-handlers/plugin-handler";
 import {EdgehandlesPluginHandler} from "./plugin-handlers/edgehandles-plugin-handler";
 import {NodeAdditionPluginHandler} from "./plugin-handlers/node-addition-plugin-handler";
 import {ShortcutsHandler} from "./shortcuts-handler";
+import * as FileSaver from "file-saver";
 import Position = Cy.Position;
 
 @Component({
@@ -86,13 +87,22 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.cy.center();
   }
 
-  parseAndInit(content) {
+  parseAndInit(content: string) {
     let parser = this.parsers.find(parser => parser.canParse(content));
     if (parser) {
       parser.parse(content);
     } else {
       console.error('Unable to find supporting parser', content);
       this.snackBar.open('Unable to import selected graph - unsupported format.');
+    }
+  }
+
+  exportGraph(type: string) {
+    if (type === 'graphml') {
+      let blob = new Blob([this.cy.graphml()], {
+        type: "application/xml"
+      });
+      FileSaver.saveAs(blob, "graph.xml");
     }
   }
 

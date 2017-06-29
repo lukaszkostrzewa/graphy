@@ -27,4 +27,8 @@ export class SideMenuComponent implements OnInit {
       }
     });
   }
+
+  exportGraph() {
+    this.graphComponent.exportGraph('graphml');
+  }
 }
