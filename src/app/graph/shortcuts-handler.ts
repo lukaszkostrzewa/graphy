@@ -32,7 +32,7 @@ export class ShortcutsHandler {
 
   keydown(event: KeyboardEvent): boolean {
     let key = [event.ctrlKey && 'ctrl', event.shiftKey && 'shift', event.key.toLowerCase()]
-      .filter(el => el)
+      .filter(Boolean)
       .join('+');
     let handler = this.shortcutsMap[key];
     if (handler) {
