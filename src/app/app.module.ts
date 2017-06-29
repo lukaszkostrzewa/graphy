@@ -12,7 +12,7 @@ import {
   MdSnackBarModule,
   MdToolbarModule,
   MdTooltipModule,
-  MdListModule
+  MdListModule, MdDialogModule
 } from "@angular/material";
 import {AccountButtonComponent} from "./account-button/account-button.component";
 import {MainToolbarComponent} from "./main-toolbar/main-toolbar.component";
@@ -25,6 +25,7 @@ import {FileUploadComponent} from './file-upload/file-upload.component';
 import {LocateButtonComponent} from './locate-button/locate-button.component';
 import {LayoutSwitchComponent} from './layout-switch/layout-switch.component';
 import {SideMenuComponent} from './side-menu/side-menu.component';
+import {ImportDialogComponent} from './import-dialog/import-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {SideMenuComponent} from './side-menu/side-menu.component';
     FileUploadComponent,
     LocateButtonComponent,
     LayoutSwitchComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    ImportDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,11 @@ import {SideMenuComponent} from './side-menu/side-menu.component';
     MdTooltipModule,
     MdSnackBarModule,
     MdMenuModule,
-    MdListModule
+    MdListModule,
+    MdDialogModule
+  ],
+  entryComponents: [
+    ImportDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

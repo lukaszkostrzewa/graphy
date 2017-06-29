@@ -1,4 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {MdDialog, MdSidenav} from "@angular/material";
+import {ImportDialogComponent} from "../import-dialog/import-dialog.component";
+import {GraphComponent} from "../graph/graph.component";
 
 @Component({
   selector: 'app-side-menu',
@@ -7,10 +10,21 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
 
-  constructor() {
+  @Input() sideNav: MdSidenav;
+  @Input() graphComponent: GraphComponent;
+
+  constructor(public dialog: MdDialog) {
   }
 
   ngOnInit() {
   }
 
+  openImportDialog() {
+    this.dialog.open(ImportDialogComponent).afterClosed().subscribe((result: string) => {
+      if (result) {
+        this.graphComponent.parseAndInit(result);
+        this.sideNav.close();
+      }
+    });
+  }
 }
