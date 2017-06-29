@@ -10,6 +10,7 @@ import {NodeAdditionPluginHandler} from "./plugin-handlers/node-addition-plugin-
 import {ShortcutsHandler} from "./shortcuts-handler";
 import * as FileSaver from "file-saver";
 import Position = Cy.Position;
+import {ContextMenusPluginHandler} from "./plugin-handlers/context-menus-plugin-handler";
 
 @Component({
   selector: 'app-graph',
@@ -54,7 +55,8 @@ export class GraphComponent implements OnInit, AfterViewInit {
     ];
     this.pluginHandlers = [
       new EdgehandlesPluginHandler(this.cy),
-      new NodeAdditionPluginHandler(this.cy)
+      new NodeAdditionPluginHandler(this.cy),
+      new ContextMenusPluginHandler(this.cy)
     ];
   }
 

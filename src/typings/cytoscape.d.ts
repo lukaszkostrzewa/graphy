@@ -2091,6 +2091,8 @@ declare module Cy {
     graphml(options: object): Instance;
 
     contextMenus(options: any): void;
+
+    container(): HTMLElement;
   }
 
   interface EventObject {
