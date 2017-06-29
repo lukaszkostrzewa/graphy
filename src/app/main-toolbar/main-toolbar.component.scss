@@ -1,10 +1,15 @@
 .main-toolbar {
-  width: 440px;
+  width: auto;
+  padding-right: 0;
   background-color: white;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.15);
   position: fixed;
   top: 10px;
   left: 10px;
+
+  md-button-toggle:not(.mat-button-toggle-checked):hover {
+    background-color: rgba(0, 0, 0, .12);
+  }
 }
 
 .main-toolbar [md-button] {
