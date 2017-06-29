@@ -4,6 +4,7 @@ export class ShortcutsHandler {
 
   private singleKeyShortcuts = {
     'Delete': this.deleteSelected,
+    'Backspace': this.deleteSelected,
     'ArrowUp': this.moveUp,
     'ArrowDown': this.moveDown,
     'ArrowLeft': this.moveLeft,
@@ -36,6 +37,7 @@ export class ShortcutsHandler {
   }
 
   keydown(event: KeyboardEvent): boolean {
+    console.log(event);
     let handler = this.singleKeyShortcuts[event.key]
       || (event.ctrlKey && event.shiftKey && this.shortcutsWithCtrlAndShift[event.key])
       || (event.ctrlKey && this.shortcutsWithCtrl[event.key]);
