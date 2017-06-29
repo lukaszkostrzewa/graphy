@@ -1,0 +1,23 @@
+.zoom-buttons-container {
+
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 4px #aaa;
+
+  button {
+    padding: 0;
+    display: block;
+    min-width: 36px;
+
+    &.btn-zoom-in {
+      border-bottom: solid 1px #eeeeee;
+    }
+
+    .mat-icon {
+      font-size: 16px;
+      height: 16px;
+    }
+  }
+}

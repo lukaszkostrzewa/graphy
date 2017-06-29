@@ -1,0 +1,8 @@
+<h1 md-dialog-title>Open Graph</h1>
+<div md-dialog-content>
+  Please select a file with graph. Currently only GraphML format is supported.
+</div>
+<div md-dialog-actions>
+  <app-file-upload (uploaded)="dialogRef.close($event);"></app-file-upload>
+</div>
+

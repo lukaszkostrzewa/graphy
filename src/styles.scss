@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
 
+$background-color: #fafafa;
+
 html, body {
-  background-color: #fafafa;
+  background-color: $background-color;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  font-family: Roboto, Arial, sans-serif;
 }

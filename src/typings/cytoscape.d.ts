@@ -2084,6 +2084,12 @@ declare module Cy {
 
     edgehandles(options: any): void;
 
+    graphml(): string;
+
+    graphml(content: string): void;
+
+    graphml(options: object): Instance;
+
     contextMenus(options: any): void;
   }
 

@@ -1,0 +1,11 @@
+.sidenav-container {
+  height: 100%;
+}
+
+:host /deep/ .mat-sidenav-backdrop.mat-sidenav-shown {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+md-sidenav {
+  width: 300px;
+}

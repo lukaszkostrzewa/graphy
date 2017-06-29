@@ -1,0 +1,26 @@
+md-divider {
+  margin: 8px 0;
+}
+
+md-nav-list {
+  md-list-item {
+    font-size: 14px;
+
+    .mat-icon-button {
+      margin-right: 8px;
+    }
+
+    md-icon {
+      font-size: 16px;
+      color: #666666;
+    }
+  }
+}
+
+.copyright-note {
+  color: #cccccc;
+}
+
+.logo {
+  padding-left: 10px;
+}

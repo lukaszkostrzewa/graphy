@@ -1,3 +1,8 @@
-<button md-fab class="account-btn" color="primary">
+<button md-fab class="account-btn" color="primary" [mdMenuTriggerFor]="accountMenu">
   {{initials}}
 </button>
+
+<md-menu #accountMenu="mdMenu" [overlapTrigger]="false" class="account-menu">
+  <button md-menu-item>Settings</button>
+  <button md-menu-item>Log out</button>
+</md-menu>

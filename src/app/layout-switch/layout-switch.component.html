@@ -1,0 +1,10 @@
+<md-menu #appMenu="mdMenu" [overlapTrigger]="false">
+  <button md-menu-item *ngFor="let layout of layouts" (click)="layoutChanged.emit(layout.name)">
+    {{ layout.displayName }}
+  </button>
+</md-menu>
+
+<button md-icon-button class="btn-layout-switch" [mdMenuTriggerFor]="appMenu"
+        md-tooltip="Change Layout" [mdTooltipPosition]="'above'">
+  <md-icon>videocam</md-icon>
+</button>

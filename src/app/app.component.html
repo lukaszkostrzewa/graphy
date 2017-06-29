@@ -8,7 +8,7 @@
   <app-graph #graph></app-graph>
 
   <md-sidenav #sidenav>
-    Menu content will be here.
+    <app-side-menu [sideNav]="sidenav" [graphComponent]="graph"></app-side-menu>
   </md-sidenav>
 
 </md-sidenav-container>

@@ -5,7 +5,7 @@ import {Hint} from "./hint";
 @Component({
   selector: 'app-hints',
   templateUrl: './hints.component.html',
-  styleUrls: ['./hints.component.css'],
+  styleUrls: ['./hints.component.scss'],
   providers: [HintsService]
 })
 export class HintsComponent implements OnInit {
