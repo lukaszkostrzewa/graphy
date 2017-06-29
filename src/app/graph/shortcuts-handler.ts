@@ -2,33 +2,27 @@ import {GraphComponent} from "./graph.component";
 
 export class ShortcutsHandler {
 
-  private singleKeyShortcuts = {
-    'Delete': this.deleteSelected,
-    'Backspace': this.deleteSelected,
-    'ArrowUp': this.moveUp,
-    'ArrowDown': this.moveDown,
-    'ArrowLeft': this.moveLeft,
-    'ArrowRight': this.moveRight,
-  };
-
-  private shortcutsWithCtrl = {
-    'a': this.selectAllNodes,
-    'f': this.search,
-    's': this.save,
-    'g': this.groupSelected,
-    'z': this.undo,
-    'y': this.redo,
-    'c': this.copy,
-    'v': this.paste,
-    'x': this.cut,
-    '-': this.zoomOut,
-    '=': this.zoomIn,
-    '0': this.locate,
-    '`': this.toggleMode
-  };
-
-  private shortcutsWithCtrlAndShift = {
-    'G': this.ungroupSelected
+  private shortcutsMap = {
+    'delete': this.deleteSelected,
+    'backspace': this.deleteSelected,
+    'arrowup': this.moveUp,
+    'arrowdown': this.moveDown,
+    'arrowleft': this.moveLeft,
+    'arrowright': this.moveRight,
+    'ctrl+a': this.selectAllNodes,
+    'ctrl+f': this.search,
+    'ctrl+s': this.save,
+    'ctrl+g': this.groupSelected,
+    'ctrl+z': this.undo,
+    'ctrl+y': this.redo,
+    'ctrl+c': this.copy,
+    'ctrl+v': this.paste,
+    'ctrl+x': this.cut,
+    'ctrl+-': this.zoomOut,
+    'ctrl+=': this.zoomIn,
+    'ctrl+0': this.locate,
+    'ctrl+`': this.toggleMode,
+    'ctrl+shift+g': this.ungroupSelected
   };
 
   private static readonly MOVE_BY: number = 20;
@@ -37,10 +31,10 @@ export class ShortcutsHandler {
   }
 
   keydown(event: KeyboardEvent): boolean {
-    console.log(event);
-    let handler = this.singleKeyShortcuts[event.key]
-      || (event.ctrlKey && event.shiftKey && this.shortcutsWithCtrlAndShift[event.key])
-      || (event.ctrlKey && this.shortcutsWithCtrl[event.key]);
+    let key = [event.ctrlKey && 'ctrl', event.shiftKey && 'shift', event.key.toLowerCase()]
+      .filter(el => el)
+      .join('+');
+    let handler = this.shortcutsMap[key];
     if (handler) {
       return handler.call(this, event);
     }
