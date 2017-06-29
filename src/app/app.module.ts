@@ -11,7 +11,8 @@ import {
   MdSidenavModule,
   MdSnackBarModule,
   MdToolbarModule,
-  MdTooltipModule
+  MdTooltipModule,
+  MdListModule
 } from "@angular/material";
 import {AccountButtonComponent} from "./account-button/account-button.component";
 import {MainToolbarComponent} from "./main-toolbar/main-toolbar.component";
@@ -23,6 +24,7 @@ import {ZoomButtonsComponent} from './zoom-buttons/zoom-buttons.component';
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {LocateButtonComponent} from './locate-button/locate-button.component';
 import {LayoutSwitchComponent} from './layout-switch/layout-switch.component';
+import {SideMenuComponent} from './side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {LayoutSwitchComponent} from './layout-switch/layout-switch.component';
     ZoomButtonsComponent,
     FileUploadComponent,
     LocateButtonComponent,
-    LayoutSwitchComponent
+    LayoutSwitchComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import {LayoutSwitchComponent} from './layout-switch/layout-switch.component';
     MdSidenavModule,
     MdTooltipModule,
     MdSnackBarModule,
-    MdMenuModule
+    MdMenuModule,
+    MdListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

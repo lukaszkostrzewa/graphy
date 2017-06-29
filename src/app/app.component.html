@@ -8,7 +8,8 @@
   <app-graph #graph></app-graph>
 
   <md-sidenav #sidenav>
-    <app-file-upload (uploaded)="graph.parseAndInit($event);sidenav.toggle();"></app-file-upload>
+    <!--<app-file-upload (uploaded)="graph.parseAndInit($event);sidenav.toggle();"></app-file-upload>-->
+    <app-side-menu></app-side-menu>
   </md-sidenav>
 
 </md-sidenav-container>

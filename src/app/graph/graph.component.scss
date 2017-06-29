@@ -5,6 +5,7 @@
   right: 0;
   position: absolute;
   z-index: -1;
+  transition: box-shadow 300ms;
 }
 
 #graph-container.edit-mode {
