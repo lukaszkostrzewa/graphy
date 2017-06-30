@@ -70,8 +70,8 @@ export class ContextMenusPluginHandler implements PluginHandler {
         id: 'edit',
         content: 'Edit',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Edit element');
+        onClickFunction: (event: Event) => {
+          this.graphComponent.openEditDialog(event.target);
         },
         hasTrailingDivider: true,
         show: false

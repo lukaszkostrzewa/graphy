@@ -6,13 +6,18 @@ import {SlickModule} from "ngx-slick";
 import {HintsComponent} from "./hints/hints.component";
 import {HotkeyModule} from "angular2-hotkeys";
 import {
-  MdButtonModule, MdButtonToggleModule,
-  MdIconModule, MdMenuModule,
+  MdAutocompleteModule,
+  MdButtonModule,
+  MdButtonToggleModule,
+  MdDialogModule,
+  MdIconModule,
+  MdInputModule,
+  MdListModule,
+  MdMenuModule,
   MdSidenavModule,
   MdSnackBarModule,
   MdToolbarModule,
-  MdTooltipModule,
-  MdListModule, MdDialogModule
+  MdTooltipModule
 } from "@angular/material";
 import {AccountButtonComponent} from "./account-button/account-button.component";
 import {MainToolbarComponent} from "./main-toolbar/main-toolbar.component";
@@ -20,12 +25,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 import "hammerjs";
 import {GraphComponent} from "./graph/graph.component";
-import {ZoomButtonsComponent} from './zoom-buttons/zoom-buttons.component';
-import {FileUploadComponent} from './file-upload/file-upload.component';
-import {LocateButtonComponent} from './locate-button/locate-button.component';
-import {LayoutSwitchComponent} from './layout-switch/layout-switch.component';
-import {SideMenuComponent} from './side-menu/side-menu.component';
-import {ImportDialogComponent} from './import-dialog/import-dialog.component';
+import {ZoomButtonsComponent} from "./zoom-buttons/zoom-buttons.component";
+import {FileUploadComponent} from "./file-upload/file-upload.component";
+import {LocateButtonComponent} from "./locate-button/locate-button.component";
+import {LayoutSwitchComponent} from "./layout-switch/layout-switch.component";
+import {SideMenuComponent} from "./side-menu/side-menu.component";
+import {ImportDialogComponent} from "./import-dialog/import-dialog.component";
+import {EditElementDialogComponent} from "./edit-element-dialog/edit-element-dialog.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -39,7 +46,8 @@ import {ImportDialogComponent} from './import-dialog/import-dialog.component';
     LocateButtonComponent,
     LayoutSwitchComponent,
     SideMenuComponent,
-    ImportDialogComponent
+    ImportDialogComponent,
+    EditElementDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -55,10 +63,14 @@ import {ImportDialogComponent} from './import-dialog/import-dialog.component';
     MdSnackBarModule,
     MdMenuModule,
     MdListModule,
-    MdDialogModule
+    MdDialogModule,
+    ReactiveFormsModule,
+    MdInputModule,
+    MdAutocompleteModule
   ],
   entryComponents: [
-    ImportDialogComponent
+    ImportDialogComponent,
+    EditElementDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

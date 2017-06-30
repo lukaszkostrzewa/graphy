@@ -13,7 +13,7 @@ export class SideMenuComponent implements OnInit {
   @Input() sideNav: MdSidenav;
   @Input() graphComponent: GraphComponent;
 
-  constructor(public dialog: MdDialog) {
+  constructor(private dialog: MdDialog) {
   }
 
   ngOnInit() {
