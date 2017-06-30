@@ -11,11 +11,13 @@ import {ShortcutsHandler} from "./shortcuts-handler";
 import * as FileSaver from "file-saver";
 import Position = Cy.Position;
 import {ContextMenusPluginHandler} from "./plugin-handlers/context-menus-plugin-handler";
+import {I18nPluralPipe} from "@angular/common";
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
-  styleUrls: ['./graph.component.scss']
+  styleUrls: ['./graph.component.scss'],
+  providers: [I18nPluralPipe]
 })
 export class GraphComponent implements OnInit, AfterViewInit {
 
@@ -40,7 +42,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
     }
   }
 
-  constructor(private snackBar: MdSnackBar) {
+  constructor(private snackBar: MdSnackBar, private pluralPipe: I18nPluralPipe) {
     this.shortcutsHandler = new ShortcutsHandler(this);
   }
 
@@ -54,10 +56,14 @@ export class GraphComponent implements OnInit, AfterViewInit {
       new GraphmlParser(this.cy)
     ];
     this.pluginHandlers = [
-      new EdgehandlesPluginHandler(this.cy),
-      new NodeAdditionPluginHandler(this.cy),
-      new ContextMenusPluginHandler(this.cy)
+      new EdgehandlesPluginHandler(this),
+      new NodeAdditionPluginHandler(this),
+      new ContextMenusPluginHandler(this)
     ];
+  }
+
+  getCy() {
+    return this.cy;
   }
 
   private getConfig() {
@@ -120,14 +126,40 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   deleteSelectedElements() {
-    this.cy.$(':selected').remove();
+    let selectedEles = this.cy.$(':selected');
+    let message = this.pluralPipe.transform(selectedEles.length, {
+        '=0': 'No element has',
+        '=1': 'One element has',
+        'other': '# elements have'
+      }) + ' been deleted.';
+    selectedEles.remove();
+    this.showMessage(message);
+  }
+
+  deleteElement(element) {
+    let message = (element.isNode() ? 'Node' : 'Edge') + ' has been deleted.';
+    element.remove();
+    this.showMessage(message);
+  }
+
+  addNodeAtPos(pos) {
+    this.cy.add({
+      group: "nodes",
+      data: {
+        id: '' + this.cy.nodes().length
+      },
+      renderedPosition: pos
+    });
+  }
+
+  private showMessage(message: string) {
     this.snackBar
-      .open("Selected elements deleted.", "Undo", {
+      .open(message, 'Undo', {
         duration: 2000,
       })
       .onAction()
       .subscribe(() => {
-        console.log("Undo node deletion");
+        console.log('Undo node deletion');
       });
   }
 

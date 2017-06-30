@@ -1,30 +1,24 @@
 import {PluginHandler} from "./plugin-handler";
+import {GraphComponent} from "../graph.component";
 
 export class NodeAdditionPluginHandler implements PluginHandler {
 
-  constructor(private cy: Cy.Instance) {
+  constructor(private graphComponent: GraphComponent) {
   }
 
   editModeActivated(): void {
-    this.cy.on('click', this.addNodeOnClickEvent);
+    this.graphComponent.getCy().on('click', this.addNodeOnClickEvent);
   }
 
   editModeDeactivated(): void {
-    this.cy.off('click', this.addNodeOnClickEvent);
+    this.graphComponent.getCy().off('click', this.addNodeOnClickEvent);
   }
 
   private addNodeOnClickEvent = (event) => {
-    if (event.target === this.cy) {
-      let pos = {
+    if (event.target === this.graphComponent.getCy()) {
+      this.graphComponent.addNodeAtPos({
         x: event.originalEvent.offsetX,
         y: event.originalEvent.offsetY
-      };
-      this.cy.add({
-        group: "nodes",
-        data: {
-          id: '' + this.cy.nodes().length
-        },
-        renderedPosition: pos
       });
     }
   };

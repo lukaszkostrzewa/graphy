@@ -3,6 +3,8 @@ import * as jquery from "jquery";
 import cytoscape from 'cytoscape/dist/cytoscape.js';
 import contextMenus from 'cytoscape-context-menus';
 import ContextMenu = Cy.ContextMenu;
+import {GraphComponent} from "../graph.component";
+import Event = JQuery.Event;
 
 export class ContextMenusPluginHandler implements PluginHandler {
 
@@ -11,13 +13,13 @@ export class ContextMenusPluginHandler implements PluginHandler {
   ];
   private contextMenu: ContextMenu;
 
-  constructor(private cy: Cy.Instance) {
+  constructor(private graphComponent: GraphComponent) {
     contextMenus(cytoscape, jquery);
     let options = {
       menuItems: this.getMenuItems(),
-      container: this.cy.container().parentElement
+      container: graphComponent.getCy().container().parentElement
     };
-    this.contextMenu = this.cy.contextMenus(options);
+    this.contextMenu = graphComponent.getCy().contextMenus(options);
   }
 
   editModeActivated(): void {
@@ -36,8 +38,11 @@ export class ContextMenusPluginHandler implements PluginHandler {
         id: 'add-node',
         content: 'Add node',
         selector: false,
-        onClickFunction: function () {
-          console.log('Add node dialog');
+        onClickFunction: (event) => {
+          this.graphComponent.addNodeAtPos({
+            x: event.originalEvent.offsetX,
+            y: event.originalEvent.offsetY
+          });
         },
         coreAsWell: true,
         show: false
@@ -55,8 +60,9 @@ export class ContextMenusPluginHandler implements PluginHandler {
         id: 'remove',
         content: 'Remove',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Remove element');
+        onClickFunction: (event: Event) => {
+          console.log(event);
+          this.graphComponent.deleteElement(event.target)
         },
         show: false
       },
@@ -74,9 +80,7 @@ export class ContextMenusPluginHandler implements PluginHandler {
         id: 'select-all',
         content: 'Select all',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Select all');
-        },
+        onClickFunction: () => this.graphComponent.selectAll(),
         coreAsWell: true
       },
       {

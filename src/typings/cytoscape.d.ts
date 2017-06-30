@@ -45,6 +45,7 @@ declare module Cy {
   /**
    * See http://js.cytoscape.org/#selectors for details about writing selectors.
    */
+  import Event = JQuery.Event;
   type Selector = string;
 
   /**
@@ -2185,7 +2186,7 @@ declare module Cy {
     content: string;
     tooltipText?: string;
     selector: string | boolean,
-    onClickFunction: () => void;
+    onClickFunction: (event: Event) => void;
     disabled?: boolean;
     show?: boolean;
     hasTrailingDivider?: boolean;
