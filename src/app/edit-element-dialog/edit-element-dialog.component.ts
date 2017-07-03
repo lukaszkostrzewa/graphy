@@ -18,6 +18,7 @@ export class EditElementDialogComponent {
     this.el = data.element;
     this.existingProperties = this.getExistingProperties(this.el.data());
     this.existingPropertiesFormGroup = this.existingProperties
+      .sort(EditElementDialogComponent.propertyComparator())
       .reduce((formGroup: FormGroup, property: Property) => {
         formGroup.addControl(property.key, new FormControl({
           value: property.value,
@@ -62,6 +63,10 @@ export class EditElementDialogComponent {
       }
     });
     return existingProperties;
+  }
+
+  private static propertyComparator() {
+    return (p1, p2) => (p1.disabled === p2.disabled ? 0 : p1.disabled ? -1 : 1);
   }
 }
 

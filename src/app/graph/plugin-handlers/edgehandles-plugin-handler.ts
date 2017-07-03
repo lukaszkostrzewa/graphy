@@ -12,7 +12,17 @@ export class EdgehandlesPluginHandler implements PluginHandler {
       handleColor: '#3f51b5',
       hoverDelay: 0,
       enabled: false,
-      loopAllowed: () => true
+      loopAllowed: () => true,
+      toggleOffOnLeave: true,
+      edgeParams: (source, target) => {
+        return {
+          data: {
+            source: source.id(),
+            target: target.id(),
+            id: this.graphComponent.getNextEdgeId()
+          }
+        }
+      }
     };
     this.graphComponent.getCy().edgehandles(defaults);
   }

@@ -941,6 +941,18 @@ declare module Cy {
     map(fn: (ele: CollectionElements, i: number, eles: CollectionElements) => any, thisArg?: any): any[];
 
     /**
+     * Reduce a single value by applying a function against an accumulator and each value of the collection.
+     *
+     * @param fn The function that returns the accumulated value given the previous value and the current element.
+     * prevVal - The value accumulated from previous elements.
+     * ele - The current element.
+     * i - The index of the current element.
+     * eles - The collection of elements being reduced.
+     * @param thisArg [optional] The value for this within the iterating function.
+     */
+    reduce(fn: (prevVal: any, ele: CollectionElements, i: number, eles: CollectionElements) => any, thisArg?: any): any[];
+
+    /**
      * Find a minimum value in a collection.
      *
      * @param fn The function that returns the value to compare for each element.
@@ -3067,15 +3079,15 @@ declare module Cy {
     /**
      * A boolean indicating whether to include nodes in the bounding box.
      */
-    includeNodes: boolean;
+    includeNodes?: boolean;
     /**
      * A boolean indicating whether to include edges in the bounding box.
      */
-    includeEdges: boolean;
+    includeEdges?: boolean;
     /**
      * A boolean indicating whether to include labels in the bounding box.
      */
-    includeLabels: boolean;
+    includeLabels?: boolean;
   }
 
   interface ZoomOptions {

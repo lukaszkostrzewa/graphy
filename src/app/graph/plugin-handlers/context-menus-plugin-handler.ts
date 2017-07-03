@@ -9,7 +9,7 @@ import Event = JQuery.Event;
 export class ContextMenusPluginHandler implements PluginHandler {
 
   private static readonly ITEMS_VISIBLE_IN_EDIT_MODE = [
-    'add-node', 'add-edge', 'remove', 'edit', 'group'
+    'add-node', 'add-edge', 'remove', 'edit', 'group', 'ungroup'
   ];
   private contextMenu: ContextMenu;
 
@@ -87,9 +87,16 @@ export class ContextMenusPluginHandler implements PluginHandler {
         id: 'group',
         content: 'Group',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Group all');
-        },
+        onClickFunction: () => this.graphComponent.groupSelectedNodes(),
+        coreAsWell: true,
+        hasTrailingDivider: true,
+        show: false
+      },
+      {
+        id: 'ungroup',
+        content: 'Ungroup',
+        selector: 'node, edge',
+        onClickFunction: () => this.graphComponent.ungroupSelectedNode(),
         coreAsWell: true,
         hasTrailingDivider: true,
         show: false

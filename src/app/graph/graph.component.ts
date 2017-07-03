@@ -15,6 +15,7 @@ import {I18nPluralPipe} from "@angular/common";
 import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-dialog.component";
 import ElementDefinition = Cy.ElementDefinition;
 import {EdgeBendEditingPluginHandler} from "./plugin-handlers/edge-bend-editing-plugin-handler";
+import CollectionElements = Cy.CollectionElements;
 
 @Component({
   selector: 'app-graph',
@@ -37,6 +38,16 @@ export class GraphComponent implements OnInit, AfterViewInit {
   private readonly readonlyEdgeProperties = ['id', 'source', 'target'];
   private readonly commonNodeProperties = ['label'];
   private readonly commonEdgeProperties = ['label', 'weight'];
+  private nodesCounter: number = 0;
+  private edgesCounter: number = 0;
+
+  getNextEdgeId(): string {
+    return 'edge_' + this.edgesCounter++;
+  }
+
+  getNextNodeId(): string {
+    return 'node_' + this.nodesCounter++;
+  }
 
   setEditMode(value) {
     this.editMode = value;
@@ -163,10 +174,10 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   addNodeAtPos(pos) {
-    this.cy.add({
+    return this.cy.add({
       group: "nodes",
       data: {
-        id: '' + this.cy.nodes().length
+        id: this.getNextNodeId()
       },
       renderedPosition: pos
     });
@@ -216,5 +227,54 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   keydown(event: KeyboardEvent) {
     this.shortcutsHandler.keydown(event);
+  }
+
+  groupSelectedNodes() {
+    let nodes: CollectionElements = this.cy.$('node:selected');
+    let boundingBox = nodes.renderedBoundingbox({
+      includeEdges: false
+    });
+    let parent = this.addNodeAtPos({
+      x: boundingBox.x1 + boundingBox.w / 2,
+      y: boundingBox.y1 + boundingBox.h / 2
+    });
+    let parentId = parent.data('id');
+    let newNodes = nodes.map((node: CollectionElements) => {
+      return {
+        group: "nodes",
+        data: $.extend(node.data(), {parent: parentId}),
+        renderedPosition: node.renderedPosition()
+      }
+    });
+    let edges = nodes
+      .map(node => node.connectedEdges());
+    nodes.remove();
+    this.cy.add(newNodes);
+    edges.forEach((nodeEdges) => {
+      console.log('nodes edges', nodeEdges);
+      this.cy.add(nodeEdges);
+    });
+    this.cy.$(':selected').unselect();
+    this.snackBar.open('Nodes has been grouped', 'Undo');
+  }
+
+  ungroupSelectedNode() {
+    let selectedNode: CollectionElements = this.cy.$('node:selected');
+    let newNodes = selectedNode.children().map((node: CollectionElements) => {
+      return {
+        group: "nodes",
+        data: node.data(),
+        renderedPosition: node.renderedPosition()
+      }
+    });
+    let edges = selectedNode.children()
+      .map(node => node.connectedEdges());
+    selectedNode.remove();
+    this.cy.add(newNodes);
+    edges.forEach((nodeEdges) => {
+      console.log('nodes edges', nodeEdges);
+      this.cy.add(nodeEdges);
+    });
+    this.snackBar.open('Node has been ungrouped', 'Undo');
   }
 }

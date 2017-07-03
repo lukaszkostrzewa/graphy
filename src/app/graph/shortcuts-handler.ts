@@ -74,14 +74,14 @@ export class ShortcutsHandler {
   private groupSelected(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
-    console.log("Group selected");
+    this.graphComponent.groupSelectedNodes();
     return false;
   };
 
   private ungroupSelected(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
-    console.log("Ungroup selected");
+    this.graphComponent.ungroupSelectedNode();
     return false;
   };
 
