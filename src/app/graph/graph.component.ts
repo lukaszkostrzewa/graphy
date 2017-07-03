@@ -14,6 +14,7 @@ import {ContextMenusPluginHandler} from "./plugin-handlers/context-menus-plugin-
 import {I18nPluralPipe} from "@angular/common";
 import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-dialog.component";
 import ElementDefinition = Cy.ElementDefinition;
+import {EdgeBendEditingPluginHandler} from "./plugin-handlers/edge-bend-editing-plugin-handler";
 
 @Component({
   selector: 'app-graph',
@@ -65,11 +66,12 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.pluginHandlers = [
       new EdgehandlesPluginHandler(this),
       new NodeAdditionPluginHandler(this),
-      new ContextMenusPluginHandler(this)
+      new ContextMenusPluginHandler(this),
+      new EdgeBendEditingPluginHandler(this)
     ];
   }
 
-  getCy() {
+  getCy(): Cy.Instance {
     return this.cy;
   }
 

@@ -2094,6 +2094,8 @@ declare module Cy {
     contextMenus(options: ContextMenuOptions): ContextMenu;
 
     container(): HTMLElement;
+
+    edgeBendEditing(options: {} | string): {};
   }
 
   export interface ContextMenuOptions {
