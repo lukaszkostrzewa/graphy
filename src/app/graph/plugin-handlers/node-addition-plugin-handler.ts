@@ -15,7 +15,7 @@ export class NodeAdditionPluginHandler implements PluginHandler {
 
   editModeDeactivated(): void {
     this.graphComponent.getCy().off('tapstart', this.deselectIfThereAreSelectedElements);
-    this.graphComponent.getCy().on('click', this.addNodeOnClickIfNotDeselected);
+    this.graphComponent.getCy().off('click', this.addNodeOnClickIfNotDeselected);
   }
 
   private addNodeOnClickIfNotDeselected = (event) => {
