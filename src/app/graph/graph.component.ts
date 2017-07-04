@@ -157,7 +157,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   deleteSelectedElements() {
-    let selectedEles = this.cy.$(':selected');
+    let selectedEles = this.getSelectedElements();
     let message = this.pluralPipe.transform(selectedEles.length, {
         '=0': 'No element has',
         '=1': 'One element has',
@@ -230,51 +230,74 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   groupSelectedNodes() {
-    let nodes: CollectionElements = this.cy.$('node:selected');
-    let boundingBox = nodes.renderedBoundingbox({
-      includeEdges: false
-    });
-    let parent = this.addNodeAtPos({
-      x: boundingBox.x1 + boundingBox.w / 2,
-      y: boundingBox.y1 + boundingBox.h / 2
-    });
-    let parentId = parent.data('id');
-    let newNodes = nodes.map((node: CollectionElements) => {
-      return {
-        group: "nodes",
-        data: $.extend(node.data(), {parent: parentId}),
-        renderedPosition: node.renderedPosition()
-      }
-    });
-    let edges = nodes
-      .map(node => node.connectedEdges());
-    nodes.remove();
-    this.cy.add(newNodes);
-    edges.forEach((nodeEdges) => {
-      console.log('nodes edges', nodeEdges);
-      this.cy.add(nodeEdges);
-    });
-    this.cy.$(':selected').unselect();
+    let nodes = this.cy.$('node:selected');
+    let parent = this.createParentNode(nodes);
+    let newNodes = this.createNodesCopies(nodes);
+    this.addParentToNodes(newNodes, parent);
+    let edges = this.getConnectedEdges(nodes);
+    this.replaceWithNodesCopies(newNodes, nodes, edges);
     this.snackBar.open('Nodes has been grouped', 'Undo');
   }
 
   ungroupSelectedNode() {
-    let selectedNode: CollectionElements = this.cy.$('node:selected');
-    let newNodes = selectedNode.children().map((node: CollectionElements) => {
+    let selectedNode = this.cy.$('node:selected');
+    let newNodes = this.createNodesCopies(selectedNode.children());
+    let edges = this.getConnectedEdges(selectedNode.children());
+    this.replaceWithNodesCopies(newNodes, selectedNode, edges);
+    this.snackBar.open('Node has been ungrouped', 'Undo');
+  }
+
+  private createParentNode(nodes: Cy.CollectionElements) {
+    return this.addNodeAtPos(this.getCenterPosition(nodes));
+  }
+
+  private getCenterPosition(nodes: CollectionElements): Cy.Position {
+    let boundingBox = nodes.renderedBoundingbox({
+      includeEdges: false
+    });
+    return {
+      x: boundingBox.x1 + boundingBox.w / 2,
+      y: boundingBox.y1 + boundingBox.h / 2
+    }
+  }
+
+  private createNodesCopies(nodes: Cy.CollectionNodes) {
+    return nodes.map(node => {
       return {
         group: "nodes",
         data: node.data(),
         renderedPosition: node.renderedPosition()
       }
     });
-    let edges = selectedNode.children()
-      .map(node => node.connectedEdges());
-    selectedNode.remove();
-    this.cy.add(newNodes);
-    edges.forEach((nodeEdges) => {
-      console.log('nodes edges', nodeEdges);
-      this.cy.add(nodeEdges);
+  }
+
+  private addParentToNodes(newNodes: any[], parent: Cy.CollectionElements) {
+    let parentId = parent.data('id');
+    newNodes.forEach(node => {
+      node.data = $.extend(node.data, {parent: parentId});
     });
-    this.snackBar.open('Node has been ungrouped', 'Undo');
+  }
+
+  private getConnectedEdges(nodes: Cy.CollectionNodes): Cy.CollectionEdges[] {
+    return nodes.map(node => node.connectedEdges());
+  }
+
+  private replaceWithNodesCopies(newNodes, oldNodes, edges) {
+    oldNodes.remove();
+    this.cy.add(newNodes);
+    edges.forEach((nodeEdges) => this.cy.add(nodeEdges));
+    this.deselect();
+  }
+
+  hasSelectedElements(): boolean {
+    return this.getSelectedElements().length > 0;
+  }
+
+  getSelectedElements(): CollectionElements {
+    return this.cy.$(':selected');
+  }
+
+  deselect(): void {
+    this.getSelectedElements().unselect();
   }
 }

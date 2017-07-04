@@ -89,7 +89,6 @@ export class ContextMenusPluginHandler implements PluginHandler {
         selector: 'node, edge',
         onClickFunction: () => this.graphComponent.groupSelectedNodes(),
         coreAsWell: true,
-        hasTrailingDivider: true,
         show: false
       },
       {
