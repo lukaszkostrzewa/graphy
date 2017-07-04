@@ -11,3 +11,62 @@
 #graph-container.edit-mode {
   box-shadow: inset 0 0 0 6px rgba(124, 77, 255, 0.4);
 }
+
+:host /deep/ .cy-context-menus-cxt-menu {
+  display: none;
+  z-index: 1000;
+  position: absolute;
+  border: 1px solid #dddddd;
+  padding: 6px 0;
+  background: white;
+  margin: 0;
+  width: 200px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.32);
+
+  .cy-context-menus-cxt-menuitem {
+    display: block;
+    z-index: 1000;
+    width: 100%;
+    padding: 8px 26px;
+    white-space: nowrap;
+    border: 0;
+    text-align: left;
+    background-color: #ffffff;
+    font-size: 12px;
+
+    &:enabled {
+      color: #000000;
+    }
+
+    &:disabled {
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: #eaeaea;
+      cursor: pointer;
+    }
+
+    &[content]:before {
+      content: attr(content);
+    }
+
+    &:not([content]):before {
+      content: "\2630";
+    }
+
+    &.cy-context-menus-divider {
+      margin: 0 0 13px 0;
+
+      &:after {
+        content: ' ';
+        display: block;
+        width: calc(100% + 52px);
+        margin-left: -26px;
+        position: relative;
+        top: 15px;
+        border-bottom: solid 1px #e5e5e5;
+      }
+    }
+  }
+}

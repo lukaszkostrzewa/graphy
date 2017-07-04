@@ -45,6 +45,7 @@ declare module Cy {
   /**
    * See http://js.cytoscape.org/#selectors for details about writing selectors.
    */
+  import Event = JQuery.Event;
   type Selector = string;
 
   /**
@@ -938,6 +939,18 @@ declare module Cy {
      * @param thisArg [optional] The value for this within the iterating function.
      */
     map(fn: (ele: CollectionElements, i: number, eles: CollectionElements) => any, thisArg?: any): any[];
+
+    /**
+     * Reduce a single value by applying a function against an accumulator and each value of the collection.
+     *
+     * @param fn The function that returns the accumulated value given the previous value and the current element.
+     * prevVal - The value accumulated from previous elements.
+     * ele - The current element.
+     * i - The index of the current element.
+     * eles - The collection of elements being reduced.
+     * @param thisArg [optional] The value for this within the iterating function.
+     */
+    reduce(fn: (prevVal: any, ele: CollectionElements, i: number, eles: CollectionElements) => any, thisArg?: any): any[];
 
     /**
      * Find a minimum value in a collection.
@@ -2089,6 +2102,109 @@ declare module Cy {
     graphml(content: string): void;
 
     graphml(options: object): Instance;
+
+    contextMenus(options: ContextMenuOptions): ContextMenu;
+
+    container(): HTMLElement;
+
+    edgeBendEditing(options: {} | string): {};
+  }
+
+  export interface ContextMenuOptions {
+
+    menuItems: ContextMenuItem[];
+    menuItemClasses?: string[];
+    contextMenuClasses?: string[];
+    container?: string | HTMLElement;
+  }
+
+  export interface ContextMenu {
+
+    /**
+     * Returns whether the extension is active
+     */
+    isActive(): boolean;
+
+    /**
+     * Appends given menu item to the menu items list
+     * @param item
+     */
+    appendMenuItem(item: ContextMenuItem): Cy.Instance;
+
+    /**
+     * Appends menu items in the given list to the menu items list
+     * @param items
+     */
+    appendMenuItems(items: ContextMenuItem[]): Cy.Instance;
+
+    /**
+     * Removes the menu item with given ID
+     * @param itemID
+     */
+    removeMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Sets whether the menuItem with given ID will have a following divider
+     * @param itemID
+     * @param status
+     */
+    setTrailingDivider(itemID: string, status: boolean): Cy.Instance;
+
+    /**
+     * Inserts given item before the existing item
+     * @param item
+     * @param existingItemID
+     */
+    insertBeforeMenuItem(item: ContextMenuItem, existingItemID: string): Cy.Instance;
+
+    /**
+     * Moves the item with given ID before the existing item
+     * @param itemID
+     * @param existingItemID
+     */
+    moveBeforeOtherMenuItem(itemID: string, existingItemID: string): Cy.Instance;
+
+    /**
+     * Disables the menu item with given ID
+     * @param itemID
+     */
+    disableMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Enables the menu item with given ID
+     * @param itemID
+     */
+    enableMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Shows the menu item with given ID
+     * @param itemID
+     */
+    showMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Hides the menu item with given ID
+     * @param itemID
+     */
+    hideMenuItem(itemID: string): Cy.Instance;
+
+    /**
+     * Destroys the extension instance
+     */
+    destroy(): Cy.Instance;
+  }
+
+  export interface ContextMenuItem {
+
+    id: string;
+    content: string;
+    tooltipText?: string;
+    selector: string | boolean,
+    onClickFunction: (event: Event) => void;
+    disabled?: boolean;
+    show?: boolean;
+    hasTrailingDivider?: boolean;
+    coreAsWell?: boolean;
   }
 
   interface EventObject {
@@ -2963,15 +3079,15 @@ declare module Cy {
     /**
      * A boolean indicating whether to include nodes in the bounding box.
      */
-    includeNodes: boolean;
+    includeNodes?: boolean;
     /**
      * A boolean indicating whether to include edges in the bounding box.
      */
-    includeEdges: boolean;
+    includeEdges?: boolean;
     /**
      * A boolean indicating whether to include labels in the bounding box.
      */
-    includeLabels: boolean;
+    includeLabels?: boolean;
   }
 
   interface ZoomOptions {

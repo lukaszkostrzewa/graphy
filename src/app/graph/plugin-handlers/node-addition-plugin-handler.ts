@@ -1,31 +1,42 @@
 import {PluginHandler} from "./plugin-handler";
+import {GraphComponent} from "../graph.component";
 
 export class NodeAdditionPluginHandler implements PluginHandler {
 
-  constructor(private cy: Cy.Instance) {
+  private wasDeselected: boolean = false;
+
+  constructor(private graphComponent: GraphComponent) {
   }
 
   editModeActivated(): void {
-    this.cy.on('click', this.addNodeOnClickEvent);
+    this.graphComponent.getCy().on('tapstart', this.deselectIfThereAreSelectedElements);
+    this.graphComponent.getCy().on('click', this.addNodeOnClickIfNotDeselected);
   }
 
   editModeDeactivated(): void {
-    this.cy.off('click', this.addNodeOnClickEvent);
+    this.graphComponent.getCy().off('tapstart', this.deselectIfThereAreSelectedElements);
+    this.graphComponent.getCy().on('click', this.addNodeOnClickIfNotDeselected);
   }
 
-  private addNodeOnClickEvent = (event) => {
-    if (event.target === this.cy) {
-      let pos = {
+  private addNodeOnClickIfNotDeselected = (event) => {
+    if (this.isClickOnViewport(event) && this.wasDeselected) {
+      this.graphComponent.addNodeAtPos({
         x: event.originalEvent.offsetX,
         y: event.originalEvent.offsetY
-      };
-      this.cy.add({
-        group: "nodes",
-        data: {
-          id: '' + this.cy.nodes().length
-        },
-        renderedPosition: pos
       });
     }
   };
+
+  private deselectIfThereAreSelectedElements = (event) => {
+    this.wasDeselected = true;
+    if (this.isClickOnViewport(event) && this.graphComponent.hasSelectedElements()) {
+      this.wasDeselected = false;
+      this.graphComponent.deselect();
+      return true;
+    }
+  };
+
+  private isClickOnViewport(event) {
+    return event.target === this.graphComponent.getCy();
+  }
 }
