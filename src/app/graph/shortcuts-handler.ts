@@ -3,6 +3,8 @@ import {GraphComponent} from "./graph.component";
 export class ShortcutsHandler {
 
   private shortcutsMap = {
+    '-': this.zoomOut,
+    '=': this.zoomIn,
     'delete': this.deleteSelected,
     'backspace': this.deleteSelected,
     'arrowup': this.moveUp,
