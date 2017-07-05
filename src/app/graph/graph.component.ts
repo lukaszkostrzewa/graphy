@@ -16,6 +16,7 @@ import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-di
 import ElementDefinition = Cy.ElementDefinition;
 import {EdgeBendEditingPluginHandler} from "./plugin-handlers/edge-bend-editing-plugin-handler";
 import CollectionElements = Cy.CollectionElements;
+import {Observable} from "rxjs/Rx";
 
 @Component({
   selector: 'app-graph',
@@ -31,6 +32,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   private cy: Cy.Instance;
   private parsers: Parser[] = [];
   private pluginHandlers: PluginHandler[] = [];
+  private algorithmRunners: { [key: string]: AlgorithmRunner; } = {};
   private shortcutsHandler: ShortcutsHandler;
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
   private static readonly FIT_PADDING: number = 100;
@@ -80,6 +82,11 @@ export class GraphComponent implements OnInit, AfterViewInit {
       new ContextMenusPluginHandler(this),
       new EdgeBendEditingPluginHandler(this)
     ];
+    this.algorithmRunners['bfs'] = new BfsAlgorithmRunner(this.cy);
+    this.algorithmRunners['dfs'] = new DfsAlgorithmRunner(this.cy);
+    this.algorithmRunners['kruskal'] = new KruskalAlgorithmRunner(this.cy);
+    this.algorithmRunners['karger-stein'] = new KargerSteinAlgorithmRunner(this.cy);
+    this.algorithmRunners['dijkstra'] = new DijkstraAlgorithmRunner(this.cy);
   }
 
   getCy(): Cy.Instance {
@@ -98,16 +105,27 @@ export class GraphComponent implements OnInit, AfterViewInit {
         name: 'grid'
       },
       style: [{
-        "selector": "node, edge",
+        "selector": "node",
         "style": {
-          "label": "data(label)",
+          "content": "data(label)",
         }
       }, {
         "selector": "edge",
         "style": {
-          "text-margin-y": "-12px"
+          "text-margin-y": "-12px",
+          "content": "data(weight)",
         }
-      }],
+      }, {
+        "selector": '.highlighted',
+        "style": {
+          'background-color': '#61bffc',
+          'line-color': '#61bffc',
+          'target-arrow-color': '#61bffc',
+          'transition-property': 'background-color, line-color, target-arrow-color',
+          'transition-duration': '0.5s'
+        }
+      }
+      ],
       wheelSensitivity: 0.2,
       boxSelectionEnabled: true
     };
@@ -299,5 +317,94 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   deselect(): void {
     this.getSelectedElements().unselect();
+  }
+
+  runAlgorithm(algorithm: string): void {
+    let runner = this.algorithmRunners[algorithm];
+    let cancel = this.snackBar.open('Algorithm started', 'Stop').onAction();
+    Observable.from(runner.run())
+      .zip(Observable.timer(0, 500), x => x)
+      .takeUntil(cancel)
+      .subscribe({
+        error: (e) => this.snackBar.open(e, 'Close', {duration: 2000}),
+        next: (el) => el.addClass('highlighted'),
+        complete: () =>
+          this.snackBar.open('Algorithm finished', 'Clear').onAction()
+            .subscribe(() => this.cy.$('.highlighted').removeClass('highlighted'))
+      });
+  }
+}
+
+interface AlgorithmRunner {
+  run(): Observable<CollectionElements>;
+}
+
+class BfsAlgorithmRunner implements AlgorithmRunner {
+
+  constructor(private cy: Cy.Instance) {
+  }
+
+  run(): Observable<CollectionElements> {
+    let roots = this.cy.$(':selected');
+    if (roots.length === 0) {
+      return Observable.throw("Please select at least one node");
+    }
+    let bfs = this.cy.elements().bfs({roots});
+    return Observable.from(bfs.path);
+  }
+}
+
+class DfsAlgorithmRunner implements AlgorithmRunner {
+
+  constructor(private cy: Cy.Instance) {
+  }
+
+  run(): Observable<CollectionElements> {
+    let roots = this.cy.$(':selected');
+    if (roots.length === 0) {
+      return Observable.throw("Please select at least one node");
+    }
+    let bfs = this.cy.elements().dfs({roots});
+    return Observable.from(bfs.path);
+  }
+}
+
+class KruskalAlgorithmRunner implements AlgorithmRunner {
+
+  constructor(private cy: Cy.Instance) {
+  }
+
+  run(): Observable<CollectionElements> {
+    let spanningTree = this.cy.elements().kruskal(edge => edge.data('weight'));
+    return Observable.from(spanningTree);
+  }
+}
+
+class KargerSteinAlgorithmRunner implements AlgorithmRunner {
+
+  constructor(private cy: Cy.Instance) {
+  }
+
+  run(): Observable<CollectionElements> {
+    let minCut = this.cy.elements().kargerStein();
+    return Observable.from(minCut.cut);
+  }
+}
+
+class DijkstraAlgorithmRunner implements AlgorithmRunner {
+
+  constructor(private cy: Cy.Instance) {
+  }
+
+  run(): Observable<CollectionElements> {
+    let root = this.cy.$(':selected');
+    if (root.length !== 2) {
+      return Observable.throw("Please select two nodes");
+    }
+    let dijkstra = this.cy.elements().dijkstra({
+      root: root.first(),
+      weight: edge => +edge.data('weight')
+    });
+    return Observable.from(dijkstra.pathTo(root.last()));
   }
 }

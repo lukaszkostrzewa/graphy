@@ -1329,6 +1329,9 @@ declare module Cy {
              directed?: boolean): SearchDijkstraResult;
 
 
+    kruskal(weight?: (edge: CollectionEdges) => number);
+
+    kargerStein();
     //TODO: continue here: http://js.cytoscape.org/#collection/algorithms/eles.dijkstra
   }
   interface CollectionNodesCompound {

@@ -1,7 +1,7 @@
 <md-sidenav-container class="sidenav-container">
 
   <app-main-toolbar (navToggle)="sidenav.toggle()"
-                    (editToggle)="graph.setEditMode($event)"></app-main-toolbar>
+                    [graphComponent]="graph"></app-main-toolbar>
   <app-account-button></app-account-button>
   <app-hints *ngIf="isEmptyGraph()"></app-hints>
 

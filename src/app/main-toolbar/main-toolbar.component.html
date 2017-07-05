@@ -10,8 +10,36 @@
     <md-icon>search</md-icon>
     Search
   </button>
-  <button md-button>
+  <button md-button [mdMenuTriggerFor]="algorithmsMenu">
     <md-icon>settings</md-icon>
     Algorithms
   </button>
+  <md-menu #algorithmsMenu="mdMenu" [overlapTrigger]="false">
+
+    <h6 md-subheader>Graph traversal</h6>
+    <button md-menu-item (click)="runAlgorithm('bfs')">
+      Breadth-first search
+    </button>
+    <button md-menu-item (click)="runAlgorithm('dfs')">
+      Depth-first search
+    </button>
+    <md-divider></md-divider>
+
+    <h6 md-subheader>Shortest path</h6>
+    <button md-menu-item (click)="runAlgorithm('dijkstra')">
+      Dijkstra's algorithm
+    </button>
+    <md-divider></md-divider>
+
+    <h6 md-subheader>Minimum spanning tree</h6>
+    <button md-menu-item (click)="runAlgorithm('kruskal')">
+      Kruskal's algorithm
+    </button>
+    <md-divider></md-divider>
+
+    <h6 md-subheader>Min cut, max flow</h6>
+    <button md-menu-item (click)="runAlgorithm('karger-stein')">
+      Karger-Stein algorithm
+    </button>
+  </md-menu>
 </md-toolbar>
