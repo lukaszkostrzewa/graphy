@@ -3128,29 +3128,6 @@ declare module Cy {
     (options?: CytoscapeOptions): Instance;
     (extensionName: string, foo: string, bar: any): Instance;
     version: string;
-
-    Promise<T>(): Cy.Promise<T>;
-  }
-
-  enum PromiseState {
-    STATE_PENDING = 0,
-    STATE_FULFILLED = 1,
-    STATE_REJECTED = 2
-
-  }
-
-  interface Promise<T> {
-    id?: string;
-    state?: PromiseState;
-    fulfillValue?: T;
-    rejectReason?: any;
-    onFulfilled?: any[];
-    onRejected?: any[];
-
-    fulfill?(value: T): Promise<T>;
-    reject?(error: any): Promise<any>;
-    then<U>(onFulfilled?: (value: T) => U | Promise<U>, onRejected?: (error: any) => U | Promise<U>): Promise<U>;
-    then<U>(onFulfilled?: (value: T) => U | Promise<U>, onRejected?: (error: any) => void): Promise<U>;
   }
 }
 

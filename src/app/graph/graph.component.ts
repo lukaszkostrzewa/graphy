@@ -311,27 +311,24 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   runAlgorithm(algorithm: string): void {
-    this.algorithmRunners[algorithm].run()
-      .subscribe({
-        next: (elements) => {
-          let cancel = this.snackBar.open('Algorithm started', 'Stop').onAction();
-          Observable.from(elements).zip(Observable.timer(0, 500), x => x)
-            .takeUntil(cancel)
-            .subscribe({
-              next: el => {
-                el.addClass('highlighted');
-              },
-              complete: () =>
-                this.snackBar.open('Algorithm finished', 'Clear').onAction()
-                  .subscribe(() => this.cy.$('.highlighted').removeClass('highlighted'))
-            });
-        }
-      });
+    this.algorithmRunners[algorithm].run().then(elements => {
+      let cancel = this.snackBar.open('Algorithm started', 'Stop').onAction();
+      Observable.from(elements).zip(Observable.timer(0, 500), x => x)
+        .takeUntil(cancel)
+        .subscribe({
+          next: el => {
+            el.addClass('highlighted');
+          },
+          complete: () =>
+            this.snackBar.open('Algorithm finished', 'Clear').onAction()
+              .subscribe(() => this.cy.$('.highlighted').removeClass('highlighted'))
+        });
+    });
   }
 }
 
 interface AlgorithmRunner {
-  run(): Observable<CollectionElements>;
+  run(): Promise<CollectionElements>;
 }
 
 class BfsAlgorithmRunner implements AlgorithmRunner {
@@ -339,13 +336,13 @@ class BfsAlgorithmRunner implements AlgorithmRunner {
   constructor(private cy: Cy.Instance, private snackBar: MdSnackBar) {
   }
 
-  run(): Observable<CollectionElements> {
+  run(): Promise<CollectionElements> {
     this.snackBar.open('Select starting node');
-    return Observable.fromPromise(this.cy.promiseOn('tap', 'node'))
-      .map((event) => {
+    return this.cy.promiseOn('tap', 'node')
+      .then((event) => {
         this.snackBar.dismiss();
         let bfs = this.cy.elements().bfs({roots: event.target, directed: false});
-        return bfs.path;
+        return Promise.resolve(bfs.path);
       });
   }
 }
@@ -355,13 +352,13 @@ class DfsAlgorithmRunner implements AlgorithmRunner {
   constructor(private cy: Cy.Instance, private snackBar: MdSnackBar) {
   }
 
-  run(): Observable<CollectionElements> {
+  run(): Promise<CollectionElements> {
     this.snackBar.open('Select starting node');
-    return Observable.fromPromise(this.cy.promiseOn('tap', 'node'))
-      .map((event) => {
+    return this.cy.promiseOn('tap', 'node')
+      .then((event) => {
         this.snackBar.dismiss();
         let dfs = this.cy.elements().dfs({roots: event.target, directed: false});
-        return dfs.path;
+        return Promise.resolve(dfs.path);
       });
   }
 }
@@ -371,9 +368,9 @@ class KruskalAlgorithmRunner implements AlgorithmRunner {
   constructor(private cy: Cy.Instance) {
   }
 
-  run(): Observable<CollectionElements> {
+  run(): Promise<CollectionElements> {
     let spanningTree = this.cy.elements().kruskal(edge => edge.data('weight'));
-    return Observable.of(spanningTree.filter('edge'));
+    return Promise.resolve(spanningTree.filter('edge'));
   }
 }
 
@@ -382,9 +379,9 @@ class KargerSteinAlgorithmRunner implements AlgorithmRunner {
   constructor(private cy: Cy.Instance) {
   }
 
-  run(): Observable<CollectionElements> {
+  run(): Promise<CollectionElements> {
     let minCut = this.cy.elements().kargerStein();
-    return Observable.of(minCut.cut);
+    return Promise.resolve(minCut.cut);
   }
 }
 
@@ -393,20 +390,20 @@ class DijkstraAlgorithmRunner implements AlgorithmRunner {
   constructor(private cy: Cy.Instance, private snackBar: MdSnackBar) {
   }
 
-  run(): Observable<CollectionElements> {
+  run(): Promise<CollectionElements> {
     this.snackBar.open('Select starting node');
-    return Observable.fromPromise(this.cy.promiseOn('tap', 'node').then((event) => {
+    return this.cy.promiseOn('tap', 'node').then((event) => {
       this.snackBar.dismiss();
       this.snackBar.open('Select destination node');
       return Promise.all([Promise.resolve(event), this.cy.promiseOn('tap', 'node')]);
-    })).map((events) => {
+    }).then((events) => {
       this.snackBar.dismiss();
       let dijkstra = this.cy.elements().dijkstra({
         root: events[0].target,
         weight: edge => +edge.data('weight'),
         directed: false
       });
-      return dijkstra.pathTo(events[1].target);
+      return Promise.resolve(dijkstra.pathTo(events[1].target));
     });
   }
 }
