@@ -39,10 +39,11 @@ export class ContextMenusPluginHandler implements PluginHandler {
         content: 'Add node',
         selector: false,
         onClickFunction: (event) => {
-          this.graphComponent.addNodeAtPos({
+          let node = this.graphComponent.addNodeAtPos({
             x: event.originalEvent.offsetX,
             y: event.originalEvent.offsetY
           });
+          this.graphComponent.openEditDialog(node);
         },
         coreAsWell: true,
         show: false
