@@ -2,7 +2,7 @@
   <button md-icon-button (click)="openSideNav()" md-tooltip="Menu">
     <md-icon>menu</md-icon>
   </button>
-  <md-button-toggle (change)="editToggleEvent($event)">
+  <md-button-toggle (change)="editToggleEvent($event)" #editModeToggler>
     <md-icon>edit</md-icon>
     Edit
   </md-button-toggle>
@@ -10,7 +10,7 @@
     <md-icon>search</md-icon>
     Search
   </button>
-  <button md-button [mdMenuTriggerFor]="algorithmsMenu">
+  <button md-button [mdMenuTriggerFor]="algorithmsMenu" (click)="leaveEditMode()">
     <md-icon>settings</md-icon>
     Algorithms
   </button>

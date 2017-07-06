@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
-import {MdButtonToggleChange} from "@angular/material";
+import {Component, EventEmitter, Input, Output, ViewChild} from "@angular/core";
+import {MdButtonToggle, MdButtonToggleChange} from "@angular/material";
 import {GraphComponent} from "../graph/graph.component";
 
 @Component({
@@ -11,6 +11,7 @@ export class MainToolbarComponent {
 
   @Output() navToggle = new EventEmitter<boolean>();
   @Input() graphComponent: GraphComponent;
+  @ViewChild("editModeToggler") editModeToggler: MdButtonToggle;
 
   openSideNav() {
     this.navToggle.emit(true);
@@ -22,5 +23,11 @@ export class MainToolbarComponent {
 
   runAlgorithm(algorithm: string) {
     this.graphComponent.runAlgorithm(algorithm);
+  }
+
+  leaveEditMode() {
+    if (this.editModeToggler.checked) {
+      this.editModeToggler._inputElement.nativeElement.click();
+    }
   }
 }
