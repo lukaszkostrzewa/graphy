@@ -1,36 +1,22 @@
 import * as jquery from "jquery";
 import cytoscape from "cytoscape/dist/cytoscape.js";
 import contextMenus from "cytoscape-context-menus";
-import {GraphComponent} from "../graph.component";
-import {AfterViewInit, Directive, OnDestroy} from "@angular/core";
+import {AfterViewInit, Directive} from "@angular/core";
+import {GraphService} from "../graph.service";
+import {EditModeAwareExtension} from "./edit-mode-aware.extension";
 import ContextMenu = Cy.ContextMenu;
 import Event = JQuery.Event;
-import {GraphService} from "../graph.service";
-import {Subscription} from "rxjs/Subscription";
 
 @Directive({
   selector: 'app-graph',
   providers: [GraphService]
 })
-export class ContextMenusExtension implements AfterViewInit, OnDestroy {
+export class ContextMenusExtension extends EditModeAwareExtension implements AfterViewInit {
 
   private static readonly ITEMS_VISIBLE_IN_EDIT_MODE = [
     'add-node', 'add-edge', 'remove', 'edit', 'group', 'ungroup'
   ];
   private contextMenu: ContextMenu;
-  private subscription: Subscription;
-
-  constructor(private graphComponent: GraphComponent, private graphService: GraphService) {
-    this.subscription = graphService.editObservable.subscribe({
-      next: value => {
-        if (value) {
-          this.editModeActivated();
-        } else {
-          this.editModeDeactivated();
-        }
-      }
-    })
-  }
 
   ngAfterViewInit(): void {
     contextMenus(cytoscape, jquery);
@@ -167,9 +153,5 @@ export class ContextMenusExtension implements AfterViewInit, OnDestroy {
         coreAsWell: true
       }
     ];
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

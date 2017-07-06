@@ -1,23 +1,14 @@
-import cytoscape from 'cytoscape/dist/cytoscape.js';
-import edgehandles from 'cytoscape-edgehandles';
-import {GraphComponent} from "../graph.component";
-import {AfterViewInit, Directive, OnDestroy} from "@angular/core";
+import cytoscape from "cytoscape/dist/cytoscape.js";
+import edgehandles from "cytoscape-edgehandles";
+import {AfterViewInit, Directive} from "@angular/core";
 import {GraphService} from "../graph.service";
-import {Subscription} from "rxjs/Subscription";
+import {EditModeAwareExtension} from "./edit-mode-aware.extension";
 
 @Directive({
   selector: 'app-graph',
   providers: [GraphService]
 })
-export class EdgeHandlesExtension implements AfterViewInit, OnDestroy {
-
-  private subscription: Subscription;
-
-  constructor(private graphComponent: GraphComponent, private graphService: GraphService) {
-    this.subscription = graphService.editObservable.subscribe({
-      next: value => this.graphComponent.getCy().edgehandles(value ? 'enable' : 'disable')
-    });
-  }
+export class EdgeHandlesExtension extends EditModeAwareExtension implements AfterViewInit {
 
   ngAfterViewInit(): void {
     edgehandles(cytoscape);
@@ -41,7 +32,11 @@ export class EdgeHandlesExtension implements AfterViewInit, OnDestroy {
     this.graphComponent.getCy().edgehandles(defaults);
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  editModeActivated() {
+    this.graphComponent.getCy().edgehandles('enable');
+  }
+
+  editModeDeactivated() {
+    this.graphComponent.getCy().edgehandles('disable');
   }
 }
