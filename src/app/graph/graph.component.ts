@@ -340,17 +340,13 @@ class BfsAlgorithmRunner implements AlgorithmRunner {
   }
 
   run(): Observable<CollectionElements> {
-    return Observable.create((observer) => {
-      let message = this.snackBar.open('Select starting node');
-      this.cy.one('tap', 'node', (event) => {
-        message.dismiss();
-        observer.next((<any>event).target);
-        observer.complete();
+    this.snackBar.open('Select starting node');
+    return Observable.fromPromise(this.cy.promiseOn('tap', 'node'))
+      .map((event) => {
+        this.snackBar.dismiss();
+        let bfs = this.cy.elements().bfs({roots: event.target, directed: false});
+        return bfs.path;
       });
-    }).map((result) => {
-      let bfs = this.cy.elements().bfs({roots: result, directed: true});
-      return bfs.path;
-    });
   }
 }
 
@@ -360,17 +356,13 @@ class DfsAlgorithmRunner implements AlgorithmRunner {
   }
 
   run(): Observable<CollectionElements> {
-    return Observable.create((observer) => {
-      let message = this.snackBar.open('Select starting node');
-      this.cy.one('tap', 'node', (event) => {
-        message.dismiss();
-        observer.next((<any>event).target);
-        observer.complete();
+    this.snackBar.open('Select starting node');
+    return Observable.fromPromise(this.cy.promiseOn('tap', 'node'))
+      .map((event) => {
+        this.snackBar.dismiss();
+        let dfs = this.cy.elements().dfs({roots: event.target, directed: false});
+        return dfs.path;
       });
-    }).map((result) => {
-      let dfs = this.cy.elements().dfs({roots: result, directed: true});
-      return dfs.path;
-    });
   }
 }
 
@@ -402,29 +394,19 @@ class DijkstraAlgorithmRunner implements AlgorithmRunner {
   }
 
   run(): Observable<CollectionElements> {
-    return Observable.create(observer => {
-      let message = this.snackBar.open('Select starting node');
-      setTimeout(() => this.cy.one('tap', 'node', (event) => {
-        message.dismiss();
-        observer.next((<any>event).target);
-        observer.complete();
-      }), 0);
-    }).flatMap(result => {
-      return Observable.create((observer) => {
-        let message = this.snackBar.open('Select destination node');
-        setTimeout(() => this.cy.one('tap', 'node', (event) => {
-          message.dismiss();
-          observer.next({end: (<any>event).target, start: result});
-          observer.complete();
-        }), 0);
-      }).map((result) => {
-        let dijkstra = this.cy.elements().dijkstra({
-          root: result.start,
-          weight: edge => +edge.data('weight'),
-          directed: true
-        });
-        return dijkstra.pathTo(result.end);
+    this.snackBar.open('Select starting node');
+    return Observable.fromPromise(this.cy.promiseOn('tap', 'node').then((event) => {
+      this.snackBar.dismiss();
+      this.snackBar.open('Select destination node');
+      return Promise.all([Promise.resolve(event), this.cy.promiseOn('tap', 'node')]);
+    })).map((events) => {
+      this.snackBar.dismiss();
+      let dijkstra = this.cy.elements().dijkstra({
+        root: events[0].target,
+        weight: edge => +edge.data('weight'),
+        directed: false
       });
+      return dijkstra.pathTo(events[1].target);
     });
   }
 }

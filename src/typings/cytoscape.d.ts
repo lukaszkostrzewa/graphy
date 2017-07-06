@@ -2098,6 +2098,22 @@ declare module Cy {
      */
     destroy(): void;
 
+    /**
+     * Get a promise that is resolved with the first of any of the specified events triggered on the graph.
+     *
+     * @param events A space separated list of event names.
+     * @param selector [optional] A selector to specify elements for which the handler is triggered.
+     */
+    promiseOn(events: string, selector?: string): Promise<any>;
+
+    /**
+     * Get a promise that is resolved with the first of any of the specified events triggered on the graph.
+     *
+     * @param events A space separated list of event names.
+     * @param selector [optional] A selector to specify elements for which the handler is triggered.
+     */
+    pon(events: string, selector?: string): Promise<any>;
+
     edgehandles(options: any): void;
 
     graphml(): string;
@@ -2106,7 +2122,7 @@ declare module Cy {
 
     graphml(options: object): Instance;
 
-    contextMenus(options: ContextMenuOptions): ContextMenu;
+    contextMenus(options: ContextMenuOptions | string): ContextMenu;
 
     container(): HTMLElement;
 
@@ -3124,15 +3140,15 @@ declare module Cy {
   }
 
   interface Promise<T> {
-    id: string;
-    state: PromiseState;
-    fulfillValue: T;
-    rejectReason: any;
-    onFulfilled: any[];
-    onRejected: any[];
+    id?: string;
+    state?: PromiseState;
+    fulfillValue?: T;
+    rejectReason?: any;
+    onFulfilled?: any[];
+    onRejected?: any[];
 
-    fulfill(value: T): Promise<T>;
-    reject(error: any): Promise<any>;
+    fulfill?(value: T): Promise<T>;
+    reject?(error: any): Promise<any>;
     then<U>(onFulfilled?: (value: T) => U | Promise<U>, onRejected?: (error: any) => U | Promise<U>): Promise<U>;
     then<U>(onFulfilled?: (value: T) => U | Promise<U>, onRejected?: (error: any) => void): Promise<U>;
   }
