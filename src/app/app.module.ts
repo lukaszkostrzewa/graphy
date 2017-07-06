@@ -33,6 +33,10 @@ import {SideMenuComponent} from "./side-menu/side-menu.component";
 import {ImportDialogComponent} from "./import-dialog/import-dialog.component";
 import {EditElementDialogComponent} from "./edit-element-dialog/edit-element-dialog.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ContextMenusExtension} from "./graph/extensions/context-menus.extension";
+import {EdgeBendEditingExtension} from "./graph/extensions/edge-bend-editing.extension";
+import {EdgeHandlesExtension} from "./graph/extensions/edge-handles.extension";
+import {NodeAdditionExtension} from "./graph/extensions/node-addition.extension";
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     LayoutSwitchComponent,
     SideMenuComponent,
     ImportDialogComponent,
-    EditElementDialogComponent
+    EditElementDialogComponent,
+    ContextMenusExtension,
+    EdgeBendEditingExtension,
+    EdgeHandlesExtension,
+    NodeAdditionExtension
   ],
   imports: [
     BrowserModule,

@@ -68,7 +68,7 @@ declare module Cy {
    */
   type Scratchpad = any;
 
-  interface CollectionElements extends CollectionEdges, CollectionNodes, CollectionFirstElement {
+  interface CollectionElements extends CollectionEdges, CollectionNodes, CollectionFirstElement, CollectionTraversing {
     //Intentionally empty.
   }
 
@@ -2214,7 +2214,7 @@ declare module Cy {
     /**
      * Holds a reference to the originator of the event (core or element)
      */
-    cyTarget: CollectionElements;
+    target: CollectionElements;
     data: any;
   }
 

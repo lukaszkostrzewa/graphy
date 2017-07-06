@@ -4,35 +4,30 @@ import cytoscape from "cytoscape/dist/cytoscape.js";
 import {Parser} from "./parsers/parser";
 import {GraphmlParser} from "./parsers/graphml-parser";
 import {MdDialog, MdSnackBar} from "@angular/material";
-import {PluginHandler} from "./plugin-handlers/plugin-handler";
-import {EdgehandlesPluginHandler} from "./plugin-handlers/edgehandles-plugin-handler";
-import {NodeAdditionPluginHandler} from "./plugin-handlers/node-addition-plugin-handler";
 import {ShortcutsHandler} from "./shortcuts-handler";
 import * as FileSaver from "file-saver";
-import Position = Cy.Position;
-import {ContextMenusPluginHandler} from "./plugin-handlers/context-menus-plugin-handler";
 import {I18nPluralPipe} from "@angular/common";
 import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-dialog.component";
-import ElementDefinition = Cy.ElementDefinition;
-import {EdgeBendEditingPluginHandler} from "./plugin-handlers/edge-bend-editing-plugin-handler";
-import CollectionElements = Cy.CollectionElements;
 import {Observable} from "rxjs/Rx";
+import {GraphService} from "./graph.service";
+import Position = Cy.Position;
+import ElementDefinition = Cy.ElementDefinition;
+import CollectionElements = Cy.CollectionElements;
 import CollectionFirstNode = Cy.CollectionFirstNode;
+import CollectionNodes = Cy.CollectionNodes;
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
-  providers: [I18nPluralPipe]
+  providers: [I18nPluralPipe, GraphService]
 })
 export class GraphComponent implements OnInit, AfterViewInit {
 
   @ViewChild('graphContainer') container: ElementRef;
 
-  private editMode: boolean;
   private cy: Cy.Instance;
   private parsers: Parser[] = [];
-  private pluginHandlers: PluginHandler[] = [];
   private algorithmRunners: { [key: string]: AlgorithmRunner; } = {};
   private shortcutsHandler: ShortcutsHandler;
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
@@ -53,18 +48,16 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   setEditMode(value) {
-    this.editMode = value;
     this.container.nativeElement.classList.toggle('edit-mode', value);
-
     if (value) {
-      this.pluginHandlers.forEach(handler => handler.editModeActivated());
+      this.graphService.editModeOn();
     } else {
-      this.pluginHandlers.forEach(handler => handler.editModeDeactivated());
+      this.graphService.editModeOff();
     }
   }
 
   constructor(private snackBar: MdSnackBar, private pluralPipe: I18nPluralPipe,
-              private dialog: MdDialog) {
+              private dialog: MdDialog, private graphService: GraphService) {
     this.shortcutsHandler = new ShortcutsHandler(this);
   }
 
@@ -76,12 +69,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
     this.parsers = [
       new GraphmlParser(this.cy)
-    ];
-    this.pluginHandlers = [
-      new EdgehandlesPluginHandler(this),
-      new NodeAdditionPluginHandler(this),
-      new ContextMenusPluginHandler(this),
-      new EdgeBendEditingPluginHandler(this)
     ];
     this.algorithmRunners['bfs'] = new BfsAlgorithmRunner(this.cy, this.snackBar);
     this.algorithmRunners['dfs'] = new DfsAlgorithmRunner(this.cy, this.snackBar);
@@ -361,7 +348,7 @@ class BfsAlgorithmRunner implements AlgorithmRunner {
         observer.complete();
       });
     }).map((result) => {
-      let bfs = this.cy.elements().bfs({roots: result});
+      let bfs = this.cy.elements().bfs({roots: result, directed: true});
       return bfs.path;
     });
   }
@@ -381,7 +368,7 @@ class DfsAlgorithmRunner implements AlgorithmRunner {
         observer.complete();
       });
     }).map((result) => {
-      let dfs = this.cy.elements().dfs({roots: result});
+      let dfs = this.cy.elements().dfs({roots: result, directed: true});
       return dfs.path;
     });
   }
@@ -433,7 +420,8 @@ class DijkstraAlgorithmRunner implements AlgorithmRunner {
       }).map((result) => {
         let dijkstra = this.cy.elements().dijkstra({
           root: result.start,
-          weight: edge => +edge.data('weight')
+          weight: edge => +edge.data('weight'),
+          directed: true
         });
         return dijkstra.pathTo(result.end);
       });
