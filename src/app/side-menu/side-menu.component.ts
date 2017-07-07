@@ -4,6 +4,7 @@ import {ImportDialogComponent} from "../import-dialog/import-dialog.component";
 import {GraphComponent} from "../graph/graph.component";
 import {NewDialogComponent} from "../new-dialog/new-dialog.component";
 import {ImportGraphResult} from "../common/ImportGraphResult";
+import {ExportDialogComponent} from "../export-dialog/export-dialog.component";
 
 @Component({
   selector: 'app-side-menu',
@@ -32,7 +33,13 @@ export class SideMenuComponent implements OnInit {
   }
 
   exportGraph() {
-    this.graphComponent.exportGraph('graphml');
+    this.dialog.open(ExportDialogComponent, {width: '300px'}).afterClosed()
+      .subscribe(type => {
+        if (type) {
+          this.graphComponent.exportGraph(type);
+          this.sideNav.close();
+        }
+      });
   }
 
   newGraph() {
@@ -42,5 +49,10 @@ export class SideMenuComponent implements OnInit {
         this.sideNav.close();
       }
     });
+  }
+
+  openGitHub() {
+    this.sideNav.close();
+    window.open('https://github.com/lukaszkostrzewa/graphy/issues', '_blank');
   }
 }

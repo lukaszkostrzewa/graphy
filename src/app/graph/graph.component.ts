@@ -1,5 +1,10 @@
 import {
-  AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
   ViewChild
 } from "@angular/core";
 
@@ -17,29 +22,40 @@ import {DfsAlgorithmRunner} from "./algorithms/dfs-algorithm-runner";
 import {KruskalAlgorithmRunner} from "./algorithms/kruskal-algorithm-runner";
 import {DijkstraAlgorithmRunner} from "./algorithms/dijkstra-algorithm-runner";
 import {KargerSteinAlgorithmRunner} from "./algorithms/karger-stein-algorithm-runner";
+import {ImportGraphResult} from "../common/ImportGraphResult";
+import {ParserService} from "./parsers/parser.service";
+import {JsonParser} from "./parsers/json-parser";
+import {AlgorithmRunner} from "./algorithms/algorithm-runner";
+import {ExportService} from "./export/export.service";
+import {Exporter} from "./export/exporter";
+import {JsonExporter} from "./export/json-exporter";
+import {GraphmlExporter} from "./export/graphml-exporter";
+import {JpgExporter} from "app/graph/export/jpg-exporter";
+import {PngExporter} from "./export/png-exporter";
+import * as moment from "moment";
 import Position = Cy.Position;
 import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
 import CollectionFirstNode = Cy.CollectionFirstNode;
 import CollectionNodes = Cy.CollectionNodes;
-import {ImportGraphResult} from "../common/ImportGraphResult";
-import {ParserService} from "./parsers/parser.service";
-import {JsonParser} from "./parsers/json-parser";
-import {AlgorithmRunner} from "./algorithms/algorithm-runner";
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
   providers: [
-    I18nPluralPipe, GraphService, AlgorithmService, ParserService,
+    I18nPluralPipe, GraphService, AlgorithmService, ParserService, ExportService,
     {provide: AlgorithmRunner, useClass: BfsAlgorithmRunner, multi: true},
     {provide: AlgorithmRunner, useClass: DfsAlgorithmRunner, multi: true},
     {provide: AlgorithmRunner, useClass: DijkstraAlgorithmRunner, multi: true},
     {provide: AlgorithmRunner, useClass: KruskalAlgorithmRunner, multi: true},
     {provide: AlgorithmRunner, useClass: KargerSteinAlgorithmRunner, multi: true},
     {provide: Parser, useClass: JsonParser, multi: true},
-    {provide: Parser, useClass: GraphmlParser, multi: true}
+    {provide: Parser, useClass: GraphmlParser, multi: true},
+    {provide: Exporter, useClass: JsonExporter, multi: true},
+    {provide: Exporter, useClass: GraphmlExporter, multi: true},
+    {provide: Exporter, useClass: PngExporter, multi: true},
+    {provide: Exporter, useClass: JpgExporter, multi: true}
   ]
 })
 export class GraphComponent implements OnInit, AfterViewInit {
@@ -76,7 +92,8 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   constructor(private snackBar: MdSnackBar, private pluralPipe: I18nPluralPipe,
               private dialog: MdDialog, private graphService: GraphService,
-              private algorithmService: AlgorithmService, private parserService: ParserService) {
+              private algorithmService: AlgorithmService, private parserService: ParserService,
+              private exportService: ExportService) {
   }
 
   ngOnInit() {
@@ -120,12 +137,10 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   exportGraph(type: string) {
-    if (type === 'graphml') {
-      let blob = new Blob([this.cy.graphml()], {
-        type: "application/xml"
-      });
-      FileSaver.saveAs(blob, "graph.xml");
-    }
+    let {blob, extension} = this.exportService.doExport(type);
+    let date = moment().format('DD-MM-YYYY-HH-mm-ss');
+    let fileName = `graph-${date}.${extension}`;
+    FileSaver.saveAs(blob, fileName);
   }
 
   locate() {

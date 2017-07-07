@@ -2830,7 +2830,7 @@ declare module Cy {
     /**
      * Export the current graph view as a PNG image in Base64 representation.
      */
-    png(options: ExportOptions): string;
+    png(options: ExportOptions): string | Blob;
 
     /**
      * Export the current graph view as a JPG image in Base64 representation.
@@ -2839,7 +2839,7 @@ declare module Cy {
     /**
      * Export the current graph view as a JPG image in Base64 representation.
      */
-    jpg(options: ExportOptions): string;
+    jpg(options: ExportOptions): string | Blob;
 
     /**
      * Export the current graph view as a JPG image in Base64 representation.
@@ -3100,6 +3100,10 @@ declare module Cy {
      * Specifies the scale automatically in combination with maxWidth such that the resultant image is no taller than maxHeight.
      */
     maxHeight?: number;
+    /**
+     * Whether the output should be 'base64uri' (default), 'base64', or 'blob'.
+     */
+    output?: string;
   }
 
   interface BoundingBoxOptions {

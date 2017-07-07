@@ -40,6 +40,7 @@ import {EdgeHandlesExtension} from "./graph/extensions/edge-handles.extension";
 import {NodeAdditionExtension} from "./graph/extensions/node-addition.extension";
 import {ShortcutsExtension} from "./graph/extensions/shortcuts.extension";
 import {NewDialogComponent} from "./new-dialog/new-dialog.component";
+import {ExportDialogComponent} from './export-dialog/export-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {NewDialogComponent} from "./new-dialog/new-dialog.component";
     EdgeHandlesExtension,
     NodeAdditionExtension,
     ShortcutsExtension,
-    NewDialogComponent
+    NewDialogComponent,
+    ExportDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +87,7 @@ import {NewDialogComponent} from "./new-dialog/new-dialog.component";
   ],
   entryComponents: [
     ImportDialogComponent,
+    ExportDialogComponent,
     EditElementDialogComponent,
     NewDialogComponent
   ],
