@@ -1,8 +1,10 @@
 <div class="zoom-buttons-container">
-  <button md-button class="btn-zoom-in" (click)="zoomIn.emit()">
+  <button md-button class="btn-zoom-in" (click)="zoomIn.emit()" md-tooltip="Zoom In"
+          [mdTooltipPosition]="'left'">
     <md-icon>add</md-icon>
   </button>
-  <button md-button class="btn-zoom-out" (click)="zoomOut.emit()">
+  <button md-button class="btn-zoom-out" (click)="zoomOut.emit()" md-tooltip="Zoom Out"
+          [mdTooltipPosition]="'left'">
     <md-icon>remove</md-icon>
   </button>
 </div>
