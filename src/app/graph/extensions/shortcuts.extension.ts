@@ -1,6 +1,10 @@
-import {GraphComponent} from "./graph.component";
+import {GraphComponent} from "../graph.component";
+import {Directive, HostListener} from "@angular/core";
 
-export class ShortcutsHandler {
+@Directive({
+  selector: 'app-graph'
+})
+export class ShortcutsExtension {
 
   private shortcutsMap = {
     '-': this.zoomOut,
@@ -32,6 +36,7 @@ export class ShortcutsHandler {
   constructor(private graphComponent: GraphComponent) {
   }
 
+  @HostListener('window:keydown', ['$event'])
   keydown(event: KeyboardEvent): boolean {
     let key = [event.ctrlKey && 'ctrl', event.shiftKey && 'shift', event.key.toLowerCase()]
       .filter(Boolean)
@@ -109,22 +114,22 @@ export class ShortcutsHandler {
   };
 
   private moveUp() {
-    this.graphComponent.moveGraph({x: 0, y: ShortcutsHandler.MOVE_BY});
+    this.graphComponent.moveGraph({x: 0, y: ShortcutsExtension.MOVE_BY});
     return false;
   }
 
   private moveDown() {
-    this.graphComponent.moveGraph({x: 0, y: -ShortcutsHandler.MOVE_BY});
+    this.graphComponent.moveGraph({x: 0, y: -ShortcutsExtension.MOVE_BY});
     return false;
   }
 
   private moveLeft() {
-    this.graphComponent.moveGraph({x: ShortcutsHandler.MOVE_BY, y: 0});
+    this.graphComponent.moveGraph({x: ShortcutsExtension.MOVE_BY, y: 0});
     return false;
   }
 
   private moveRight() {
-    this.graphComponent.moveGraph({x: -ShortcutsHandler.MOVE_BY, y: 0});
+    this.graphComponent.moveGraph({x: -ShortcutsExtension.MOVE_BY, y: 0});
     return false;
   }
 

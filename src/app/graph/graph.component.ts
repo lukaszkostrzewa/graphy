@@ -4,7 +4,6 @@ import cytoscape from "cytoscape/dist/cytoscape.js";
 import {Parser} from "./parsers/parser";
 import {GraphmlParser} from "./parsers/graphml-parser";
 import {MdDialog, MdSnackBar} from "@angular/material";
-import {ShortcutsHandler} from "./shortcuts-handler";
 import * as FileSaver from "file-saver";
 import {I18nPluralPipe} from "@angular/common";
 import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-dialog.component";
@@ -29,7 +28,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
   private cy: Cy.Instance;
   private parsers: Parser[] = [];
   private algorithmRunners: { [key: string]: AlgorithmRunner; } = {};
-  private shortcutsHandler: ShortcutsHandler;
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
   private static readonly FIT_PADDING: number = 100;
   private readonly readonlyNodeProperties = ['id', 'parent'];
@@ -58,7 +56,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   constructor(private snackBar: MdSnackBar, private pluralPipe: I18nPluralPipe,
               private dialog: MdDialog, private graphService: GraphService) {
-    this.shortcutsHandler = new ShortcutsHandler(this);
   }
 
   ngOnInit() {
@@ -232,10 +229,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   moveGraph(options: Position) {
     this.cy.panBy(options);
-  }
-
-  keydown(event: KeyboardEvent) {
-    this.shortcutsHandler.keydown(event);
   }
 
   groupSelectedNodes() {

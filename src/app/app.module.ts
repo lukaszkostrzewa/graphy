@@ -37,6 +37,7 @@ import {ContextMenusExtension} from "./graph/extensions/context-menus.extension"
 import {EdgeBendEditingExtension} from "./graph/extensions/edge-bend-editing.extension";
 import {EdgeHandlesExtension} from "./graph/extensions/edge-handles.extension";
 import {NodeAdditionExtension} from "./graph/extensions/node-addition.extension";
+import {ShortcutsExtension} from "./graph/extensions/shortcuts.extension";
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {NodeAdditionExtension} from "./graph/extensions/node-addition.extension"
     ContextMenusExtension,
     EdgeBendEditingExtension,
     EdgeHandlesExtension,
-    NodeAdditionExtension
+    NodeAdditionExtension,
+    ShortcutsExtension
   ],
   imports: [
     BrowserModule,
