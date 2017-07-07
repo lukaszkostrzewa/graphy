@@ -22,6 +22,9 @@ import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
 import CollectionFirstNode = Cy.CollectionFirstNode;
 import CollectionNodes = Cy.CollectionNodes;
+import {ImportGraphResult} from "../common/ImportGraphResult";
+import {ParserService} from "./parsers/parser.service";
+import {JsonParser} from "./parsers/json-parser";
 
 @Component({
   selector: 'app-graph',
@@ -29,7 +32,9 @@ import CollectionNodes = Cy.CollectionNodes;
   styleUrls: ['./graph.component.scss'],
   providers: [
     I18nPluralPipe, GraphService, AlgorithmService, BfsAlgorithmRunner, DfsAlgorithmRunner,
-    KruskalAlgorithmRunner, DijkstraAlgorithmRunner, KargerSteinAlgorithmRunner
+    KruskalAlgorithmRunner, DijkstraAlgorithmRunner, KargerSteinAlgorithmRunner, ParserService,
+    {provide: Parser, useClass: JsonParser, multi: true},
+    {provide: Parser, useClass: GraphmlParser, multi: true}
   ]
 })
 export class GraphComponent implements OnInit, AfterViewInit {
@@ -38,7 +43,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
   @Output() empty = new EventEmitter<boolean>();
 
   private cy: Cy.Instance;
-  private parsers: Parser[] = [];
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
   private static readonly FIT_PADDING: number = 100;
   private readonly readonlyNodeProperties = ['id', 'parent'];
@@ -67,7 +71,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   constructor(private snackBar: MdSnackBar, private pluralPipe: I18nPluralPipe,
               private dialog: MdDialog, private graphService: GraphService,
-              private algorithmService: AlgorithmService) {
+              private algorithmService: AlgorithmService, private parserService: ParserService) {
   }
 
   ngOnInit() {
@@ -86,10 +90,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
         this.empty.emit(true);
       }
     });
-
-    this.parsers = [
-      new GraphmlParser(this.cy)
-    ];
   }
 
   getCy(): Cy.Instance {
@@ -109,14 +109,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.cy.center();
   }
 
-  parseAndInit(content: string) {
-    let parser = this.parsers.find(parser => parser.canParse(content));
-    if (parser) {
-      parser.parse(content);
-    } else {
-      console.error('Unable to find supporting parser', content);
-      this.snackBar.open('Unable to import selected graph - unsupported format.');
-    }
+  parseAndInit(result: ImportGraphResult) {
+    this.newGraph();
+    this.parserService.get(result.type).parse(result.content);
   }
 
   exportGraph(type: string) {

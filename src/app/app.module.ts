@@ -14,6 +14,7 @@ import {
   MdInputModule,
   MdListModule,
   MdMenuModule,
+  MdSelectModule,
   MdSidenavModule,
   MdSnackBarModule,
   MdToolbarModule,
@@ -32,13 +33,13 @@ import {LayoutSwitchComponent} from "./layout-switch/layout-switch.component";
 import {SideMenuComponent} from "./side-menu/side-menu.component";
 import {ImportDialogComponent} from "./import-dialog/import-dialog.component";
 import {EditElementDialogComponent} from "./edit-element-dialog/edit-element-dialog.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ContextMenusExtension} from "./graph/extensions/context-menus.extension";
 import {EdgeBendEditingExtension} from "./graph/extensions/edge-bend-editing.extension";
 import {EdgeHandlesExtension} from "./graph/extensions/edge-handles.extension";
 import {NodeAdditionExtension} from "./graph/extensions/node-addition.extension";
 import {ShortcutsExtension} from "./graph/extensions/shortcuts.extension";
-import {NewDialogComponent} from './new-dialog/new-dialog.component';
+import {NewDialogComponent} from "./new-dialog/new-dialog.component";
 
 @NgModule({
   declarations: [
@@ -76,9 +77,11 @@ import {NewDialogComponent} from './new-dialog/new-dialog.component';
     MdMenuModule,
     MdListModule,
     MdDialogModule,
+    FormsModule,
     ReactiveFormsModule,
     MdInputModule,
-    MdAutocompleteModule
+    MdAutocompleteModule,
+    MdSelectModule
   ],
   entryComponents: [
     ImportDialogComponent,

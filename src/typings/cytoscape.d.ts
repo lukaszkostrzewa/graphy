@@ -2854,6 +2854,13 @@ declare module Cy {
      * Export the graph as JSON, the same format used at initialisation.
      */
     json(): string;
+
+    /**
+     * Import the graph as JSON, updating only the fields specified.
+     *
+     * @param cyJson The object with the fields corresponding to the states that should be changed.
+     */
+    json(cyJson: CytoscapeOptions): Cy.Instance;
   }
 
   interface Position {

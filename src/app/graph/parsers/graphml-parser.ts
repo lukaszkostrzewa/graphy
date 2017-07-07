@@ -1,18 +1,22 @@
 import {Parser} from "./parser";
-import cytoscape from 'cytoscape/dist/cytoscape.js';
-import graphml from 'cytoscape-graphml';
+import cytoscape from "cytoscape/dist/cytoscape.js";
+import graphml from "cytoscape-graphml";
+import {Injectable} from "@angular/core";
+import {GraphService} from "../graph.service";
 
-export class GraphmlParser implements Parser {
+@Injectable()
+export class GraphmlParser extends Parser {
 
-  constructor(private cy: Cy.Instance) {
+  constructor(graphService: GraphService) {
+    super(graphService);
     graphml(cytoscape, jQuery);
   }
 
-  canParse(content: string): boolean {
-    return true;
+  parse(content: string): void {
+    this.graphService.getCy().graphml(content);
   }
 
-  parse(content: string): void {
-    this.cy.graphml(content);
+  id(): string {
+    return 'graphml';
   }
 }

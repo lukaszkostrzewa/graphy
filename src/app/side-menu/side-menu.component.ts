@@ -3,6 +3,7 @@ import {MdDialog, MdSidenav} from "@angular/material";
 import {ImportDialogComponent} from "../import-dialog/import-dialog.component";
 import {GraphComponent} from "../graph/graph.component";
 import {NewDialogComponent} from "../new-dialog/new-dialog.component";
+import {ImportGraphResult} from "../common/ImportGraphResult";
 
 @Component({
   selector: 'app-side-menu',
@@ -21,12 +22,13 @@ export class SideMenuComponent implements OnInit {
   }
 
   openImportDialog() {
-    this.dialog.open(ImportDialogComponent).afterClosed().subscribe((result: string) => {
-      if (result) {
-        this.graphComponent.parseAndInit(result);
-        this.sideNav.close();
-      }
-    });
+    this.dialog.open(ImportDialogComponent, {width: '400px', height: '180px'}).afterClosed()
+      .subscribe((result: ImportGraphResult) => {
+        if (result) {
+          this.graphComponent.parseAndInit(result);
+          this.sideNav.close();
+        }
+      });
   }
 
   exportGraph() {
