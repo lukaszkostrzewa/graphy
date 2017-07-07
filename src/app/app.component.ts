@@ -7,10 +7,12 @@ import {Component} from "@angular/core";
 })
 export class AppComponent {
 
+  emptyGraph: boolean = false;
+
   constructor() {
   }
 
-  isEmptyGraph(): boolean {
-    return false;
+  isEmptyGraph(emptyGraph: boolean) {
+    this.emptyGraph = emptyGraph;
   }
 }

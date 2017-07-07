@@ -38,6 +38,7 @@ import {EdgeBendEditingExtension} from "./graph/extensions/edge-bend-editing.ext
 import {EdgeHandlesExtension} from "./graph/extensions/edge-handles.extension";
 import {NodeAdditionExtension} from "./graph/extensions/node-addition.extension";
 import {ShortcutsExtension} from "./graph/extensions/shortcuts.extension";
+import {NewDialogComponent} from './new-dialog/new-dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {ShortcutsExtension} from "./graph/extensions/shortcuts.extension";
     EdgeBendEditingExtension,
     EdgeHandlesExtension,
     NodeAdditionExtension,
-    ShortcutsExtension
+    ShortcutsExtension,
+    NewDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import {ShortcutsExtension} from "./graph/extensions/shortcuts.extension";
   ],
   entryComponents: [
     ImportDialogComponent,
-    EditElementDialogComponent
+    EditElementDialogComponent,
+    NewDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

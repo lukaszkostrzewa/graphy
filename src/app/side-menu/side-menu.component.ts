@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MdDialog, MdSidenav} from "@angular/material";
 import {ImportDialogComponent} from "../import-dialog/import-dialog.component";
 import {GraphComponent} from "../graph/graph.component";
+import {NewDialogComponent} from "../new-dialog/new-dialog.component";
 
 @Component({
   selector: 'app-side-menu',
@@ -30,5 +31,14 @@ export class SideMenuComponent implements OnInit {
 
   exportGraph() {
     this.graphComponent.exportGraph('graphml');
+  }
+
+  newGraph() {
+    this.dialog.open(NewDialogComponent).afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.graphComponent.newGraph();
+        this.sideNav.close();
+      }
+    });
   }
 }

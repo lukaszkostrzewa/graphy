@@ -3,9 +3,9 @@
   <app-main-toolbar (navToggle)="sidenav.toggle()"
                     [graphComponent]="graph"></app-main-toolbar>
   <app-account-button></app-account-button>
-  <app-hints *ngIf="isEmptyGraph()"></app-hints>
+  <app-hints *ngIf="emptyGraph"></app-hints>
 
-  <app-graph #graph></app-graph>
+  <app-graph #graph (empty)="isEmptyGraph($event)"></app-graph>
 
   <md-sidenav #sidenav>
     <app-side-menu [sideNav]="sidenav" [graphComponent]="graph"></app-side-menu>

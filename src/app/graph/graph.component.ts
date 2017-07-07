@@ -1,4 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {
+  AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output,
+  ViewChild
+} from "@angular/core";
 
 import {Parser} from "./parsers/parser";
 import {GraphmlParser} from "./parsers/graphml-parser";
@@ -32,6 +35,7 @@ import CollectionNodes = Cy.CollectionNodes;
 export class GraphComponent implements OnInit, AfterViewInit {
 
   @ViewChild('graphContainer') container: ElementRef;
+  @Output() empty = new EventEmitter<boolean>();
 
   private cy: Cy.Instance;
   private parsers: Parser[] = [];
@@ -71,6 +75,17 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.cy = this.graphService.initialize(this.container.nativeElement);
+    this.empty.emit(false);
+    this.cy.on('add', (evt) => {
+      if (evt.cy.elements().length === 1) {
+        this.empty.emit(false);
+      }
+    });
+    this.cy.on('remove', (evt) => {
+      if (evt.cy.elements().empty()) {
+        this.empty.emit(true);
+      }
+    });
 
     this.parsers = [
       new GraphmlParser(this.cy)
@@ -279,5 +294,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
               .subscribe(() => this.cy.$('.highlighted').removeClass('highlighted'))
         });
     });
+  }
+
+  newGraph() {
+    this.cy.elements().remove();
   }
 }

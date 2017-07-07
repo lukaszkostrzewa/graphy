@@ -2232,6 +2232,7 @@ declare module Cy {
      */
     target: CollectionElements;
     data: any;
+    cy: Cy.Instance;
   }
 
   interface InstanceEvent {
