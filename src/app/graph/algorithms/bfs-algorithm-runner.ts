@@ -5,9 +5,10 @@ import {GraphService} from "../graph.service";
 import CollectionElements = Cy.CollectionElements;
 
 @Injectable()
-export class BfsAlgorithmRunner implements AlgorithmRunner {
+export class BfsAlgorithmRunner extends AlgorithmRunner {
 
-  constructor(private graphService: GraphService, private snackBar: MdSnackBar) {
+  constructor(graphService: GraphService, private snackBar: MdSnackBar) {
+    super(graphService);
   }
 
   run(): Promise<CollectionElements> {
@@ -19,5 +20,9 @@ export class BfsAlgorithmRunner implements AlgorithmRunner {
         let bfs = cy.elements().bfs({roots: event.target, directed: false});
         return Promise.resolve(bfs.path);
       });
+  }
+
+  name(): string {
+    return 'bfs';
   }
 }

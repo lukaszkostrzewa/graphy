@@ -5,9 +5,10 @@ import {GraphService} from "../graph.service";
 import CollectionElements = Cy.CollectionElements;
 
 @Injectable()
-export class DijkstraAlgorithmRunner implements AlgorithmRunner {
+export class DijkstraAlgorithmRunner extends AlgorithmRunner {
 
-  constructor(private graphService: GraphService, private snackBar: MdSnackBar) {
+  constructor(graphService: GraphService, private snackBar: MdSnackBar) {
+    super(graphService);
   }
 
   run(): Promise<CollectionElements> {
@@ -26,5 +27,9 @@ export class DijkstraAlgorithmRunner implements AlgorithmRunner {
       });
       return Promise.resolve(dijkstra.pathTo(events[1].target));
     });
+  }
+
+  name(): string {
+    return 'dijkstra';
   }
 }

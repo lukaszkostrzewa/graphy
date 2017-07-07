@@ -25,14 +25,19 @@ import CollectionNodes = Cy.CollectionNodes;
 import {ImportGraphResult} from "../common/ImportGraphResult";
 import {ParserService} from "./parsers/parser.service";
 import {JsonParser} from "./parsers/json-parser";
+import {AlgorithmRunner} from "./algorithms/algorithm-runner";
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
   providers: [
-    I18nPluralPipe, GraphService, AlgorithmService, BfsAlgorithmRunner, DfsAlgorithmRunner,
-    KruskalAlgorithmRunner, DijkstraAlgorithmRunner, KargerSteinAlgorithmRunner, ParserService,
+    I18nPluralPipe, GraphService, AlgorithmService, ParserService,
+    {provide: AlgorithmRunner, useClass: BfsAlgorithmRunner, multi: true},
+    {provide: AlgorithmRunner, useClass: DfsAlgorithmRunner, multi: true},
+    {provide: AlgorithmRunner, useClass: DijkstraAlgorithmRunner, multi: true},
+    {provide: AlgorithmRunner, useClass: KruskalAlgorithmRunner, multi: true},
+    {provide: AlgorithmRunner, useClass: KargerSteinAlgorithmRunner, multi: true},
     {provide: Parser, useClass: JsonParser, multi: true},
     {provide: Parser, useClass: GraphmlParser, multi: true}
   ]
