@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from "@angular/core";
-import cytoscape from "cytoscape/dist/cytoscape.js";
 
 import {Parser} from "./parsers/parser";
 import {GraphmlParser} from "./parsers/graphml-parser";
@@ -9,6 +8,12 @@ import {I18nPluralPipe} from "@angular/common";
 import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-dialog.component";
 import {Observable} from "rxjs/Rx";
 import {GraphService} from "./graph.service";
+import {AlgorithmService} from "./algorithms/algorithm.service";
+import {BfsAlgorithmRunner} from "./algorithms/bfs-algorithm-runner";
+import {DfsAlgorithmRunner} from "./algorithms/dfs-algorithm-runner";
+import {KruskalAlgorithmRunner} from "./algorithms/kruskal-algorithm-runner";
+import {DijkstraAlgorithmRunner} from "./algorithms/dijkstra-algorithm-runner";
+import {KargerSteinAlgorithmRunner} from "./algorithms/karger-stein-algorithm-runner";
 import Position = Cy.Position;
 import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
@@ -19,7 +24,10 @@ import CollectionNodes = Cy.CollectionNodes;
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
-  providers: [I18nPluralPipe, GraphService]
+  providers: [
+    I18nPluralPipe, GraphService, AlgorithmService, BfsAlgorithmRunner, DfsAlgorithmRunner,
+    KruskalAlgorithmRunner, DijkstraAlgorithmRunner, KargerSteinAlgorithmRunner
+  ]
 })
 export class GraphComponent implements OnInit, AfterViewInit {
 
@@ -27,7 +35,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   private cy: Cy.Instance;
   private parsers: Parser[] = [];
-  private algorithmRunners: { [key: string]: AlgorithmRunner; } = {};
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
   private static readonly FIT_PADDING: number = 100;
   private readonly readonlyNodeProperties = ['id', 'parent'];
@@ -55,68 +62,23 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   constructor(private snackBar: MdSnackBar, private pluralPipe: I18nPluralPipe,
-              private dialog: MdDialog, private graphService: GraphService) {
+              private dialog: MdDialog, private graphService: GraphService,
+              private algorithmService: AlgorithmService) {
   }
 
   ngOnInit() {
   }
 
   ngAfterViewInit(): void {
-    this.cy = cytoscape(this.getConfig());
+    this.cy = this.graphService.initialize(this.container.nativeElement);
 
     this.parsers = [
       new GraphmlParser(this.cy)
     ];
-    this.algorithmRunners['bfs'] = new BfsAlgorithmRunner(this.cy, this.snackBar);
-    this.algorithmRunners['dfs'] = new DfsAlgorithmRunner(this.cy, this.snackBar);
-    this.algorithmRunners['kruskal'] = new KruskalAlgorithmRunner(this.cy);
-    this.algorithmRunners['karger-stein'] = new KargerSteinAlgorithmRunner(this.cy);
-    this.algorithmRunners['dijkstra'] = new DijkstraAlgorithmRunner(this.cy, this.snackBar);
   }
 
   getCy(): Cy.Instance {
     return this.cy;
-  }
-
-  private getConfig() {
-    return {
-      container: this.container.nativeElement,
-      elements: [
-        {data: {id: 'a', label: 'A'}},
-        {data: {id: 'b', label: 'B'}},
-        {data: {id: 'c', label: 'C'}},
-        {data: {id: 'ab', source: 'a', target: 'b', weight: '1'}},
-        {data: {id: 'bc', source: 'b', target: 'c', weight: '1'}},
-        {data: {id: 'ac', source: 'a', target: 'c', weight: '100'}}
-      ],
-      layout: {
-        name: 'grid'
-      },
-      style: [{
-        "selector": "node",
-        "style": {
-          "content": "data(label)",
-        }
-      }, {
-        "selector": "edge",
-        "style": {
-          "text-margin-y": "-12px",
-          "content": "data(weight)",
-        }
-      }, {
-        "selector": '.highlighted',
-        "style": {
-          'background-color': '#61bffc',
-          'line-color': '#61bffc',
-          'target-arrow-color': '#61bffc',
-          'transition-property': 'background-color, line-color, target-arrow-color',
-          'transition-duration': '0.5s'
-        }
-      }
-      ],
-      wheelSensitivity: 0.2,
-      boxSelectionEnabled: true
-    };
   }
 
   zoomIn() {
@@ -304,7 +266,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   runAlgorithm(algorithm: string): void {
-    this.algorithmRunners[algorithm].run().then(elements => {
+    this.algorithmService.get(algorithm).run().then(elements => {
       let cancel = this.snackBar.open('Algorithm started', 'Stop').onAction();
       Observable.from(elements).zip(Observable.timer(0, 500), x => x)
         .takeUntil(cancel)
@@ -316,87 +278,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
             this.snackBar.open('Algorithm finished', 'Clear').onAction()
               .subscribe(() => this.cy.$('.highlighted').removeClass('highlighted'))
         });
-    });
-  }
-}
-
-interface AlgorithmRunner {
-  run(): Promise<CollectionElements>;
-}
-
-class BfsAlgorithmRunner implements AlgorithmRunner {
-
-  constructor(private cy: Cy.Instance, private snackBar: MdSnackBar) {
-  }
-
-  run(): Promise<CollectionElements> {
-    this.snackBar.open('Select starting node');
-    return this.cy.promiseOn('tap', 'node')
-      .then((event) => {
-        this.snackBar.dismiss();
-        let bfs = this.cy.elements().bfs({roots: event.target, directed: false});
-        return Promise.resolve(bfs.path);
-      });
-  }
-}
-
-class DfsAlgorithmRunner implements AlgorithmRunner {
-
-  constructor(private cy: Cy.Instance, private snackBar: MdSnackBar) {
-  }
-
-  run(): Promise<CollectionElements> {
-    this.snackBar.open('Select starting node');
-    return this.cy.promiseOn('tap', 'node')
-      .then((event) => {
-        this.snackBar.dismiss();
-        let dfs = this.cy.elements().dfs({roots: event.target, directed: false});
-        return Promise.resolve(dfs.path);
-      });
-  }
-}
-
-class KruskalAlgorithmRunner implements AlgorithmRunner {
-
-  constructor(private cy: Cy.Instance) {
-  }
-
-  run(): Promise<CollectionElements> {
-    let spanningTree = this.cy.elements().kruskal(edge => edge.data('weight'));
-    return Promise.resolve(spanningTree.filter('edge'));
-  }
-}
-
-class KargerSteinAlgorithmRunner implements AlgorithmRunner {
-
-  constructor(private cy: Cy.Instance) {
-  }
-
-  run(): Promise<CollectionElements> {
-    let minCut = this.cy.elements().kargerStein();
-    return Promise.resolve(minCut.cut);
-  }
-}
-
-class DijkstraAlgorithmRunner implements AlgorithmRunner {
-
-  constructor(private cy: Cy.Instance, private snackBar: MdSnackBar) {
-  }
-
-  run(): Promise<CollectionElements> {
-    this.snackBar.open('Select starting node');
-    return this.cy.promiseOn('tap', 'node').then((event) => {
-      this.snackBar.dismiss();
-      this.snackBar.open('Select destination node');
-      return Promise.all([Promise.resolve(event), this.cy.promiseOn('tap', 'node')]);
-    }).then((events) => {
-      this.snackBar.dismiss();
-      let dijkstra = this.cy.elements().dijkstra({
-        root: events[0].target,
-        weight: edge => +edge.data('weight'),
-        directed: false
-      });
-      return Promise.resolve(dijkstra.pathTo(events[1].target));
     });
   }
 }
