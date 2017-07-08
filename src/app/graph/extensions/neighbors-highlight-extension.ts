@@ -7,16 +7,6 @@ import {EditModeAwareExtension} from "./edit-mode-aware.extension";
 export class NeighborsHighlightExtension extends EditModeAwareExtension implements AfterViewInit {
 
   ngAfterViewInit(): void {
-    this.graphComponent.getCy().style().fromJson([{
-      "selector": '.hover',
-      "style": {
-        'background-color': '#4580e5',
-        'line-color': '#4580e5',
-        'target-arrow-color': '#4580e5',
-        'transition-property': 'background-color, line-color, target-arrow-color',
-        'transition-duration': '0.2s'
-      }
-    }]);
     this.editModeDeactivated();
   }
 

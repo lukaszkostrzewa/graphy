@@ -64,6 +64,15 @@ export class GraphService {
           'transition-property': 'background-color, line-color, target-arrow-color',
           'transition-duration': '0.5s'
         }
+      }, {
+        "selector": '.hover',
+        "style": {
+          'background-color': '#4580e5',
+          'line-color': '#4580e5',
+          'target-arrow-color': '#4580e5',
+          'transition-property': 'background-color, line-color, target-arrow-color',
+          'transition-duration': '0.2s'
+        }
       }
       ],
       wheelSensitivity: 0.2,
