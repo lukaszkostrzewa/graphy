@@ -103,17 +103,17 @@ export class ShortcutsExtension {
   }
 
   private copy() {
-    console.log("Copy");
+    this.graphComponent.copy();
     return false;
   }
 
   private paste() {
-    console.log("Paste");
+    this.graphComponent.paste();
     return false;
   }
 
   private cut() {
-    console.log("Cut");
+    this.graphComponent.cut();
     return false;
   }
 

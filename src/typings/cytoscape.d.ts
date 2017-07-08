@@ -2136,6 +2136,8 @@ declare module Cy {
     edgeBendEditing(options: {} | string): {};
 
     undoRedo(options?: {}): any;
+
+    clipboard(options?: any): any;
   }
 
   export interface ContextMenuOptions {

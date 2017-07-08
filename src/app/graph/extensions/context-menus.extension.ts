@@ -109,27 +109,21 @@ export class ContextMenusExtension extends EditModeAwareExtension implements Aft
         id: 'copy',
         content: 'Copy',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Copy');
-        },
+        onClickFunction: event => this.graphComponent.copy(event.target),
         coreAsWell: true,
       },
       {
         id: 'cut',
         content: 'Cut',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Cut');
-        },
+        onClickFunction: event => this.graphComponent.cut(event.target),
         coreAsWell: true,
       },
       {
         id: 'paste',
         content: 'Paste',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Paste');
-        },
+        onClickFunction: () => this.graphComponent.paste(),
         coreAsWell: true,
         hasTrailingDivider: true
       },

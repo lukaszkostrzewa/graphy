@@ -13,6 +13,7 @@ import {GraphmlParser} from "./parsers/graphml-parser";
 import {MdDialog, MdSnackBar} from "@angular/material";
 import * as FileSaver from "file-saver";
 import * as moment from "moment";
+import * as jquery from "jquery";
 import {I18nPluralPipe} from "@angular/common";
 import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-dialog.component";
 import {Observable} from "rxjs/Rx";
@@ -36,6 +37,7 @@ import {JpgExporter} from "app/graph/export/jpg-exporter";
 import {PngExporter} from "./export/png-exporter";
 import cytoscape from "cytoscape/dist/cytoscape.js";
 import undoRedo from "cytoscape-undo-redo";
+import clipboard from "cytoscape-clipboard";
 import Position = Cy.Position;
 import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
@@ -106,8 +108,10 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     undoRedo(cytoscape);
+    clipboard(cytoscape, jquery);
     this.cy = this.graphService.initialize(this.container.nativeElement);
     this.undoRedo = this.cy.undoRedo({undoableDrag: false});
+    this.cy.clipboard();
     this.undoRedo.action('add-edge', edges => this.cy.add(edges), edges => edges.remove());
     this.undoRedo.action('group-nodes',
       nodes => this.groupNodes(nodes),
@@ -307,4 +311,18 @@ export class GraphComponent implements OnInit, AfterViewInit {
   redo = () => {
     this.undoRedo.redo();
   };
+
+  copy(elements?: CollectionElements) {
+    this.cy.clipboard().copy(elements || this.cy.$(":selected"));
+  }
+
+  paste() {
+    this.undoRedo.do('paste');
+  }
+
+  cut(elements?: CollectionElements) {
+    elements = elements || this.cy.$(":selected");
+    this.copy(elements);
+    this.undoRedo.do('remove', elements);
+  }
 }
