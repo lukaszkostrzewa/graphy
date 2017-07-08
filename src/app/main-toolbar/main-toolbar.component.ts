@@ -27,7 +27,11 @@ export class MainToolbarComponent {
 
   leaveEditMode() {
     if (this.editModeToggler.checked) {
-      this.editModeToggler._inputElement.nativeElement.click();
+      this.toggleEditMode();
     }
+  }
+
+  toggleEditMode() {
+    this.editModeToggler._inputElement.nativeElement.click();
   }
 }

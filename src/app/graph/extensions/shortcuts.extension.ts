@@ -1,5 +1,6 @@
 import {GraphComponent} from "../graph.component";
-import {Directive, HostListener} from "@angular/core";
+import {Directive, HostListener, Input} from "@angular/core";
+import {MainToolbarComponent} from "../../main-toolbar/main-toolbar.component";
 
 @Directive({
   selector: 'app-graph'
@@ -15,6 +16,7 @@ export class ShortcutsExtension {
     'arrowdown': this.moveDown,
     'arrowleft': this.moveLeft,
     'arrowright': this.moveRight,
+    'escape': this.deselectAndLeaveEditMode,
     'ctrl+a': this.selectAllNodes,
     'ctrl+f': this.search,
     'ctrl+s': this.save,
@@ -30,6 +32,8 @@ export class ShortcutsExtension {
     'ctrl+`': this.toggleMode,
     'ctrl+shift+g': this.ungroupSelected
   };
+
+  @Input() mainToolbar: MainToolbarComponent;
 
   private static readonly MOVE_BY: number = 20;
 
@@ -153,7 +157,12 @@ export class ShortcutsExtension {
   }
 
   private toggleMode() {
-    console.log("Toggle mode event");
+    this.mainToolbar.toggleEditMode();
     return false;
   };
+
+  private deselectAndLeaveEditMode() {
+    this.graphComponent.deselect();
+    this.mainToolbar.leaveEditMode();
+  }
 }

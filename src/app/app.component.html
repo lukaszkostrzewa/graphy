@@ -1,11 +1,11 @@
 <md-sidenav-container class="sidenav-container">
 
   <app-main-toolbar (navToggle)="sidenav.toggle()"
-                    [graphComponent]="graph"></app-main-toolbar>
+                    [graphComponent]="graph" #mainToolbar></app-main-toolbar>
   <app-account-button></app-account-button>
   <app-hints *ngIf="emptyGraph"></app-hints>
 
-  <app-graph #graph (empty)="isEmptyGraph($event)"></app-graph>
+  <app-graph #graph (empty)="isEmptyGraph($event)" [mainToolbar]="mainToolbar"></app-graph>
 
   <md-sidenav #sidenav>
     <app-side-menu [sideNav]="sidenav" [graphComponent]="graph"></app-side-menu>
