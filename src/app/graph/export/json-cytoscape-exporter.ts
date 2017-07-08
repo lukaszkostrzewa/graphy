@@ -3,7 +3,7 @@ import {Exporter} from "./exporter";
 import {ExportResult} from "./export-result";
 
 @Injectable()
-export class JsonExporter extends Exporter {
+export class JsonCytoscapeExporter extends Exporter {
 
   doExport(): ExportResult {
     return {
@@ -15,6 +15,6 @@ export class JsonExporter extends Exporter {
   }
 
   id(): string {
-    return 'json';
+    return 'json-cytoscape';
   }
 }

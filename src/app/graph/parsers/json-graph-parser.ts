@@ -2,7 +2,7 @@ import {Parser} from "./parser";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class JsonParser extends Parser {
+export class JsonGraphParser extends Parser {
 
   parse(content: string): void {
     let graph = JSON.parse(content).graph;
@@ -19,6 +19,6 @@ export class JsonParser extends Parser {
   }
 
   id(): string {
-    return 'json';
+    return 'json-graph';
   }
 }

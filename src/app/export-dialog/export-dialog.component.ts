@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class ExportDialogComponent implements OnInit {
 
   supportedFormats: ExportFormat[] = [
-    {id: 'json', name: 'JSON'},
+    {id: 'json-cytoscape', name: 'JSON Cytoscape'},
     {id: 'graphml', name: 'GraphML'},
     {id: 'png', name: 'PNG'},
     {id: 'jpg', name: 'JPG'}

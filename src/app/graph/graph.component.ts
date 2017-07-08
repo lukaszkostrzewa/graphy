@@ -12,6 +12,7 @@ import {Parser} from "./parsers/parser";
 import {GraphmlParser} from "./parsers/graphml-parser";
 import {MdDialog, MdSnackBar} from "@angular/material";
 import * as FileSaver from "file-saver";
+import * as moment from "moment";
 import {I18nPluralPipe} from "@angular/common";
 import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-dialog.component";
 import {Observable} from "rxjs/Rx";
@@ -24,15 +25,15 @@ import {DijkstraAlgorithmRunner} from "./algorithms/dijkstra-algorithm-runner";
 import {KargerSteinAlgorithmRunner} from "./algorithms/karger-stein-algorithm-runner";
 import {ImportGraphResult} from "../common/ImportGraphResult";
 import {ParserService} from "./parsers/parser.service";
-import {JsonParser} from "./parsers/json-parser";
+import {JsonGraphParser} from "./parsers/json-graph-parser";
+import {JsonCytoscapeParser} from "./parsers/json-cytoscape-parser";
 import {AlgorithmRunner} from "./algorithms/algorithm-runner";
 import {ExportService} from "./export/export.service";
 import {Exporter} from "./export/exporter";
-import {JsonExporter} from "./export/json-exporter";
+import {JsonCytoscapeExporter} from "./export/json-cytoscape-exporter";
 import {GraphmlExporter} from "./export/graphml-exporter";
 import {JpgExporter} from "app/graph/export/jpg-exporter";
 import {PngExporter} from "./export/png-exporter";
-import * as moment from "moment";
 import Position = Cy.Position;
 import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
@@ -50,9 +51,10 @@ import CollectionNodes = Cy.CollectionNodes;
     {provide: AlgorithmRunner, useClass: DijkstraAlgorithmRunner, multi: true},
     {provide: AlgorithmRunner, useClass: KruskalAlgorithmRunner, multi: true},
     {provide: AlgorithmRunner, useClass: KargerSteinAlgorithmRunner, multi: true},
-    {provide: Parser, useClass: JsonParser, multi: true},
+    {provide: Parser, useClass: JsonGraphParser, multi: true},
+    {provide: Parser, useClass: JsonCytoscapeParser, multi: true},
     {provide: Parser, useClass: GraphmlParser, multi: true},
-    {provide: Exporter, useClass: JsonExporter, multi: true},
+    {provide: Exporter, useClass: JsonCytoscapeExporter, multi: true},
     {provide: Exporter, useClass: GraphmlExporter, multi: true},
     {provide: Exporter, useClass: PngExporter, multi: true},
     {provide: Exporter, useClass: JpgExporter, multi: true}

@@ -9,8 +9,12 @@ export class GraphFormatsService {
 
   getSupportedFormats(): GraphFormat[] {
     return [{
-      id: 'json',
-      name: 'JSON',
+      id: 'json-graph',
+      name: 'JSON Graph',
+      extensions: ['.json', '.txt']
+    }, {
+      id: 'json-cytoscape',
+      name: 'JSON Cytoscape',
       extensions: ['.json', '.txt']
     }, {
       id: 'graphml',
