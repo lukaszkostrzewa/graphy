@@ -57,9 +57,8 @@ export class ContextMenusExtension extends EditModeAwareExtension implements Aft
         id: 'add-edge',
         content: 'Add edge',
         selector: 'node',
-        onClickFunction: function () {
-          console.log('Add edge action');
-        },
+        onClickFunction: (event) =>
+          this.graphComponent.getCy().edgehandles('start', event.target.id()),
         show: false
       },
       {
@@ -138,18 +137,14 @@ export class ContextMenusExtension extends EditModeAwareExtension implements Aft
         id: 'undo',
         content: 'Undo',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Undo');
-        },
+        onClickFunction: () => this.graphComponent.undo(),
         coreAsWell: true
       },
       {
         id: 'redo',
         content: 'Redo',
         selector: 'node, edge',
-        onClickFunction: function () {
-          console.log('Redo');
-        },
+        onClickFunction: () => this.graphComponent.redo(),
         coreAsWell: true
       }
     ];

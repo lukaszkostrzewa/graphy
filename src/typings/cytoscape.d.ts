@@ -2121,6 +2121,8 @@ declare module Cy {
 
     edgehandles(options: any): void;
 
+    edgehandles(operation: string, arg?: any): void;
+
     graphml(): string;
 
     graphml(content: string): void;
@@ -2132,6 +2134,8 @@ declare module Cy {
     container(): HTMLElement;
 
     edgeBendEditing(options: {} | string): {};
+
+    undoRedo(options?: {}): any;
   }
 
   export interface ContextMenuOptions {

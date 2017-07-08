@@ -29,6 +29,7 @@
     "cytoscape-edge-bend-editing": "^1.5.2",
     "cytoscape-edgehandles": "^2.13.0",
     "cytoscape-graphml": "^1.0.5",
+    "cytoscape-undo-redo": "^1.2.13",
     "file-saver": "^1.3.3",
     "hammerjs": "^2.0.8",
     "jquery": "^3.2.1",

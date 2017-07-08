@@ -89,12 +89,12 @@ export class ShortcutsExtension {
   };
 
   private undo() {
-    console.log("Undo");
+    this.graphComponent.undo();
     return false;
   };
 
   private redo() {
-    console.log("Redo");
+    this.graphComponent.redo();
     return false;
   };
 

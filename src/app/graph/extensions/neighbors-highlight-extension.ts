@@ -36,11 +36,15 @@ export class NeighborsHighlightExtension extends EditModeAwareExtension implemen
   }
 
   onNodeMouseOver = event => {
-    this.addHoverClass(event, event.target.outgoers());
+    if (!event.target.isParent()) {
+      this.addHoverClass(event, event.target.outgoers());
+    }
   };
 
   onNodeMouseOut = event => {
-    this.removeHoverClass(event, event.target.outgoers());
+    if (!event.target.isParent()) {
+      this.removeHoverClass(event, event.target.outgoers());
+    }
   };
 
   onEdgeMouseOver = event => {

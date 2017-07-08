@@ -34,6 +34,8 @@ import {JsonCytoscapeExporter} from "./export/json-cytoscape-exporter";
 import {GraphmlExporter} from "./export/graphml-exporter";
 import {JpgExporter} from "app/graph/export/jpg-exporter";
 import {PngExporter} from "./export/png-exporter";
+import cytoscape from "cytoscape/dist/cytoscape.js";
+import undoRedo from "cytoscape-undo-redo";
 import Position = Cy.Position;
 import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
@@ -74,6 +76,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   private readonly commonEdgeProperties = ['label', 'weight'];
   private nodesCounter: number = 0;
   private edgesCounter: number = 0;
+  undoRedo: any;
 
   getNextEdgeId(): string {
     return 'edge_' + this.edgesCounter++;
@@ -102,7 +105,16 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    undoRedo(cytoscape);
     this.cy = this.graphService.initialize(this.container.nativeElement);
+    this.undoRedo = this.cy.undoRedo({undoableDrag: false});
+    this.undoRedo.action('add-edge', edges => this.cy.add(edges), edges => edges.remove());
+    this.undoRedo.action('group-nodes',
+      nodes => this.groupNodes(nodes),
+      parent => this.ungroupNodes(parent));
+    this.undoRedo.action('ungroup-nodes',
+      parent => this.ungroupNodes(parent),
+      nodes => this.groupNodes(nodes));
     this.empty.emit(false);
     this.cy.on('add', (evt) => {
       if (evt.cy.elements().length === 1) {
@@ -158,23 +170,24 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   deleteSelectedElements() {
     let selectedEles = this.getSelectedElements();
-    let message = this.pluralPipe.transform(selectedEles.length, {
-        '=0': 'No element has',
-        '=1': 'One element has',
-        'other': '# elements have'
-      }) + ' been deleted.';
-    selectedEles.remove();
-    this.showMessage(message);
+    if (selectedEles.length) {
+      let message = this.pluralPipe.transform(selectedEles.length, {
+          '=1': 'One element has',
+          'other': '# elements have'
+        }) + ' been deleted.';
+      this.undoRedo.do('remove', selectedEles);
+      this.showMessageWithUndo(message);
+    }
   }
 
   deleteElement(element) {
     let message = (element.isNode() ? 'Node' : 'Edge') + ' has been deleted.';
-    element.remove();
-    this.showMessage(message);
+    this.undoRedo.do('remove', element);
+    this.showMessageWithUndo(message);
   }
 
   addNodeAtPos(pos) {
-    return this.cy.add({
+    return this.undoRedo.do('add', {
       group: "nodes",
       data: {
         id: this.getNextNodeId()
@@ -199,22 +212,13 @@ export class GraphComponent implements OnInit, AfterViewInit {
       width: '600px'
     }).afterClosed().subscribe((result) => {
       if (result) {
-        this.snackBar.open((result.isNode() ? 'Node' : 'Edge') + ' data updated.', 'Undo', {
-          duration: 2000
-        });
+        this.showMessageWithUndo((result.isNode() ? 'Node' : 'Edge') + ' data updated.');
       }
     });
   }
 
-  private showMessage(message: string) {
-    this.snackBar
-      .open(message, 'Undo', {
-        duration: 2000,
-      })
-      .onAction()
-      .subscribe(() => {
-        console.log('Undo node deletion');
-      });
+  private showMessageWithUndo(message: string) {
+    this.snackBar.open(message, 'Undo', {duration: 2000,}).onAction().subscribe(this.undo);
   }
 
   selectAll() {
@@ -226,21 +230,28 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   groupSelectedNodes() {
-    let nodes = this.cy.$('node:selected');
+    this.undoRedo.do('group-nodes', this.cy.$('node:selected'));
+    this.deselect();
+    this.showMessageWithUndo('Nodes has been grouped');
+  }
+
+  groupNodes(nodes) {
     let parent = this.createParentNode(nodes);
-    let newNodes = this.createNodesCopies(nodes);
-    this.addParentToNodes(newNodes, parent);
-    let edges = this.getConnectedEdges(nodes);
-    this.replaceWithNodesCopies(newNodes, nodes, edges);
-    this.snackBar.open('Nodes has been grouped', 'Undo');
+    nodes.move({parent: parent.id()});
+    return parent;
   }
 
   ungroupSelectedNode() {
-    let selectedNode = this.cy.$('node:selected');
-    let newNodes = this.createNodesCopies(selectedNode.children());
-    let edges = this.getConnectedEdges(selectedNode.children());
-    this.replaceWithNodesCopies(newNodes, selectedNode, edges);
-    this.snackBar.open('Node has been ungrouped', 'Undo');
+    this.undoRedo.do('ungroup-nodes', this.cy.$('node:selected:parent'));
+    this.deselect();
+    this.showMessageWithUndo('Node has been ungrouped');
+  }
+
+  ungroupNodes(parent) {
+    let children = parent.children();
+    children.move({parent: null});
+    parent.remove();
+    return children;
   }
 
   private createParentNode(nodes: Cy.CollectionElements) {
@@ -255,34 +266,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
       x: boundingBox.x1 + boundingBox.w / 2,
       y: boundingBox.y1 + boundingBox.h / 2
     }
-  }
-
-  private createNodesCopies(nodes: Cy.CollectionNodes) {
-    return nodes.map(node => {
-      return {
-        group: "nodes",
-        data: node.data(),
-        renderedPosition: node.renderedPosition()
-      }
-    });
-  }
-
-  private addParentToNodes(newNodes: any[], parent: Cy.CollectionElements) {
-    let parentId = parent.data('id');
-    newNodes.forEach(node => {
-      node.data = $.extend(node.data, {parent: parentId});
-    });
-  }
-
-  private getConnectedEdges(nodes: Cy.CollectionNodes): Cy.CollectionEdges[] {
-    return nodes.map(node => node.connectedEdges());
-  }
-
-  private replaceWithNodesCopies(newNodes, oldNodes, edges) {
-    oldNodes.remove();
-    this.cy.add(newNodes);
-    edges.forEach((nodeEdges) => this.cy.add(nodeEdges));
-    this.deselect();
   }
 
   hasSelectedElements(): boolean {
@@ -316,4 +299,12 @@ export class GraphComponent implements OnInit, AfterViewInit {
   newGraph() {
     this.cy.elements().remove();
   }
+
+  undo = () => {
+    this.undoRedo.undo();
+  };
+
+  redo = () => {
+    this.undoRedo.redo();
+  };
 }

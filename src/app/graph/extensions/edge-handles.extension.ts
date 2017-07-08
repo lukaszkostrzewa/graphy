@@ -27,6 +27,10 @@ export class EdgeHandlesExtension extends EditModeAwareExtension implements Afte
             id: this.graphComponent.getNextEdgeId()
           }
         }
+      },
+      complete: (sourceNode, targetNodes, addedEntities) => {
+        addedEntities.remove();
+        this.graphComponent.undoRedo.do('add-edge', addedEntities);
       }
     };
     this.graphComponent.getCy().edgehandles(defaults);
