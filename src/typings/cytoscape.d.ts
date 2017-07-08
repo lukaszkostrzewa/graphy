@@ -2099,6 +2099,11 @@ declare module Cy {
     destroy(): void;
 
     /**
+     * Get the entry point to modify the visual style of the graph after initialisation.
+     */
+    style(): any;
+
+    /**
      * Get a promise that is resolved with the first of any of the specified events triggered on the graph.
      *
      * @param events A space separated list of event names.

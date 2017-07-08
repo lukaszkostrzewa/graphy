@@ -42,6 +42,7 @@ import {ShortcutsExtension} from "./graph/extensions/shortcuts.extension";
 import {NewDialogComponent} from "./new-dialog/new-dialog.component";
 import {ExportDialogComponent} from "./export-dialog/export-dialog.component";
 import {ShortcutsDialogComponent} from "./shortcuts-dialog/shortcuts-dialog.component";
+import {NeighborsHighlightExtension} from "./graph/extensions/neighbors-highlight-extension";
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {ShortcutsDialogComponent} from "./shortcuts-dialog/shortcuts-dialog.comp
     EdgeHandlesExtension,
     NodeAdditionExtension,
     ShortcutsExtension,
+    NeighborsHighlightExtension,
     NewDialogComponent,
     ExportDialogComponent,
     ShortcutsDialogComponent
