@@ -7,8 +7,12 @@
   top: 10px;
   left: 10px;
 
-  md-button-toggle:not(.mat-button-toggle-checked):hover {
-    background-color: rgba(0, 0, 0, .12);
+  md-button-toggle {
+    box-shadow: none;
+
+    &:not(.mat-button-toggle-checked):hover {
+      background-color: rgba(0, 0, 0, .12);
+    }
   }
 }
 

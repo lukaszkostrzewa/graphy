@@ -1,0 +1,15 @@
+<h2 md-dialog-title>Shortcuts</h2>
+<md-dialog-content>
+  <md-list dense>
+    <div *ngFor="let group of shortcutsGroup" class="shortcuts-group">
+      <h3 md-subheader>{{group.name}}</h3>
+      <md-list-item *ngFor="let shortcut of group.shortcuts">
+        <kbd *ngFor="let key of shortcut.keys">{{key}}</kbd>
+        <span class="shortcut-description">{{shortcut.description}}</span>
+      </md-list-item>
+    </div>
+  </md-list>
+</md-dialog-content>
+<md-dialog-actions align="end">
+  <button md-button md-dialog-close>Close</button>
+</md-dialog-actions>
