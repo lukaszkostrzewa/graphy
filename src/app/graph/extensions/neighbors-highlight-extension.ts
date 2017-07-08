@@ -57,9 +57,9 @@ export class NeighborsHighlightExtension extends EditModeAwareExtension implemen
 
   private addHoverClass(event, neighbors) {
     neighbors.union(event.target).addClass('hover');
-  };
+  }
 
   private removeHoverClass(event, neighbors) {
     neighbors.union(event.target).removeClass('hover');
-  };
+  }
 }

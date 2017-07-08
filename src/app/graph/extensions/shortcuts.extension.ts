@@ -55,67 +55,67 @@ export class ShortcutsExtension {
   private deleteSelected() {
     this.graphComponent.deleteSelectedElements();
     return false;
-  };
+  }
 
   private selectAllNodes(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
     this.graphComponent.selectAll();
     return false;
-  };
+  }
 
   private search(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
     console.log("Search");
     return false;
-  };
+  }
 
   private save(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
     console.log("Save graph");
     return false;
-  };
+  }
 
   private groupSelected(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
     this.graphComponent.groupSelectedNodes();
     return false;
-  };
+  }
 
   private ungroupSelected(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
     this.graphComponent.ungroupSelectedNode();
     return false;
-  };
+  }
 
   private undo() {
     this.graphComponent.undo();
     return false;
-  };
+  }
 
   private redo() {
     this.graphComponent.redo();
     return false;
-  };
+  }
 
   private copy() {
     console.log("Copy");
     return false;
-  };
+  }
 
   private paste() {
     console.log("Paste");
     return false;
-  };
+  }
 
   private cut() {
     console.log("Cut");
     return false;
-  };
+  }
 
   private moveUp() {
     this.graphComponent.moveGraph({x: 0, y: ShortcutsExtension.MOVE_BY});
@@ -159,7 +159,7 @@ export class ShortcutsExtension {
   private toggleMode() {
     this.mainToolbar.toggleEditMode();
     return false;
-  };
+  }
 
   private deselectAndLeaveEditMode() {
     this.graphComponent.deselect();
