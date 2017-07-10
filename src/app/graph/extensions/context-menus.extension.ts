@@ -21,8 +21,7 @@ export class ContextMenusExtension extends EditModeAwareExtension implements Aft
   ngAfterViewInit(): void {
     contextMenus(cytoscape, jquery);
     let options = {
-      menuItems: this.getMenuItems(),
-      container: this.graphComponent.getCy().container().parentElement
+      menuItems: this.getMenuItems()
     };
     this.contextMenu = this.graphComponent.getCy().contextMenus(options);
   }
