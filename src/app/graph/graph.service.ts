@@ -7,6 +7,7 @@ export class GraphService {
 
   private cy: Cy.Instance;
 
+  private directed: boolean;
   private editSubject = new Subject<boolean>();
   editObservable = this.editSubject.asObservable();
 
@@ -54,6 +55,7 @@ export class GraphService {
         "style": {
           "text-margin-y": "-12px",
           "content": "data(weight)",
+          "curve-style": "bezier"
         }
       }, {
         "selector": '.highlighted',
@@ -87,22 +89,26 @@ export class GraphService {
       }, {
         "selector": 'edge.default-color',
         "style": {
-          "line-color": "#aaaaaa"
+          "line-color": "#aaaaaa",
+          'target-arrow-color': '#aaaaaa'
         }
       }, {
         "selector": 'edge.lighter-color',
         "style": {
-          "line-color": "#dddddd"
+          "line-color": "#dddddd",
+          'target-arrow-color': '#dddddd'
         }
       }, {
         "selector": 'edge.primary-color',
         "style": {
-          "line-color": "#7285ee"
+          "line-color": "#7285ee",
+          'target-arrow-color': '#7285ee'
         }
       }, {
         "selector": 'edge.secondary-color',
         "style": {
-          "line-color": "#bbd7ff"
+          "line-color": "#bbd7ff",
+          'target-arrow-color': '#bbd7ff'
         }
       }, {
         "selector": '.hover',
@@ -113,10 +119,23 @@ export class GraphService {
           'transition-property': 'background-color, line-color, target-arrow-color',
           'transition-duration': '0.2s'
         }
+      }, {
+        "selector": 'edge.directed',
+        "style": {
+          "target-arrow-shape": "triangle"
+        }
       }
       ],
       wheelSensitivity: 0.2,
       boxSelectionEnabled: true
     };
+  }
+
+  setDirected(directed: boolean) {
+    this.directed = directed;
+  }
+
+  isDirected() {
+    return this.directed;
   }
 }

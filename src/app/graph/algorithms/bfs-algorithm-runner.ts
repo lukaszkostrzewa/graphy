@@ -17,7 +17,10 @@ export class BfsAlgorithmRunner extends AlgorithmRunner {
     return cy.promiseOn('tap', 'node')
       .then((event) => {
         this.snackBar.dismiss();
-        let bfs = cy.elements().bfs({roots: event.target, directed: false});
+        let bfs = cy.elements().bfs({
+          roots: event.target,
+          directed: this.graphService.isDirected()
+        });
         return Promise.resolve(bfs.path);
       });
   }

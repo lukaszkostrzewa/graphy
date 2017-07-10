@@ -1,4 +1,6 @@
 <div id="graph-container" #graphContainer></div>
 <app-zoom-buttons (zoomOut)="zoomOut()" (zoomIn)="zoomIn()"></app-zoom-buttons>
+<app-options-button (directionalityChanged)="directionalityChanged($event)"
+                    [directedGraph]="isDirected()"></app-options-button>
 <app-locate-button (click)="locate()"></app-locate-button>
 <app-layout-switch (layoutChanged)="setLayout($event)"></app-layout-switch>

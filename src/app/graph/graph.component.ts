@@ -312,4 +312,19 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.copy(elements);
     this.undoRedo.do('remove', elements);
   }
+
+  directionalityChanged(directed) {
+    this.graphService.setDirected(directed);
+    this.cy.batch(() => {
+      if (directed) {
+        this.cy.edges().addClass('directed');
+      } else {
+        this.cy.edges().removeClass('directed');
+      }
+    });
+  }
+
+  isDirected(): boolean {
+    return this.graphService.isDirected();
+  }
 }

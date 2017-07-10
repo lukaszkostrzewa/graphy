@@ -1,0 +1,15 @@
+<h1 md-dialog-title>Graph Options</h1>
+<div md-dialog-content>
+  <md-input-container>
+    <input mdInput placeholder="Name" value="Graph name">
+  </md-input-container>
+  <div class="checkbox-container">
+    <md-checkbox [(ngModel)]="directedGraph">Directed Graph</md-checkbox>
+  </div>
+</div>
+<div md-dialog-actions align="end">
+  <button md-button md-dialog-close>
+    Cancel
+  </button>
+  <button md-button [md-dialog-close]="directedGraph">Save</button>
+</div>

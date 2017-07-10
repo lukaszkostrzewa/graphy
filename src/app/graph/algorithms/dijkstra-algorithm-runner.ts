@@ -23,7 +23,7 @@ export class DijkstraAlgorithmRunner extends AlgorithmRunner {
       let dijkstra = cy.elements().dijkstra({
         root: events[0].target,
         weight: edge => +edge.data('weight'),
-        directed: false
+        directed: this.graphService.isDirected()
       });
       return Promise.resolve(dijkstra.pathTo(events[1].target));
     });

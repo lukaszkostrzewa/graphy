@@ -46,6 +46,8 @@ import {ShortcutsDialogComponent} from "./shortcuts-dialog/shortcuts-dialog.comp
 import {NeighborsHighlightExtension} from "./graph/extensions/neighbors-highlight-extension";
 import {EditNodeDialogComponent} from "./edit-node-dialog/edit-node-dialog.component";
 import {EditEdgeDialogComponent} from "./edit-edge-dialog/edit-edge-dialog.component";
+import {OptionsButtonComponent} from './options-button/options-button.component';
+import {GraphOptionsDialogComponent} from './graph-options-dialog/graph-options-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import {EditEdgeDialogComponent} from "./edit-edge-dialog/edit-edge-dialog.compo
     ExportDialogComponent,
     ShortcutsDialogComponent,
     EditNodeDialogComponent,
-    EditEdgeDialogComponent
+    EditEdgeDialogComponent,
+    OptionsButtonComponent,
+    GraphOptionsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +105,8 @@ import {EditEdgeDialogComponent} from "./edit-edge-dialog/edit-edge-dialog.compo
     EditNodeDialogComponent,
     EditEdgeDialogComponent,
     NewDialogComponent,
-    ShortcutsDialogComponent
+    ShortcutsDialogComponent,
+    GraphOptionsDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -30,6 +30,9 @@ export class EdgeHandlesExtension extends EditModeAwareExtension implements Afte
       },
       complete: (sourceNode, targetNodes, addedEntities) => {
         addedEntities.remove();
+        if (this.graphComponent.isDirected()) {
+          addedEntities.addClass('directed');
+        }
         this.graphComponent.undoRedo.do('add-edge', addedEntities);
       }
     };

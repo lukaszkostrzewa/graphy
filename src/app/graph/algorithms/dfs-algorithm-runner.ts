@@ -17,7 +17,10 @@ export class DfsAlgorithmRunner extends AlgorithmRunner {
     return cy.promiseOn('tap', 'node')
       .then((event) => {
         this.snackBar.dismiss();
-        let dfs = cy.elements().dfs({roots: event.target, directed: false});
+        let dfs = cy.elements().dfs({
+          roots: event.target,
+          directed: this.graphService.isDirected()
+        });
         return Promise.resolve(dfs.path);
       });
   }
