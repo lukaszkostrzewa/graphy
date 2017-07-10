@@ -27,15 +27,21 @@ export class NeighborsHighlightExtension extends EditModeAwareExtension implemen
 
   onNodeMouseOver = event => {
     if (!event.target.isParent()) {
-      this.addHoverClass(event, event.target.outgoers());
+      this.addHoverClass(event, this.getOutgoingEdges(event));
     }
   };
 
   onNodeMouseOut = event => {
     if (!event.target.isParent()) {
-      this.removeHoverClass(event, event.target.outgoers());
+      this.removeHoverClass(event, this.getOutgoingEdges(event));
     }
   };
+
+  private getOutgoingEdges(event) {
+    return this.graphComponent.isDirected()
+      ? event.target.outgoers()
+      : event.target.connectedEdges();
+  }
 
   onEdgeMouseOver = event => {
     this.addHoverClass(event, event.target.connectedNodes());
