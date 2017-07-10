@@ -14,6 +14,19 @@
       background-color: rgba(0, 0, 0, .12);
     }
   }
+
+  md-icon {
+    position: relative;
+    left: -8px;
+  }
+
+  .btn-menu {
+    margin-right: 12px;
+
+    md-icon {
+      left: 0;
+    }
+  }
 }
 
 .main-toolbar [md-button] {
