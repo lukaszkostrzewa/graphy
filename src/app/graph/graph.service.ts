@@ -65,6 +65,46 @@ export class GraphService {
           'transition-duration': '0.5s'
         }
       }, {
+        "selector": 'node.default-color',
+        "style": {
+          "background-color": "#666666"
+        }
+      }, {
+        "selector": 'node.lighter-color',
+        "style": {
+          "background-color": "#cccccc"
+        }
+      }, {
+        "selector": 'node.primary-color',
+        "style": {
+          "background-color": "#3f51b5"
+        }
+      }, {
+        "selector": 'node.secondary-color',
+        "style": {
+          "background-color": "#579cff"
+        }
+      }, {
+        "selector": 'edge.default-color',
+        "style": {
+          "line-color": "#aaaaaa"
+        }
+      }, {
+        "selector": 'edge.lighter-color',
+        "style": {
+          "line-color": "#dddddd"
+        }
+      }, {
+        "selector": 'edge.primary-color',
+        "style": {
+          "line-color": "#7285ee"
+        }
+      }, {
+        "selector": 'edge.secondary-color',
+        "style": {
+          "line-color": "#bbd7ff"
+        }
+      }, {
         "selector": '.hover',
         "style": {
           'background-color': '#4580e5',

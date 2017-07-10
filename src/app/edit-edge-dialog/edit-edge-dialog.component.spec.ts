@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {EditElementDialogComponent} from './edit-element-dialog.component';
+import {EditEdgeDialogComponent} from './edit-edge-dialog.component';
 
-describe('EditElementDialogComponent', () => {
-  let component: EditElementDialogComponent;
-  let fixture: ComponentFixture<EditElementDialogComponent>;
+describe('EditEdgeDialogComponent', () => {
+  let component: EditEdgeDialogComponent;
+  let fixture: ComponentFixture<EditEdgeDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditElementDialogComponent]
+      declarations: [EditEdgeDialogComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditElementDialogComponent);
+    fixture = TestBed.createComponent(EditEdgeDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,6 +9,7 @@ import {
   MdAutocompleteModule,
   MdButtonModule,
   MdButtonToggleModule,
+  MdCheckboxModule,
   MdDialogModule,
   MdIconModule,
   MdInputModule,
@@ -16,6 +17,7 @@ import {
   MdMenuModule,
   MdSelectModule,
   MdSidenavModule,
+  MdSliderModule,
   MdSnackBarModule,
   MdToolbarModule,
   MdTooltipModule
@@ -32,7 +34,6 @@ import {LocateButtonComponent} from "./locate-button/locate-button.component";
 import {LayoutSwitchComponent} from "./layout-switch/layout-switch.component";
 import {SideMenuComponent} from "./side-menu/side-menu.component";
 import {ImportDialogComponent} from "./import-dialog/import-dialog.component";
-import {EditElementDialogComponent} from "./edit-element-dialog/edit-element-dialog.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ContextMenusExtension} from "./graph/extensions/context-menus.extension";
 import {EdgeBendEditingExtension} from "./graph/extensions/edge-bend-editing.extension";
@@ -43,6 +44,8 @@ import {NewDialogComponent} from "./new-dialog/new-dialog.component";
 import {ExportDialogComponent} from "./export-dialog/export-dialog.component";
 import {ShortcutsDialogComponent} from "./shortcuts-dialog/shortcuts-dialog.component";
 import {NeighborsHighlightExtension} from "./graph/extensions/neighbors-highlight-extension";
+import {EditNodeDialogComponent} from "./edit-node-dialog/edit-node-dialog.component";
+import {EditEdgeDialogComponent} from "./edit-edge-dialog/edit-edge-dialog.component";
 
 @NgModule({
   declarations: [
@@ -57,7 +60,6 @@ import {NeighborsHighlightExtension} from "./graph/extensions/neighbors-highligh
     LayoutSwitchComponent,
     SideMenuComponent,
     ImportDialogComponent,
-    EditElementDialogComponent,
     ContextMenusExtension,
     EdgeBendEditingExtension,
     EdgeHandlesExtension,
@@ -66,7 +68,9 @@ import {NeighborsHighlightExtension} from "./graph/extensions/neighbors-highligh
     NeighborsHighlightExtension,
     NewDialogComponent,
     ExportDialogComponent,
-    ShortcutsDialogComponent
+    ShortcutsDialogComponent,
+    EditNodeDialogComponent,
+    EditEdgeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,12 +91,15 @@ import {NeighborsHighlightExtension} from "./graph/extensions/neighbors-highligh
     ReactiveFormsModule,
     MdInputModule,
     MdAutocompleteModule,
-    MdSelectModule
+    MdSelectModule,
+    MdSliderModule,
+    MdCheckboxModule
   ],
   entryComponents: [
     ImportDialogComponent,
     ExportDialogComponent,
-    EditElementDialogComponent,
+    EditNodeDialogComponent,
+    EditEdgeDialogComponent,
     NewDialogComponent,
     ShortcutsDialogComponent
   ],

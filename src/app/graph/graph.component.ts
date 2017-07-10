@@ -15,7 +15,6 @@ import * as FileSaver from "file-saver";
 import * as moment from "moment";
 import * as jquery from "jquery";
 import {I18nPluralPipe} from "@angular/common";
-import {EditElementDialogComponent} from "../edit-element-dialog/edit-element-dialog.component";
 import {Observable} from "rxjs/Rx";
 import {GraphService} from "./graph.service";
 import {AlgorithmService} from "./algorithms/algorithm.service";
@@ -38,6 +37,8 @@ import {PngExporter} from "./export/png-exporter";
 import cytoscape from "cytoscape/dist/cytoscape.js";
 import undoRedo from "cytoscape-undo-redo";
 import clipboard from "cytoscape-clipboard";
+import {EditNodeDialogComponent} from "../edit-node-dialog/edit-node-dialog.component";
+import {EditEdgeDialogComponent} from "../edit-edge-dialog/edit-edge-dialog.component";
 import Position = Cy.Position;
 import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
@@ -72,10 +73,6 @@ export class GraphComponent implements OnInit, AfterViewInit {
   private cy: Cy.Instance;
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
   private static readonly FIT_PADDING: number = 100;
-  private readonly readonlyNodeProperties = ['id', 'parent'];
-  private readonly readonlyEdgeProperties = ['id', 'source', 'target'];
-  private readonly commonNodeProperties = ['label'];
-  private readonly commonEdgeProperties = ['label', 'weight'];
   private nodesCounter: number = 0;
   private edgesCounter: number = 0;
   undoRedo: any;
@@ -201,24 +198,14 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   openEditDialog(element) {
-    let readonlyProperties = element.isNode()
-      ? this.readonlyNodeProperties
-      : this.readonlyEdgeProperties;
-    let commonProperties = element.isNode()
-      ? this.commonNodeProperties
-      : this.commonEdgeProperties;
-    this.dialog.open(EditElementDialogComponent, {
-      data: {
-        element,
-        readonlyProperties,
-        commonProperties
-      },
-      width: '600px'
-    }).afterClosed().subscribe((result) => {
-      if (result) {
-        this.showMessageWithUndo((result.isNode() ? 'Node' : 'Edge') + ' data updated.');
-      }
-    });
+    let dialog, config = {data: {element}, width: '600px'};
+    if (element.isNode()) {
+      dialog = this.dialog.open(EditNodeDialogComponent, config);
+    } else {
+      dialog = this.dialog.open(EditEdgeDialogComponent, config);
+    }
+    dialog.afterClosed().subscribe(
+      result => result && this.snackBar.open('Element data updated.', null, {duration: 2000}));
   }
 
   private showMessageWithUndo(message: string) {

@@ -1,0 +1,72 @@
+md-input-container, md-slider, md-select {
+  width: 100%;
+}
+
+md-select {
+  margin-top: 14px;
+}
+
+.size-label, .color-label, .line-style-label {
+  font-size: 12px;
+  color: rgba(0, 0, 0, .38);
+  display: block;
+}
+
+.size-label {
+  margin-top: 22px;
+}
+
+.color-label {
+  margin-top: 12px;
+}
+
+.color-preview {
+  display: inline-block;
+  border-radius: 24px;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin: 3px;
+
+  &.default-color {
+    background-color: #aaaaaa;
+  }
+
+  &.lighter-color {
+    background-color: #dddddd;
+  }
+
+  &.primary-color {
+    background-color: #7285ee;
+  }
+
+  &.secondary-color {
+    background-color: #bbd7ff;
+  }
+}
+
+.mat-button-toggle-group {
+  box-shadow: none;
+  margin-top: 12px;
+  margin-left: -16px;
+}
+
+.mat-button-toggle {
+  margin-right: -10px;
+}
+
+.mat-button-toggle-checked {
+  background: none;
+  .color-preview {
+    border: solid 3px #ff4081;
+    margin: 0;
+  }
+}
+
+.line-style-preview {
+  border: 0;
+  border-top-width: 5px;
+  width: 100px;
+  display: block;
+  margin: 10px;
+}

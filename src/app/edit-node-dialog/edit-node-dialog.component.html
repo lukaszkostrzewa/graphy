@@ -1,0 +1,39 @@
+<h1 md-dialog-title>Edit node</h1>
+<div md-dialog-content>
+  <md-input-container>
+    <input mdInput placeholder="Id" value="{{id}}" disabled>
+  </md-input-container>
+  <md-input-container *ngIf="parent">
+    <input mdInput placeholder="Parent" value="{{parent}}" disabled>
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Label" value="{{label}}">
+  </md-input-container>
+  <md-select placeholder="Shape" [(ngModel)]="selectedShape">
+    <md-option *ngFor="let shape of shapes" [value]="shape">
+      {{ shape }}
+    </md-option>
+  </md-select>
+  <div>
+    <label class="size-label">Size</label>
+    <md-slider min="20" max="200" step="2" value="{{selectedSize}}"
+               [(ngModel)]="selectedSize"></md-slider>
+  </div>
+  <div>
+    <label class="color-label">Color</label>
+    <md-button-toggle-group #group="mdButtonToggleGroup" [(ngModel)]="selectedColor">
+      <md-button-toggle *ngFor="let color of colors" [value]="color">
+        <span class="color-preview mat-elevation-z1 {{color}}-color"></span>
+      </md-button-toggle>
+    </md-button-toggle-group>
+  </div>
+</div>
+<div md-dialog-actions align="end">
+  <button md-button md-dialog-close>
+    Cancel
+  </button>
+  <button md-raised-button (click)="save()" [md-dialog-close]="node" color="primary">
+    Save
+  </button>
+</div>
+

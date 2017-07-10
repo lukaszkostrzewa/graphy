@@ -432,7 +432,13 @@ declare module Cy {
      *
      * @param name The name of the visual style property to get.
      */
-    css(name: string): Css.ElementCss;
+    css(name: string): string;
+    /**
+     * Get the numeric value of a style property in preferred units that can be used for calculations.
+     *
+     * @param name The name of the style property to get.
+     */
+    numericStyle(name: string): number;
 
     /**
      * Get a name-value pair object containing visual style properties and their values for the element.

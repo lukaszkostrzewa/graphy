@@ -1,0 +1,49 @@
+<h1 md-dialog-title>Edit edge</h1>
+<div md-dialog-content>
+  <md-input-container>
+    <input mdInput placeholder="Id" value="{{id}}" disabled>
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Id" value="{{source}}" disabled>
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Id" value="{{target}}" disabled>
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Label" value="{{label}}">
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Weight" value="{{weight}}" type="number">
+  </md-input-container>
+  <div>
+    <label class="size-label">Thickness</label>
+    <md-slider min="1" max="15" step="1" value="{{selectedWidth}}"
+               [(ngModel)]="selectedWidth"></md-slider>
+  </div>
+  <div>
+    <label class="line-style-label">Line style</label>
+    <md-button-toggle-group [(ngModel)]="selectedLineStyle">
+      <md-button-toggle *ngFor="let lineStyle of lineStyles" [value]="lineStyle"
+                        md-tooltip="{{lineStyle}}">
+        <span class="line-style-preview" [ngStyle]="{'border-top-style': lineStyle}"></span>
+      </md-button-toggle>
+    </md-button-toggle-group>
+  </div>
+  <div>
+    <label class="color-label">Color</label>
+    <md-button-toggle-group [(ngModel)]="selectedColor">
+      <md-button-toggle *ngFor="let color of colors" [value]="color">
+        <span class="color-preview mat-elevation-z1 {{color}}-color"></span>
+      </md-button-toggle>
+    </md-button-toggle-group>
+  </div>
+</div>
+<div md-dialog-actions align="end">
+  <button md-button md-dialog-close>
+    Cancel
+  </button>
+  <button md-raised-button (click)="save()" [md-dialog-close]="edge" color="primary">
+    Save
+  </button>
+</div>
+
