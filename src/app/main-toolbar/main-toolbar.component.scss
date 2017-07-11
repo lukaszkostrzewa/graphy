@@ -61,3 +61,14 @@ h6[md-subheader] {
 .mat-menu-item {
   font-size: 14px;
 }
+
+@media (max-width: 600px) {
+  md-button-toggle, button:not(.btn-menu) {
+    display: none;
+  }
+
+  .main-toolbar {
+    background: transparent;
+    box-shadow: none;
+  }
+}

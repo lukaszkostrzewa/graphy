@@ -7,7 +7,7 @@
     <md-icon>timeline</md-icon>
     Edit
   </md-button-toggle>
-  <button md-button [mdMenuTriggerFor]="algorithmsMenu" (click)="leaveEditMode()"
+  <button md-button [mdMenuTriggerFor]="algorithmsMenu.menu" (click)="leaveEditMode()"
           md-tooltip="Run Algorithms" [mdTooltipPosition]="'below'">
     <md-icon>play_arrow</md-icon>
     Algorithms
@@ -17,32 +17,5 @@
     <md-icon>search</md-icon>
     Search
   </button>
-  <md-menu #algorithmsMenu="mdMenu" [overlapTrigger]="false">
-
-    <h6 md-subheader>Graph traversal</h6>
-    <button md-menu-item (click)="runAlgorithm('bfs')">
-      Breadth-first search
-    </button>
-    <button md-menu-item (click)="runAlgorithm('dfs')">
-      Depth-first search
-    </button>
-    <md-divider></md-divider>
-
-    <h6 md-subheader>Shortest path</h6>
-    <button md-menu-item (click)="runAlgorithm('dijkstra')">
-      Dijkstra's algorithm
-    </button>
-    <md-divider></md-divider>
-
-    <h6 md-subheader>Minimum spanning tree</h6>
-    <button md-menu-item (click)="runAlgorithm('kruskal')">
-      Kruskal's algorithm
-    </button>
-    <md-divider></md-divider>
-
-    <h6 md-subheader>Min cut, max flow</h6>
-    <button md-menu-item (click)="runAlgorithm('karger-stein')">
-      Karger-Stein algorithm
-    </button>
-  </md-menu>
+  <app-algorithms-menu #algorithmsMenu [graphComponent]="graphComponent"></app-algorithms-menu>
 </md-toolbar>

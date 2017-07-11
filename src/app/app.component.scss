@@ -9,3 +9,15 @@
 md-sidenav {
   width: 300px;
 }
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/deep/ canvas {
+  @extend .no-select
+}

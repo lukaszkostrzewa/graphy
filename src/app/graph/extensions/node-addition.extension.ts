@@ -12,20 +12,17 @@ export class NodeAdditionExtension extends EditModeAwareExtension {
 
   editModeActivated() {
     this.graphComponent.getCy().on('tapstart', this.deselectIfThereAreSelectedElements);
-    this.graphComponent.getCy().on('click', this.addNodeOnClickIfNotDeselected);
+    this.graphComponent.getCy().on('tap', this.addNodeOnClickIfNotDeselected);
   }
 
   editModeDeactivated() {
     this.graphComponent.getCy().off('tapstart', this.deselectIfThereAreSelectedElements);
-    this.graphComponent.getCy().off('click', this.addNodeOnClickIfNotDeselected);
+    this.graphComponent.getCy().off('tap', this.addNodeOnClickIfNotDeselected);
   }
 
   private addNodeOnClickIfNotDeselected = (event) => {
     if (this.isClickOnViewport(event) && this.wasDeselected) {
-      this.graphComponent.addNodeAtPos({
-        x: event.originalEvent.offsetX,
-        y: event.originalEvent.offsetY
-      });
+      this.graphComponent.addNodeAtPos(this.getPosition(event));
     }
   };
 
@@ -40,5 +37,13 @@ export class NodeAdditionExtension extends EditModeAwareExtension {
 
   private isClickOnViewport(event) {
     return event.target === this.graphComponent.getCy();
+  }
+
+  private getPosition(event: any) {
+    if (event.originalEvent.type === 'touchend') {
+      let touches = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+      return {x: touches.pageX, y: touches.pageY};
+    }
+    return {x: event.originalEvent.offsetX, y: event.originalEvent.offsetY};
   }
 }

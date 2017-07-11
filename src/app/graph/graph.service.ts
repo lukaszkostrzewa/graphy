@@ -58,15 +58,6 @@ export class GraphService {
           "curve-style": "bezier"
         }
       }, {
-        "selector": '.highlighted',
-        "style": {
-          'background-color': '#61bffc',
-          'line-color': '#61bffc',
-          'target-arrow-color': '#61bffc',
-          'transition-property': 'background-color, line-color, target-arrow-color',
-          'transition-duration': '0.5s'
-        }
-      }, {
         "selector": 'node.default-color',
         "style": {
           "background-color": "#666666"
@@ -123,6 +114,15 @@ export class GraphService {
         "selector": 'edge.directed',
         "style": {
           "target-arrow-shape": "triangle"
+        }
+      }, {
+        "selector": '.highlighted',
+        "style": {
+          'background-color': '#61bffc',
+          'line-color': '#61bffc',
+          'target-arrow-color': '#61bffc',
+          'transition-property': 'background-color, line-color, target-arrow-color',
+          'transition-duration': '0.5s'
         }
       }
       ],

@@ -8,7 +8,8 @@
   <app-graph #graph (empty)="isEmptyGraph($event)" [mainToolbar]="mainToolbar"></app-graph>
 
   <md-sidenav #sidenav>
-    <app-side-menu [sideNav]="sidenav" [graphComponent]="graph"></app-side-menu>
+    <app-side-menu [sideNav]="sidenav" [graphComponent]="graph"
+                   [mainToolbar]="mainToolbar"></app-side-menu>
   </md-sidenav>
 
 </md-sidenav-container>

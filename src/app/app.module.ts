@@ -48,6 +48,7 @@ import {EditNodeDialogComponent} from "./edit-node-dialog/edit-node-dialog.compo
 import {EditEdgeDialogComponent} from "./edit-edge-dialog/edit-edge-dialog.component";
 import {OptionsButtonComponent} from './options-button/options-button.component';
 import {GraphOptionsDialogComponent} from './graph-options-dialog/graph-options-dialog.component';
+import {AlgorithmsMenuComponent} from './algorithms-menu/algorithms-menu.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import {GraphOptionsDialogComponent} from './graph-options-dialog/graph-options-
     EditNodeDialogComponent,
     EditEdgeDialogComponent,
     OptionsButtonComponent,
-    GraphOptionsDialogComponent
+    GraphOptionsDialogComponent,
+    AlgorithmsMenuComponent
   ],
   imports: [
     BrowserModule,

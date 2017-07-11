@@ -32,3 +32,17 @@ md-nav-list {
 .logo {
   padding-left: 10px;
 }
+
+.mobile-menu-items {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .mobile-menu-items {
+    display: block;
+  }
+}
+
+.btn-close-side-nav {
+  margin-left: auto;
+}

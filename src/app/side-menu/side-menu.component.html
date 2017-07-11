@@ -1,9 +1,37 @@
 <md-list>
-  <md-list-item class="logo">Graphy</md-list-item>
+  <md-list-item class="logo">
+    Graphy
+    <button md-icon-button class="btn-close-side-nav">
+      <md-icon (click)="sideNav.close()">keyboard_arrow_left</md-icon>
+    </button>
+  </md-list-item>
   <md-divider></md-divider>
 </md-list>
 
 <md-nav-list>
+  <div class="mobile-menu-items">
+    <md-list-item (click)="mainToolbar.toggleEditMode();sideNav.close()">
+      <button md-icon-button>
+        <md-icon>timeline</md-icon>
+      </button>
+      <a href="#">Edit</a>
+    </md-list-item>
+    <md-list-item [mdMenuTriggerFor]="algorithmsMenu.menu" (click)="mainToolbar.leaveEditMode()">
+      <button md-icon-button>
+        <md-icon>play_arrow</md-icon>
+      </button>
+      <a href="#">Algorithms</a>
+      <app-algorithms-menu #algorithmsMenu [graphComponent]="graphComponent"></app-algorithms-menu>
+    </md-list-item>
+    <md-list-item disabled (click)="mainToolbar.leaveEditMode()">
+      <button md-icon-button>
+        <md-icon>search</md-icon>
+      </button>
+      <a href="#">Search</a>
+    </md-list-item>
+    <md-divider></md-divider>
+  </div>
+
   <md-list-item (click)="newGraph()">
     <button md-icon-button>
       <md-icon>insert_drive_file</md-icon>

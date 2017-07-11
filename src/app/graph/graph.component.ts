@@ -272,6 +272,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   runAlgorithm(algorithm: string): void {
+    this.removeHighlight();
     this.algorithmService.get(algorithm).run().then(elements => {
       let cancel = this.snackBar.open('Algorithm started', 'Stop').onAction();
       Observable.from(elements).zip(Observable.timer(0, 500), x => x)
@@ -282,9 +283,13 @@ export class GraphComponent implements OnInit, AfterViewInit {
           },
           complete: () =>
             this.snackBar.open('Algorithm finished', 'Clear').onAction()
-              .subscribe(() => this.cy.$('.highlighted').removeClass('highlighted'))
+              .subscribe(() => this.removeHighlight())
         });
     });
+  }
+
+  private removeHighlight() {
+    return this.cy.$('.highlighted').removeClass('highlighted');
   }
 
   newGraph() {

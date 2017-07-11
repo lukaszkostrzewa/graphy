@@ -21,10 +21,6 @@ export class MainToolbarComponent {
     this.graphComponent.setEditMode(e.source.checked);
   }
 
-  runAlgorithm(algorithm: string) {
-    this.graphComponent.runAlgorithm(algorithm);
-  }
-
   leaveEditMode() {
     if (this.editModeToggler.checked) {
       this.toggleEditMode();
