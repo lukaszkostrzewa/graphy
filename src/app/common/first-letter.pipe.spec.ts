@@ -1,6 +1,6 @@
 import {FirstLetterPipe} from './first-letter.pipe';
 
-fdescribe('FirstLetterPipe', () => {
+describe('FirstLetterPipe', () => {
   it('should return empty string for null', () => {
     const pipe = new FirstLetterPipe();
     const val = pipe.transform(null);
