@@ -1,6 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {GraphOptionsDialogComponent} from './graph-options-dialog.component';
+import {
+  MD_DIALOG_DATA, MdCheckboxModule, MdDialogModule, MdDialogRef,
+  MdInputModule
+} from "@angular/material";
+import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('GraphOptionsDialogComponent', () => {
   let component: GraphOptionsDialogComponent;
@@ -8,7 +14,13 @@ describe('GraphOptionsDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GraphOptionsDialogComponent]
+      imports: [NoopAnimationsModule, FormsModule, MdInputModule, MdCheckboxModule, MdDialogModule],
+      declarations: [GraphOptionsDialogComponent],
+      providers: [{
+        provide: MD_DIALOG_DATA, useValue: {directedGraph: false}
+      }, {
+        provide: MdDialogRef, useValue: {}
+      }]
     })
       .compileComponents();
   }));

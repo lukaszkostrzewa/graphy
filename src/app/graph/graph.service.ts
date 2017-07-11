@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs/Subject";
-import cytoscape from "cytoscape/dist/cytoscape.js";
+import * as cytoscape from "cytoscape/dist/cytoscape.js";
 
 @Injectable()
 export class GraphService {

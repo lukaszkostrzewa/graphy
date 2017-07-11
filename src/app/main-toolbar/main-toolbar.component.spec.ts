@@ -1,7 +1,8 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
 import {MainToolbarComponent} from "./main-toolbar.component";
-import {MdToolbarModule} from "@angular/material";
+import {MdMenuModule, MdToolbarModule, MdTooltipModule} from "@angular/material";
+import {AlgorithmsMenuComponent} from "../algorithms-menu/algorithms-menu.component";
 
 describe('MainToolbarComponent', () => {
   let component: MainToolbarComponent;
@@ -9,8 +10,8 @@ describe('MainToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MdToolbarModule],
-      declarations: [MainToolbarComponent]
+      imports: [MdToolbarModule, MdTooltipModule, MdMenuModule],
+      declarations: [MainToolbarComponent, AlgorithmsMenuComponent]
     })
       .compileComponents();
   }));

@@ -1,6 +1,7 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {ShortcutsDialogComponent} from './shortcuts-dialog.component';
+import {ShortcutsDialogComponent} from "./shortcuts-dialog.component";
+import {MdListModule} from "@angular/material";
 
 describe('ShortcutsDialogComponent', () => {
   let component: ShortcutsDialogComponent;
@@ -8,6 +9,7 @@ describe('ShortcutsDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MdListModule],
       declarations: [ShortcutsDialogComponent]
     })
       .compileComponents();

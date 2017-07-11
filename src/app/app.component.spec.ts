@@ -1,21 +1,39 @@
 import {async, TestBed} from "@angular/core/testing";
 
 import {AppComponent} from "./app.component";
-import {MdSidenavModule, MdSnackBarModule} from "@angular/material";
+import {
+  MdButtonToggleModule,
+  MdDialogModule,
+  MdMenuModule,
+  MdSidenavModule,
+  MdSnackBarModule,
+  MdTooltipModule
+} from "@angular/material";
 import {MainToolbarComponent} from "./main-toolbar/main-toolbar.component";
 import {AccountButtonComponent} from "./account-button/account-button.component";
 import {HintsComponent} from "./hints/hints.component";
 import {SlickModule} from "ngx-slick";
 import {HotkeyModule} from "angular2-hotkeys";
 import {GraphComponent} from "./graph/graph.component";
+import {SideMenuComponent} from "./side-menu/side-menu.component";
+import {AlgorithmsMenuComponent} from "./algorithms-menu/algorithms-menu.component";
+import {ZoomButtonsComponent} from "./zoom-buttons/zoom-buttons.component";
+import {OptionsButtonComponent} from "./options-button/options-button.component";
+import {LocateButtonComponent} from "./locate-button/locate-button.component";
+import {LayoutSwitchComponent} from "./layout-switch/layout-switch.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MdSidenavModule, SlickModule.forRoot(), HotkeyModule.forRoot(), MdSnackBarModule],
-      declarations: [
-        AppComponent, MainToolbarComponent, AccountButtonComponent, HintsComponent, GraphComponent
+      imports: [
+        MdSidenavModule, SlickModule.forRoot(), HotkeyModule.forRoot(), MdSnackBarModule,
+        MdButtonToggleModule, MdTooltipModule, MdMenuModule, MdDialogModule
       ],
+      declarations: [
+        AppComponent, MainToolbarComponent, AccountButtonComponent, HintsComponent, GraphComponent,
+        SideMenuComponent, AlgorithmsMenuComponent, ZoomButtonsComponent, OptionsButtonComponent,
+        LocateButtonComponent, LayoutSwitchComponent
+      ]
     }).compileComponents();
   }));
 

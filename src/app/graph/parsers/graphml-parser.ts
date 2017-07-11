@@ -1,6 +1,6 @@
 import {Parser} from "./parser";
 import cytoscape from "cytoscape/dist/cytoscape.js";
-import graphml from "cytoscape-graphml";
+import * as graphml from 'cytoscape-graphml';
 import {Injectable} from "@angular/core";
 import {GraphService} from "../graph.service";
 

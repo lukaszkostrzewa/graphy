@@ -1,6 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {ExportDialogComponent} from './export-dialog.component';
+import {ExportDialogComponent} from "./export-dialog.component";
+import {FormsModule} from "@angular/forms";
+import {MdDialogModule, MdDialogRef, MdSelectModule} from "@angular/material";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('ExportDialogComponent', () => {
   let component: ExportDialogComponent;
@@ -8,9 +11,12 @@ describe('ExportDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ExportDialogComponent]
-    })
-      .compileComponents();
+      imports: [NoopAnimationsModule, FormsModule, MdSelectModule, MdDialogModule],
+      declarations: [ExportDialogComponent],
+      providers: [{
+        provide: MdDialogRef, useValue: {}
+      }]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
