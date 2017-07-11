@@ -124,6 +124,30 @@ export class GraphService {
           'transition-property': 'background-color, line-color, target-arrow-color',
           'transition-duration': '0.5s'
         }
+      }, {
+        selector: '.edgehandles-hover',
+        css: {
+          'background-color': '#ff4081'
+        }
+      }, {
+        selector: '.edgehandles-source',
+        css: {
+          'border-width': 2,
+          'border-color': '#ff4081'
+        }
+      }, {
+        selector: '.edgehandles-target',
+        css: {
+          'border-width': 2,
+          'border-color': '#ff4081'
+        }
+      }, {
+        selector: '.edgehandles-preview, .edgehandles-ghost-edge',
+        css: {
+          'line-color': '#ff4081',
+          'target-arrow-color': '#ff4081',
+          'source-arrow-color': '#ff4081'
+        }
       }
       ],
       wheelSensitivity: 0.2,
