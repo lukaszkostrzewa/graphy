@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
     "cytoscape": "^3.1.2",
     "cytoscape-clipboard": "^2.0.3",
@@ -38,6 +39,7 @@
     "ngx-slick": "^0.1.1",
     "rxjs": "^5.1.0",
     "slick-carousel": "^1.6.0",
+    "web-animations-js": "^2.2.5",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
