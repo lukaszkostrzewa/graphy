@@ -1,8 +1,14 @@
-<button md-fab class="account-btn" color="primary" [mdMenuTriggerFor]="accountMenu">
-  {{initials}}
-</button>
+<div *ngIf="user">
+  <button md-mini-fab class="btn-account" color="primary" [mdMenuTriggerFor]="accountMenu">
+    {{user.name | firstLetter}}
+  </button>
 
-<md-menu #accountMenu="mdMenu" [overlapTrigger]="false" class="account-menu">
-  <button md-menu-item>Settings</button>
-  <button md-menu-item>Log out</button>
-</md-menu>
+  <md-menu #accountMenu="mdMenu" [overlapTrigger]="false" class="account-menu">
+    <button md-menu-item>Settings</button>
+    <button md-menu-item (click)="logout()" class="btn-log-out">Log out</button>
+  </md-menu>
+</div>
+
+<button *ngIf="!user" md-raised-button class="btn-log-in" color="primary" (click)="login()">
+  Log in
+</button>

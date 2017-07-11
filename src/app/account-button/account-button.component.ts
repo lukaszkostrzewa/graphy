@@ -7,5 +7,14 @@ import {Component} from "@angular/core";
 })
 export class AccountButtonComponent {
 
-  initials: string = "LK";
+  user: any | null = null;
+  private exampleUser: any = {name: 'John Doe'};
+
+  logout() {
+    this.user = null;
+  }
+
+  login() {
+    this.user = this.exampleUser;
+  }
 }

@@ -1,7 +1,11 @@
-.account-btn {
+.btn-account, .btn-log-in {
   position: fixed;
   top: 20px;
   right: 20px;
+}
+
+.btn-account {
+  font-size: 1.0em;
 }
 
 .mat-menu-item {

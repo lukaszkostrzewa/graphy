@@ -49,6 +49,7 @@ import {OptionsButtonComponent} from './options-button/options-button.component'
 import {GraphOptionsDialogComponent} from './graph-options-dialog/graph-options-dialog.component';
 import {AlgorithmsMenuComponent} from './algorithms-menu/algorithms-menu.component';
 import {EditModeAwareExtension} from "./graph/extensions/edit-mode-aware.extension";
+import {FirstLetterPipe} from './common/first-letter.pipe';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {EditModeAwareExtension} from "./graph/extensions/edit-mode-aware.extensi
     EditEdgeDialogComponent,
     OptionsButtonComponent,
     GraphOptionsDialogComponent,
-    AlgorithmsMenuComponent
+    AlgorithmsMenuComponent,
+    FirstLetterPipe
   ],
   imports: [
     BrowserModule,
