@@ -4,7 +4,6 @@ import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {SlickModule} from "ngx-slick";
 import {HintsComponent} from "./hints/hints.component";
-import {HotkeyModule} from "angular2-hotkeys";
 import {
   MdAutocompleteModule,
   MdButtonModule,
@@ -84,7 +83,6 @@ import {EditModeAwareExtension} from "./graph/extensions/edit-mode-aware.extensi
     BrowserModule,
     BrowserAnimationsModule,
     SlickModule.forRoot(),
-    HotkeyModule.forRoot(),
     MdButtonModule,
     MdButtonToggleModule,
     MdToolbarModule,
