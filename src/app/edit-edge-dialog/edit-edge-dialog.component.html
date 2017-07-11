@@ -10,10 +10,10 @@
     <input mdInput placeholder="Id" value="{{target}}" disabled>
   </md-input-container>
   <md-input-container>
-    <input mdInput placeholder="Label" value="{{label}}">
+    <input mdInput placeholder="Label" [(ngModel)]="label">
   </md-input-container>
   <md-input-container>
-    <input mdInput placeholder="Weight" value="{{weight}}" type="number">
+    <input mdInput placeholder="Weight" type="number" [(ngModel)]="weight">
   </md-input-container>
   <div>
     <label class="size-label">Thickness</label>
