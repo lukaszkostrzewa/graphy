@@ -7,19 +7,21 @@ import {Subscription} from "rxjs/Subscription";
   selector: 'app-graph',
   providers: [GraphService]
 })
-export abstract class EditModeAwareExtension implements OnDestroy {
+export class EditModeAwareExtension implements OnDestroy {
 
   private subscription: Subscription;
 
   constructor(protected graphComponent: GraphComponent, private graphService: GraphService) {
     this.subscription = this.graphService.editObservable.subscribe({
       next: value => value ? this.editModeActivated() : this.editModeDeactivated()
-    })
+    });
   }
 
-  abstract editModeActivated();
+  protected editModeActivated() {
+  }
 
-  abstract editModeDeactivated();
+  protected editModeDeactivated() {
+  };
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

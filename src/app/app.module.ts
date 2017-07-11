@@ -49,6 +49,7 @@ import {EditEdgeDialogComponent} from "./edit-edge-dialog/edit-edge-dialog.compo
 import {OptionsButtonComponent} from './options-button/options-button.component';
 import {GraphOptionsDialogComponent} from './graph-options-dialog/graph-options-dialog.component';
 import {AlgorithmsMenuComponent} from './algorithms-menu/algorithms-menu.component';
+import {EditModeAwareExtension} from "./graph/extensions/edit-mode-aware.extension";
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {AlgorithmsMenuComponent} from './algorithms-menu/algorithms-menu.compone
     LayoutSwitchComponent,
     SideMenuComponent,
     ImportDialogComponent,
+    EditModeAwareExtension,
     ContextMenusExtension,
     EdgeBendEditingExtension,
     EdgeHandlesExtension,
