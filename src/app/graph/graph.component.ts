@@ -3,6 +3,8 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
+  NgZone,
   OnInit,
   Output,
   ViewChild
@@ -39,6 +41,7 @@ import * as undoRedo from "cytoscape-undo-redo";
 import * as clipboard from "cytoscape-clipboard";
 import {EditNodeDialogComponent} from "../edit-node-dialog/edit-node-dialog.component";
 import {EditEdgeDialogComponent} from "../edit-edge-dialog/edit-edge-dialog.component";
+import {MainToolbarComponent} from "../main-toolbar/main-toolbar.component";
 import Position = Cy.Position;
 import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
@@ -69,6 +72,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   @ViewChild('graphContainer') container: ElementRef;
   @Output() empty = new EventEmitter<boolean>();
+  @Input() mainToolbar?: MainToolbarComponent;
 
   private cy: Cy.Instance;
   private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
@@ -97,7 +101,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   constructor(private snackBar: MdSnackBar, private pluralPipe: I18nPluralPipe,
               private dialog: MdDialog, private graphService: GraphService,
               private algorithmService: AlgorithmService, private parserService: ParserService,
-              private exportService: ExportService) {
+              private exportService: ExportService, private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -106,7 +110,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     undoRedo(cytoscape);
     clipboard(cytoscape, jquery);
-    this.cy = this.graphService.initialize(this.container.nativeElement);
+    this.cy = this.ngZone.runOutsideAngular(() => {
+      return this.graphService.initialize(this.container.nativeElement);
+    });
     this.undoRedo = this.cy.undoRedo({undoableDrag: false});
     this.cy.clipboard();
     this.undoRedo.action('add-edge', edges => this.cy.add(edges), edges => edges.remove());

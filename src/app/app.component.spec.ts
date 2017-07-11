@@ -29,7 +29,7 @@ describe('AppComponent', () => {
         MdTooltipModule, MdMenuModule, MdDialogModule
       ],
       declarations: [
-        AppComponent, MainToolbarComponent, AccountButtonComponent, HintsComponent, GraphComponent,
+        AppComponent, AccountButtonComponent, HintsComponent, GraphComponent, MainToolbarComponent,
         SideMenuComponent, AlgorithmsMenuComponent, ZoomButtonsComponent, OptionsButtonComponent,
         LocateButtonComponent, LayoutSwitchComponent
       ]

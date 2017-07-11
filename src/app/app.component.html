@@ -5,7 +5,7 @@
   <app-account-button></app-account-button>
   <app-hints *ngIf="emptyGraph"></app-hints>
 
-  <app-graph #graph (empty)="isEmptyGraph($event)"></app-graph>
+  <app-graph #graph (empty)="isEmptyGraph($event)" [mainToolbar]="mainToolbar"></app-graph>
 
   <md-sidenav #sidenav>
     <app-side-menu [sideNav]="sidenav" [graphComponent]="graph"

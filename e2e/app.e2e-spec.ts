@@ -7,8 +7,8 @@ describe('graphy App', () => {
     page = new GraphyPage();
   });
 
-  it('should display welcome message', () => {
+  it('should have main toolbar', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getMainToolbar()).toBeTruthy();
   });
 });
