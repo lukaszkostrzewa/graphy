@@ -20,6 +20,7 @@ import {ZoomButtonsComponent} from "./zoom-buttons/zoom-buttons.component";
 import {OptionsButtonComponent} from "./options-button/options-button.component";
 import {LocateButtonComponent} from "./locate-button/locate-button.component";
 import {LayoutSwitchComponent} from "./layout-switch/layout-switch.component";
+import {FirstLetterPipe} from "./common/first-letter.pipe";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -31,7 +32,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent, AccountButtonComponent, HintsComponent, GraphComponent, MainToolbarComponent,
         SideMenuComponent, AlgorithmsMenuComponent, ZoomButtonsComponent, OptionsButtonComponent,
-        LocateButtonComponent, LayoutSwitchComponent
+        LocateButtonComponent, LayoutSwitchComponent, FirstLetterPipe
       ]
     }).compileComponents();
   }));
