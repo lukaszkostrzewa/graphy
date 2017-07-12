@@ -20,19 +20,19 @@
     <md-slider min="1" max="15" step="1" value="{{selectedWidth}}"
                [(ngModel)]="selectedWidth"></md-slider>
   </div>
-  <div>
+  <div class="line-style-container">
     <label class="line-style-label">Line style</label>
     <md-button-toggle-group [(ngModel)]="selectedLineStyle">
       <md-button-toggle *ngFor="let lineStyle of lineStyles" [value]="lineStyle"
-                        md-tooltip="{{lineStyle}}">
+                        md-tooltip="{{lineStyle}}" ngClass="{{lineStyle}}">
         <span class="line-style-preview" [ngStyle]="{'border-top-style': lineStyle}"></span>
       </md-button-toggle>
     </md-button-toggle-group>
   </div>
-  <div>
+  <div class="color-container">
     <label class="color-label">Color</label>
     <md-button-toggle-group [(ngModel)]="selectedColor">
-      <md-button-toggle *ngFor="let color of colors" [value]="color">
+      <md-button-toggle *ngFor="let color of colors" [value]="color" ngClass="{{color}}">
         <span class="color-preview mat-elevation-z1 {{color}}-color"></span>
       </md-button-toggle>
     </md-button-toggle-group>

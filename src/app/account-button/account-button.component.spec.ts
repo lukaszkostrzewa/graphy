@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import {AccountButtonComponent} from './account-button.component';
+import {AccountButtonComponent} from "./account-button.component";
 import {MdMenuModule} from "@angular/material";
 import {By} from "@angular/platform-browser";
-import {DebugElement} from "@angular/core";
+import {DebugElement, NO_ERRORS_SCHEMA} from "@angular/core";
 import {FirstLetterPipe} from "../common/first-letter.pipe";
 
 describe('AccountButtonComponent', () => {
@@ -14,7 +14,8 @@ describe('AccountButtonComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MdMenuModule],
-      declarations: [AccountButtonComponent, FirstLetterPipe]
+      declarations: [AccountButtonComponent, FirstLetterPipe],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   }));
