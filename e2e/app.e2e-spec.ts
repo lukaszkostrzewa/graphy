@@ -1,9 +1,11 @@
 import { GraphyPage } from './app.po';
+import {browser} from "protractor";
 
 describe('graphy App', () => {
   let page: GraphyPage;
 
   beforeEach(() => {
+    browser.waitForAngularEnabled(false);
     page = new GraphyPage();
   });
 

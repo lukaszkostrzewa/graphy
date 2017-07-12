@@ -4,7 +4,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  NgZone,
   OnInit,
   Output,
   ViewChild
@@ -101,7 +100,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   constructor(private snackBar: MdSnackBar, private pluralPipe: I18nPluralPipe,
               private dialog: MdDialog, private graphService: GraphService,
               private algorithmService: AlgorithmService, private parserService: ParserService,
-              private exportService: ExportService, private ngZone: NgZone) {
+              private exportService: ExportService) {
   }
 
   ngOnInit() {
@@ -110,9 +109,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     undoRedo(cytoscape);
     clipboard(cytoscape, jquery);
-    this.cy = this.ngZone.runOutsideAngular(() => {
-      return this.graphService.initialize(this.container.nativeElement);
-    });
+    this.cy = this.graphService.initialize(this.container.nativeElement);
     this.undoRedo = this.cy.undoRedo({undoableDrag: false});
     this.cy.clipboard();
     this.undoRedo.action('add-edge', edges => this.cy.add(edges), edges => edges.remove());
