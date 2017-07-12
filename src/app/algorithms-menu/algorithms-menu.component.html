@@ -1,29 +1,13 @@
-<md-menu #algorithmsMenu="mdMenu" [overlapTrigger]="false" [yPosition]="'above'">
+<md-menu #algorithmsMenu="mdMenu" [overlapTrigger]="false">
 
-  <h6 md-subheader>Graph traversal</h6>
-  <button md-menu-item (click)="runAlgorithm('bfs')">
-    Breadth-first search
-  </button>
-  <button md-menu-item (click)="runAlgorithm('dfs')">
-    Depth-first search
-  </button>
-  <md-divider></md-divider>
-
-  <h6 md-subheader>Shortest path</h6>
-  <button md-menu-item (click)="runAlgorithm('dijkstra')">
-    Dijkstra's algorithm
-  </button>
-  <md-divider></md-divider>
-
-  <h6 md-subheader>Minimum spanning tree</h6>
-  <button md-menu-item (click)="runAlgorithm('kruskal')">
-    Kruskal's algorithm
-  </button>
-  <md-divider></md-divider>
-
-  <h6 md-subheader>Min cut, max flow</h6>
-  <button md-menu-item (click)="runAlgorithm('karger-stein')">
-    Karger-Stein algorithm
-  </button>
-
+  <div *ngFor="let group of algorithmGroups; let last = last">
+    <h6 md-subheader>{{group.name}}</h6>
+    <button *ngFor="let algorithm of group.algorithms" md-menu-item
+            (click)="selectAlgorithm(algorithm.name)">
+      {{algorithm.displayName}}
+    </button>
+    <md-divider *ngIf="!last"></md-divider>
+  </div>
+  <div id="test"></div>
 </md-menu>
+<div id="test2"></div>

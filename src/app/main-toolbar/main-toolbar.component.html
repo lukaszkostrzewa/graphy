@@ -17,5 +17,6 @@
     <md-icon>search</md-icon>
     Search
   </button>
-  <app-algorithms-menu #algorithmsMenu [graphComponent]="graphComponent"></app-algorithms-menu>
+  <app-algorithms-menu #algorithmsMenu (algorithmSelected)="graphComponent.runAlgorithm($event)">
+  </app-algorithms-menu>
 </md-toolbar>

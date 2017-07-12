@@ -21,7 +21,9 @@
         <md-icon>play_arrow</md-icon>
       </button>
       <a href="#">Algorithms</a>
-      <app-algorithms-menu #algorithmsMenu [graphComponent]="graphComponent"></app-algorithms-menu>
+      <app-algorithms-menu #algorithmsMenu
+                           (algorithmSelected)="graphComponent.runAlgorithm($event)">
+      </app-algorithms-menu>
     </md-list-item>
     <md-list-item disabled (click)="mainToolbar.leaveEditMode()">
       <button md-icon-button>

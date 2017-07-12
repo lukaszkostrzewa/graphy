@@ -1,5 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {GraphComponent} from "../graph/graph.component";
+import {Component, EventEmitter, OnInit, Output, ViewChild} from "@angular/core";
 
 @Component({
   selector: 'app-algorithms-menu',
@@ -9,7 +8,31 @@ import {GraphComponent} from "../graph/graph.component";
 export class AlgorithmsMenuComponent implements OnInit {
 
   @ViewChild('algorithmsMenu') menu: any;
-  @Input() graphComponent: GraphComponent;
+  @Output() algorithmSelected = new EventEmitter<string>();
+
+  algorithmGroups = [{
+    name: 'Graph traversal',
+    algorithms: [{
+      name: 'bfs', displayName: 'Breadth-first search'
+    }, {
+      name: 'dfs',
+      displayName: 'Depth-first search'
+    }]
+  }, {
+    name: 'Shortest path', algorithms: [{
+      name: 'dijkstra', displayName: 'Dijkstra\'s algorithm'
+    }]
+  }, {
+    name: 'Minimum spanning tree',
+    algorithms: [{
+      name: 'kruskal', displayName: 'Kruskal\'s algorithm'
+    }]
+  }, {
+    name: 'Minimum cut',
+    algorithms: [{
+      name: 'karger-stein', displayName: 'Karger-Stein algorithm'
+    }]
+  }];
 
   constructor() {
   }
@@ -17,7 +40,7 @@ export class AlgorithmsMenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  runAlgorithm(algorithm: string) {
-    this.graphComponent.runAlgorithm(algorithm);
+  selectAlgorithm(algorithm: string) {
+    this.algorithmSelected.emit(algorithm);
   }
 }

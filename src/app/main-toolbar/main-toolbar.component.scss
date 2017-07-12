@@ -54,14 +54,6 @@
   color: rgba(255, 255, 255, .87);
 }
 
-h6[md-subheader] {
-  color: #aaaaaa;
-}
-
-.mat-menu-item {
-  font-size: 14px;
-}
-
 @media (max-width: 600px) {
   md-button-toggle, button:not(.btn-menu) {
     display: none;
