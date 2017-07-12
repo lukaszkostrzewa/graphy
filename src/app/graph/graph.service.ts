@@ -106,9 +106,7 @@ export class GraphService {
         "style": {
           'background-color': '#4580e5',
           'line-color': '#4580e5',
-          'target-arrow-color': '#4580e5',
-          'transition-property': 'background-color, line-color, target-arrow-color',
-          'transition-duration': '0.2s'
+          'target-arrow-color': '#4580e5'
         }
       }, {
         "selector": 'edge.directed',
