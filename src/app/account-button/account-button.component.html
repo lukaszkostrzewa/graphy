@@ -1,5 +1,6 @@
 <div *ngIf="user">
-  <button md-mini-fab class="btn-account" color="primary" [mdMenuTriggerFor]="accountMenu">
+  <button md-mini-fab class="btn-account" color="primary" [mdMenuTriggerFor]="accountMenu"
+          md-tooltip="Logged in as {{ user.name}}" [mdTooltipPosition]="'left'">
     {{user.name | firstLetter}}
   </button>
 
