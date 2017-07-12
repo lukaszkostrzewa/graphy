@@ -19,12 +19,24 @@ kbd + kbd {
   }
 }
 
-.shortcut-description::before {
-  content: '–';
-  padding: 8px;
-}
-
 .shortcuts-group {
   margin-bottom: 12px;
+  font-size: 12px;
+
+  h3 {
+    color: rgba(0, 0, 0, .54);
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  td:first-child {
+    text-align: right;
+    width: 145px;
+    padding: 8px 0;
+  }
+
+  td:last-child {
+    padding-left: 12px;
+  }
 }
 
