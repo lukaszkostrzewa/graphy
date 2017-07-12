@@ -49,6 +49,9 @@ md-select {
   box-shadow: none;
   margin-top: 12px;
   margin-left: -16px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
 }
 
 .mat-button-toggle {
