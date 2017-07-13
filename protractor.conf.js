@@ -4,17 +4,29 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
-  specs: [
+  allScriptsTimeout: 61000,
+  specs            : [
     './e2e/**/*.e2e-spec.ts'
   ],
-  capabilities: {
-    'browserName': 'chrome'
+  capabilities     : {
+    'browserName'  : 'chrome',
+    'platform'     : 'ANY',
+    'version'      : 'ANY',
+    'chromeOptions': {
+      args : ['--no-sandbox', '--test-type=browser'],
+      prefs: {
+        'download': {
+          'prompt_for_download': false,
+          'directory_upgrade'  : true,
+          'default_directory'  : process.cwd() + '/e2e/tmp/',
+        }
+      }
+    }
   },
-  directConnect: true,
-  baseUrl: 'http://localhost:4200/',
-  framework: 'jasmine',
-  jasmineNodeOpts: {
+  directConnect    : true,
+  baseUrl          : 'http://localhost:4200/',
+  framework        : 'jasmine',
+  jasmineNodeOpts  : {
     showColors: true,
     defaultTimeoutInterval: 30000,
     print: function() {}
