@@ -1,7 +1,37 @@
 import {browser, by, element} from 'protractor';
-import {promise} from "selenium-webdriver";
+import {promise} from 'selenium-webdriver';
 
 export class GraphyPage {
+
+  buttons = {
+    edit() {
+      return element(by.css('#btn-edit'));
+    },
+
+    menu() {
+      return element(by.css('.btn-menu'));
+    },
+
+    doExport() {
+      return element(by.css('#btn-export'));
+    },
+
+    exportOpen() {
+      return element(by.css('#btn-export-open'));
+    }
+  };
+
+  dialogs = {
+    exportDialog() {
+      return element(by.css('app-export-dialog'));
+    }
+  };
+
+  inputs = {
+    exportFilename() {
+      return element(by.css('.filename'));
+    }
+  };
 
   navigateTo() {
     return browser.get('/');
@@ -36,35 +66,5 @@ export class GraphyPage {
 
   sideMenu() {
     return element(by.css('md-sidenav'));
-  }
-
-  buttons = {
-    edit() {
-      return element(by.css('#btn-edit'));
-    },
-
-    menu() {
-      return element(by.css('.btn-menu'));
-    },
-
-    doExport() {
-      return element(by.css('#btn-export'));
-    },
-
-    exportOpen() {
-      return element(by.css('#btn-export-open'));
-    }
-  };
-
-  dialogs = {
-    exportDialog() {
-      return element(by.css('app-export-dialog'));
-    }
-  };
-
-  inputs = {
-    exportFilename() {
-      return element(by.css('.filename'));
-    }
   }
 }

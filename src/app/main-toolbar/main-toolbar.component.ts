@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from "@angular/core";
-import {MdButtonToggle, MdButtonToggleChange} from "@angular/material";
-import {GraphComponent} from "../graph/graph.component";
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {MdButtonToggle, MdButtonToggleChange} from '@angular/material';
+import {GraphComponent} from '../graph/graph.component';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -11,7 +11,7 @@ export class MainToolbarComponent {
 
   @Output() navToggle = new EventEmitter<boolean>();
   @Input() graphComponent: GraphComponent;
-  @ViewChild("editModeToggler") editModeToggler: MdButtonToggle;
+  @ViewChild('editModeToggler') editModeToggler: MdButtonToggle;
 
   openSideNav() {
     this.navToggle.emit(true);

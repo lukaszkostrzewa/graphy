@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-file-upload',
@@ -11,10 +11,10 @@ export class FileUploadComponent {
   @Input() allowedExtensions: string[];
 
   fileChange(event) {
-    let fileList: FileList = event.target.files;
+    const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
-      let file: File = fileList[0];
-      let reader: FileReader = new FileReader();
+      const file: File = fileList[0];
+      const reader: FileReader = new FileReader();
       reader.onload = (e) => this.uploaded.emit((<any>e.target).result);
       reader.readAsText(file, 'UTF-8');
     }

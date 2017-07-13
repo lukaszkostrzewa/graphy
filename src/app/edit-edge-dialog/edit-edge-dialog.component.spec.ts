@@ -1,17 +1,18 @@
-import {async, ComponentFixture, inject, TestBed} from "@angular/core/testing";
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
-import {EditEdgeDialogComponent} from "./edit-edge-dialog.component";
+import {EditEdgeDialogComponent} from './edit-edge-dialog.component';
 import {
   MD_DIALOG_DATA,
   MdButtonToggleModule,
   MdDialogRef,
   MdInputModule,
   MdSliderModule
-} from "@angular/material";
-import {FormsModule} from "@angular/forms";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {DebugElement, NO_ERRORS_SCHEMA} from "@angular/core";
-import {By} from "@angular/platform-browser";
+} from '@angular/material';
+import {FormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {EdgeMock} from './test-utils/edge-mock';
 
 describe('EditEdgeDialogComponent', () => {
   let component: EditEdgeDialogComponent;
@@ -94,18 +95,18 @@ describe('EditEdgeDialogComponent', () => {
 
   it('should save data', inject([MD_DIALOG_DATA], (data) => {
     const edgeMock: EdgeMock = data.element;
-    const newLabel: string = 'New label';
-    const newWeight: number = 10;
+    const newLabel = 'New label';
+    const newWeight = 10;
     const oldColor: string = edgeMock._data.color;
     const newColor: string = oldColor; // change to 'primary'
     page.label.nativeElement.value = newLabel;
     page.weight.nativeElement.value = newWeight;
     page.label.nativeElement.dispatchEvent(new Event('input'));
     page.weight.nativeElement.dispatchEvent(new Event('input'));
-    let newColorRadioBtn = fixture.debugElement.query(By.css('.' + newColor)).nativeElement;
-    newColorRadioBtn.setAttribute("checked", "checked");
+    const newColorRadioBtn = fixture.debugElement.query(By.css('.' + newColor)).nativeElement;
+    newColorRadioBtn.setAttribute('checked', 'checked');
     newColorRadioBtn.checked = true;
-    newColorRadioBtn.dispatchEvent(new Event('input')); //todo:why it does not got updated?
+    newColorRadioBtn.dispatchEvent(new Event('input')); // todo:why it does not got updated?
     spyOn(edgeMock, 'addClass');
     spyOn(edgeMock, 'removeClass');
     fixture.detectChanges();
@@ -119,48 +120,3 @@ describe('EditEdgeDialogComponent', () => {
     expect(edgeMock.addClass).toHaveBeenCalledWith(newColor + '-color');
   }));
 });
-
-class EdgeMock {
-
-  _data = {
-    source: 2,
-    target: 3,
-    label: 'test label',
-    weight: 4,
-    color: 'secondary'
-  };
-  _css = {
-    width: '5',
-    'line-style': 'dotted'
-  };
-
-  id() {
-    return 1;
-  }
-
-  public data(name: string, value: string): string | void {
-    if (typeof value === 'undefined') {
-      return this._data[name];
-    } else {
-      this._data[name] = value;
-    }
-  }
-
-  public css(name: string, value: string): string | void {
-    if (typeof value === 'undefined') {
-      return this._css[name];
-    } else {
-      this._css[name] = value;
-    }
-  }
-
-  numericStyle(name): number {
-    return +this._css[name];
-  }
-
-  addClass() {
-  }
-
-  removeClass() {
-  }
-}

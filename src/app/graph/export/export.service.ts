@@ -1,5 +1,5 @@
-import {Inject, Injectable} from "@angular/core";
-import {Exporter} from "./exporter";
+import {Inject, Injectable} from '@angular/core';
+import {Exporter} from './exporter';
 
 @Injectable()
 export class ExportService {

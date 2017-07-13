@@ -1,8 +1,8 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {SideMenuComponent} from "./side-menu.component";
-import {MdDialogModule, MdIconModule, MdMenuModule} from "@angular/material";
-import {AlgorithmsMenuComponent} from "../algorithms-menu/algorithms-menu.component";
+import {SideMenuComponent} from './side-menu.component';
+import {MdDialogModule, MdIconModule, MdMenuModule} from '@angular/material';
+import {AlgorithmsMenuComponent} from '../algorithms-menu/algorithms-menu.component';
 
 describe('SideMenuComponent', () => {
   let component: SideMenuComponent;

@@ -1,9 +1,9 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ExportDialogComponent} from "./export-dialog.component";
-import {FormsModule} from "@angular/forms";
-import {MdDialogModule, MdDialogRef, MdInputModule, MdSelectModule} from "@angular/material";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {ExportDialogComponent} from './export-dialog.component';
+import {FormsModule} from '@angular/forms';
+import {MdDialogModule, MdDialogRef, MdInputModule, MdSelectModule} from '@angular/material';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('ExportDialogComponent', () => {
   let component: ExportDialogComponent;

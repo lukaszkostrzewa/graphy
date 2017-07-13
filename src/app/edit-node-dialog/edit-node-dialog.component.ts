@@ -1,15 +1,12 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {MD_DIALOG_DATA} from "@angular/material";
+import {Component, Inject} from '@angular/core';
+import {MD_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-edit-node-dialog',
   templateUrl: './edit-node-dialog.component.html',
   styleUrls: ['./edit-node-dialog.component.scss']
 })
-export class EditNodeDialogComponent implements OnInit {
-
-  ngOnInit(): void {
-  }
+export class EditNodeDialogComponent {
 
   public readonly node: Cy.CollectionNodes;
   public readonly id: string;

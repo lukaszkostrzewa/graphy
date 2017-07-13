@@ -1,17 +1,17 @@
-import * as jquery from "jquery";
-import cytoscape from "cytoscape/dist/cytoscape.js";
-import contextMenus from "cytoscape-context-menus";
-import {AfterViewInit, Directive} from "@angular/core";
-import {GraphService} from "../graph.service";
-import {EditModeAwareExtension} from "./edit-mode-aware.extension";
+import * as jquery from 'jquery';
+import cytoscape from 'cytoscape/dist/cytoscape.js';
+import contextMenus from 'cytoscape-context-menus';
+import {AfterViewInit, Directive} from '@angular/core';
+import {GraphService} from '../graph.service';
+import {EditModeAwareDirective} from './edit-mode-aware.directive';
 import ContextMenu = Cy.ContextMenu;
 import Event = JQuery.Event;
 
 @Directive({
-  selector: 'app-graph',
+  selector: '[appContextMenus]',
   providers: [GraphService]
 })
-export class ContextMenusExtension extends EditModeAwareExtension implements AfterViewInit {
+export class ContextMenusDirective extends EditModeAwareDirective implements AfterViewInit {
 
   private static readonly ITEMS_VISIBLE_IN_EDIT_MODE = [
     'add-node', 'add-edge', 'remove', 'edit', 'group', 'ungroup'
@@ -20,19 +20,19 @@ export class ContextMenusExtension extends EditModeAwareExtension implements Aft
 
   ngAfterViewInit(): void {
     contextMenus(cytoscape, jquery);
-    let options = {
+    const options = {
       menuItems: this.getMenuItems()
     };
     this.contextMenu = this.graphComponent.getCy().contextMenus(options);
   }
 
   editModeActivated(): void {
-    ContextMenusExtension.ITEMS_VISIBLE_IN_EDIT_MODE
+    ContextMenusDirective.ITEMS_VISIBLE_IN_EDIT_MODE
       .forEach(item => this.contextMenu.showMenuItem(item));
   }
 
   editModeDeactivated(): void {
-    ContextMenusExtension.ITEMS_VISIBLE_IN_EDIT_MODE
+    ContextMenusDirective.ITEMS_VISIBLE_IN_EDIT_MODE
       .forEach(item => this.contextMenu.hideMenuItem(item));
   }
 
@@ -43,7 +43,7 @@ export class ContextMenusExtension extends EditModeAwareExtension implements Aft
         content: 'Add node',
         selector: false,
         onClickFunction: (event) => {
-          let node = this.graphComponent.addNodeAtPos({
+          const node = this.graphComponent.addNodeAtPos({
             x: event.originalEvent.offsetX,
             y: event.originalEvent.offsetY
           });

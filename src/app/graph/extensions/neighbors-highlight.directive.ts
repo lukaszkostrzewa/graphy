@@ -1,10 +1,10 @@
-import {AfterViewInit, Directive} from "@angular/core";
-import {EditModeAwareExtension} from "./edit-mode-aware.extension";
+import {AfterViewInit, Directive} from '@angular/core';
+import {EditModeAwareDirective} from './edit-mode-aware.directive';
 
 @Directive({
-  selector: 'app-graph'
+  selector: '[appNeighborsHighlight]'
 })
-export class NeighborsHighlightExtension extends EditModeAwareExtension implements AfterViewInit {
+export class NeighborsHighlightDirective extends EditModeAwareDirective implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.editModeDeactivated();

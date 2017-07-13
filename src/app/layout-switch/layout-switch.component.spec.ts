@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {LayoutSwitchComponent} from './layout-switch.component';
-import {MdMenuModule, MdTooltipModule} from "@angular/material";
+import {MdMenuModule, MdTooltipModule} from '@angular/material';
 
 describe('LayoutSwitchComponent', () => {
   let component: LayoutSwitchComponent;

@@ -7,45 +7,45 @@ import {
   OnInit,
   Output,
   ViewChild
-} from "@angular/core";
+} from '@angular/core';
 
-import {Parser} from "./parsers/parser";
-import {GraphmlParser} from "./parsers/graphml-parser";
-import {MdDialog, MdSnackBar} from "@angular/material";
-import * as FileSaver from "file-saver";
-import * as jquery from "jquery";
-import {I18nPluralPipe} from "@angular/common";
-import {Observable} from "rxjs/Rx";
-import {GraphService} from "./graph.service";
-import {AlgorithmService} from "./algorithms/algorithm.service";
-import {BfsAlgorithmRunner} from "./algorithms/bfs-algorithm-runner";
-import {DfsAlgorithmRunner} from "./algorithms/dfs-algorithm-runner";
-import {KruskalAlgorithmRunner} from "./algorithms/kruskal-algorithm-runner";
-import {DijkstraAlgorithmRunner} from "./algorithms/dijkstra-algorithm-runner";
-import {KargerSteinAlgorithmRunner} from "./algorithms/karger-stein-algorithm-runner";
-import {ImportGraphResult} from "../common/import-graph-result";
-import {ParserService} from "./parsers/parser.service";
-import {JsonGraphParser} from "./parsers/json-graph-parser";
-import {JsonCytoscapeParser} from "./parsers/json-cytoscape-parser";
-import {AlgorithmRunner} from "./algorithms/algorithm-runner";
-import {ExportService} from "./export/export.service";
-import {Exporter} from "./export/exporter";
-import {JsonCytoscapeExporter} from "./export/json-cytoscape-exporter";
-import {GraphmlExporter} from "./export/graphml-exporter";
-import {JpgExporter} from "app/graph/export/jpg-exporter";
-import {PngExporter} from "./export/png-exporter";
-import * as cytoscape from "cytoscape/dist/cytoscape.js";
-import * as undoRedo from "cytoscape-undo-redo";
-import * as clipboard from "cytoscape-clipboard";
-import {EditNodeDialogComponent} from "../edit-node-dialog/edit-node-dialog.component";
-import {EditEdgeDialogComponent} from "../edit-edge-dialog/edit-edge-dialog.component";
-import {MainToolbarComponent} from "../main-toolbar/main-toolbar.component";
+import {Parser} from './parsers/parser';
+import {GraphmlParser} from './parsers/graphml-parser';
+import {MdDialog, MdSnackBar} from '@angular/material';
+import * as FileSaver from 'file-saver';
+import * as jquery from 'jquery';
+import {I18nPluralPipe} from '@angular/common';
+import {Observable} from 'rxjs/Rx';
+import {GraphService} from './graph.service';
+import {AlgorithmService} from './algorithms/algorithm.service';
+import {BfsAlgorithmRunner} from './algorithms/bfs-algorithm-runner';
+import {DfsAlgorithmRunner} from './algorithms/dfs-algorithm-runner';
+import {KruskalAlgorithmRunner} from './algorithms/kruskal-algorithm-runner';
+import {DijkstraAlgorithmRunner} from './algorithms/dijkstra-algorithm-runner';
+import {KargerSteinAlgorithmRunner} from './algorithms/karger-stein-algorithm-runner';
+import {ImportGraphResult} from '../common/import-graph-result';
+import {ParserService} from './parsers/parser.service';
+import {JsonGraphParser} from './parsers/json-graph-parser';
+import {JsonCytoscapeParser} from './parsers/json-cytoscape-parser';
+import {AlgorithmRunner} from './algorithms/algorithm-runner';
+import {ExportService} from './export/export.service';
+import {Exporter} from './export/exporter';
+import {JsonCytoscapeExporter} from './export/json-cytoscape-exporter';
+import {GraphmlExporter} from './export/graphml-exporter';
+import {JpgExporter} from 'app/graph/export/jpg-exporter';
+import {PngExporter} from './export/png-exporter';
+import * as cytoscape from 'cytoscape/dist/cytoscape.js';
+import * as undoRedo from 'cytoscape-undo-redo';
+import * as clipboard from 'cytoscape-clipboard';
+import {EditNodeDialogComponent} from '../edit-node-dialog/edit-node-dialog.component';
+import {EditEdgeDialogComponent} from '../edit-edge-dialog/edit-edge-dialog.component';
+import {MainToolbarComponent} from '../main-toolbar/main-toolbar.component';
+import {ExportGraphOptions} from '../common/export-graph-options';
 import Position = Cy.Position;
 import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
 import CollectionFirstNode = Cy.CollectionFirstNode;
 import CollectionNodes = Cy.CollectionNodes;
-import {ExportGraphOptions} from "../common/export-graph-options";
 
 @Component({
   selector: 'app-graph',
@@ -69,15 +69,16 @@ import {ExportGraphOptions} from "../common/export-graph-options";
 })
 export class GraphComponent implements OnInit, AfterViewInit {
 
+  private static readonly ZOOM_IN_OUT_FACTOR = 1.25;
+  private static readonly FIT_PADDING = 100;
+
   @ViewChild('graphContainer') container: ElementRef;
   @Output() empty = new EventEmitter<boolean>();
   @Input() mainToolbar?: MainToolbarComponent;
 
   private cy: Cy.Instance;
-  private static readonly ZOOM_IN_OUT_FACTOR: number = 1.25;
-  private static readonly FIT_PADDING: number = 100;
-  private nodesCounter: number = 0;
-  private edgesCounter: number = 0;
+  private nodesCounter = 0;
+  private edgesCounter = 0;
   undoRedo: any;
 
   getNextEdgeId(): string {
@@ -155,7 +156,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   exportGraph(options: ExportGraphOptions) {
-    let blob = this.exportService.doExport(options.format.id);
+    const blob = this.exportService.doExport(options.format.id);
     FileSaver.saveAs(blob, options.getFullName());
   }
 
@@ -164,16 +165,16 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   setLayout(layoutName: string) {
-    let layout: any = this.cy.layout({name: layoutName, padding: 100});
+    const layout: any = this.cy.layout({name: layoutName, padding: 100});
     if (layout) {
       layout.run();
     }
   }
 
   deleteSelectedElements() {
-    let selectedEles = this.getSelectedElements();
+    const selectedEles = this.getSelectedElements();
     if (selectedEles.length) {
-      let message = this.pluralPipe.transform(selectedEles.length, {
+      const message = this.pluralPipe.transform(selectedEles.length, {
           '=1': 'One element has',
           'other': '# elements have'
         }) + ' been deleted.';
@@ -183,14 +184,14 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   deleteElement(element) {
-    let message = (element.isNode() ? 'Node' : 'Edge') + ' has been deleted.';
+    const message = (element.isNode() ? 'Node' : 'Edge') + ' has been deleted.';
     this.undoRedo.do('remove', element);
     this.showMessageWithUndo(message);
   }
 
   addNodeAtPos(pos) {
     return this.undoRedo.do('add', {
-      group: "nodes",
+      group: 'nodes',
       data: {
         id: this.getNextNodeId()
       },
@@ -199,7 +200,8 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   openEditDialog(element) {
-    let dialog, config = {data: {element}, width: '600px'};
+    const config = {data: {element}, width: '600px'};
+    let dialog;
     if (element.isNode()) {
       dialog = this.dialog.open(EditNodeDialogComponent, config);
     } else {
@@ -210,7 +212,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   private showMessageWithUndo(message: string) {
-    this.snackBar.open(message, 'Undo', {duration: 2000,}).onAction().subscribe(this.undo);
+    this.snackBar.open(message, 'Undo', {duration: 2000}).onAction().subscribe(this.undo);
   }
 
   selectAll() {
@@ -228,7 +230,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   groupNodes(nodes) {
-    let parent = this.createParentNode(nodes);
+    const parent = this.createParentNode(nodes);
     nodes.move({parent: parent.id()});
     return parent;
   }
@@ -240,7 +242,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   ungroupNodes(parent) {
-    let children = parent.children();
+    const children = parent.children();
     children.move({parent: null});
     parent.remove();
     return children;
@@ -251,7 +253,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   private getCenterPosition(nodes: CollectionElements): Cy.Position {
-    let boundingBox = nodes.renderedBoundingbox({
+    const boundingBox = nodes.renderedBoundingbox({
       includeEdges: false
     });
     return {
@@ -275,7 +277,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   runAlgorithm(algorithm: string): void {
     this.removeHighlight();
     this.algorithmService.get(algorithm).run().then(elements => {
-      let cancel = this.snackBar.open('Algorithm started', 'Stop').onAction();
+      const cancel = this.snackBar.open('Algorithm started', 'Stop').onAction();
       Observable.from(elements).zip(Observable.timer(0, 500), x => x)
         .takeUntil(cancel)
         .subscribe({
@@ -306,7 +308,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   };
 
   copy(elements?: CollectionElements) {
-    this.cy.clipboard().copy(elements || this.cy.$(":selected"));
+    this.cy.clipboard().copy(elements || this.cy.$(':selected'));
   }
 
   paste() {
@@ -314,7 +316,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   }
 
   cut(elements?: CollectionElements) {
-    elements = elements || this.cy.$(":selected");
+    elements = elements || this.cy.$(':selected');
     this.copy(elements);
     this.undoRedo.do('remove', elements);
   }

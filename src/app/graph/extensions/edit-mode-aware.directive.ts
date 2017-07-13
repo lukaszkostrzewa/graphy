@@ -1,13 +1,13 @@
-import {GraphComponent} from "../graph.component";
-import {Directive, OnDestroy} from "@angular/core";
-import {GraphService} from "../graph.service";
-import {Subscription} from "rxjs/Subscription";
+import {GraphComponent} from '../graph.component';
+import {Directive, OnDestroy} from '@angular/core';
+import {GraphService} from '../graph.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Directive({
-  selector: 'app-graph',
+  selector: '[appEditModeAware]',
   providers: [GraphService]
 })
-export class EditModeAwareExtension implements OnDestroy {
+export class EditModeAwareDirective implements OnDestroy {
 
   private subscription: Subscription;
 

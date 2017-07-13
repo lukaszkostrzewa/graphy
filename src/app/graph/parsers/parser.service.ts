@@ -1,5 +1,5 @@
-import {Inject, Injectable} from "@angular/core";
-import {Parser} from "./parser";
+import {Inject, Injectable} from '@angular/core';
+import {Parser} from './parser';
 
 @Injectable()
 export class ParserService {

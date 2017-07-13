@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {MdDialog, MdSidenav} from "@angular/material";
-import {ImportDialogComponent} from "../import-dialog/import-dialog.component";
-import {GraphComponent} from "../graph/graph.component";
-import {NewDialogComponent} from "../new-dialog/new-dialog.component";
-import {ImportGraphResult} from "../common/import-graph-result";
-import {ExportDialogComponent} from "../export-dialog/export-dialog.component";
-import {ShortcutsDialogComponent} from "../shortcuts-dialog/shortcuts-dialog.component";
-import {MainToolbarComponent} from "../main-toolbar/main-toolbar.component";
+import {Component, Input, OnInit} from '@angular/core';
+import {MdDialog, MdSidenav} from '@angular/material';
+import {ImportDialogComponent} from '../import-dialog/import-dialog.component';
+import {GraphComponent} from '../graph/graph.component';
+import {NewDialogComponent} from '../new-dialog/new-dialog.component';
+import {ImportGraphResult} from '../common/import-graph-result';
+import {ExportDialogComponent} from '../export-dialog/export-dialog.component';
+import {ShortcutsDialogComponent} from '../shortcuts-dialog/shortcuts-dialog.component';
+import {MainToolbarComponent} from '../main-toolbar/main-toolbar.component';
 
 @Component({
   selector: 'app-side-menu',

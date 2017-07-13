@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {MdDialogRef} from "@angular/material";
-import {GraphFormatsService} from "../graph/formats/graph-formats.service";
-import {GraphFormat} from "../graph/formats/graph-format";
+import {Component, OnInit} from '@angular/core';
+import {MdDialogRef} from '@angular/material';
+import {GraphFormatsService} from '../graph/formats/graph-formats.service';
+import {GraphFormat} from '../graph/formats/graph-format';
 
 @Component({
   selector: 'app-import-dialog',

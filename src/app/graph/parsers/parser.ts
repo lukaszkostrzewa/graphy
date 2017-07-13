@@ -1,5 +1,5 @@
-import {GraphService} from "../graph.service";
-import {Injectable} from "@angular/core";
+import {GraphService} from '../graph.service';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class Parser {

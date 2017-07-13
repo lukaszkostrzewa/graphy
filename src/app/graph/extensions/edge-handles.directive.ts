@@ -1,18 +1,18 @@
-import cytoscape from "cytoscape/dist/cytoscape.js";
-import edgehandles from "cytoscape-edgehandles";
-import {AfterViewInit, Directive} from "@angular/core";
-import {GraphService} from "../graph.service";
-import {EditModeAwareExtension} from "./edit-mode-aware.extension";
+import cytoscape from 'cytoscape/dist/cytoscape.js';
+import edgehandles from 'cytoscape-edgehandles';
+import {AfterViewInit, Directive} from '@angular/core';
+import {GraphService} from '../graph.service';
+import {EditModeAwareDirective} from './edit-mode-aware.directive';
 
 @Directive({
-  selector: 'app-graph',
+  selector: '[appEdgeHandles]',
   providers: [GraphService]
 })
-export class EdgeHandlesExtension extends EditModeAwareExtension implements AfterViewInit {
+export class EdgeHandlesDirective extends EditModeAwareDirective implements AfterViewInit {
 
   ngAfterViewInit(): void {
     edgehandles(cytoscape);
-    let defaults = {
+    const defaults = {
       handleHitThreshold: 12,
       handleColor: '#3f51b5',
       hoverDelay: 0,

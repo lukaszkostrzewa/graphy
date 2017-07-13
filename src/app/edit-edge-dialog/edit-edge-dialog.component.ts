@@ -1,15 +1,12 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {MD_DIALOG_DATA} from "@angular/material";
+import {Component, Inject} from '@angular/core';
+import {MD_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-edit-edge-dialog',
   templateUrl: './edit-edge-dialog.component.html',
   styleUrls: ['./edit-edge-dialog.component.scss']
 })
-export class EditEdgeDialogComponent implements OnInit {
-
-  ngOnInit(): void {
-  }
+export class EditEdgeDialogComponent {
 
   public readonly edge: Cy.CollectionEdges;
   public readonly id: string;

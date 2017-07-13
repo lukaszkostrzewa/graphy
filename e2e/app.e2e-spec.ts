@@ -1,9 +1,9 @@
-import {GraphyPage} from "./app.po";
-import {browser, protractor} from "protractor";
-import {ExportUtil} from "./export-util";
-import {GraphPromise} from "./graph-promise";
+import {GraphyPage} from './app.po';
+import {browser, protractor} from 'protractor';
+import {ExportUtil} from './export-util';
+import {GraphPromise} from './graph-promise';
 
-let exportGraph = ExportUtil.exportGraph;
+const exportGraph = ExportUtil.exportGraph;
 
 describe('graphy App', () => {
   let page: GraphyPage;

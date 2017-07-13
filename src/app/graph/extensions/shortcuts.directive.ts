@@ -1,11 +1,13 @@
-import {GraphComponent} from "../graph.component";
-import {Directive, HostListener, Input} from "@angular/core";
-import {MainToolbarComponent} from "../../main-toolbar/main-toolbar.component";
+import {GraphComponent} from '../graph.component';
+import {Directive, HostListener, Input} from '@angular/core';
+import {MainToolbarComponent} from '../../main-toolbar/main-toolbar.component';
 
 @Directive({
-  selector: 'app-graph'
+  selector: '[appShortcuts]'
 })
-export class ShortcutsExtension {
+export class ShortcutsDirective {
+
+  private static readonly MOVE_BY: number = 20;
 
   private shortcutsMap = {
     '-': (event) => this.zoomOut(event, false),
@@ -35,17 +37,15 @@ export class ShortcutsExtension {
 
   @Input() mainToolbar: MainToolbarComponent;
 
-  private static readonly MOVE_BY: number = 20;
-
   constructor(private graphComponent: GraphComponent) {
   }
 
   @HostListener('window:keydown', ['$event'])
   keydown(event: KeyboardEvent): boolean {
-    let key = [event.ctrlKey && 'ctrl', event.shiftKey && 'shift', event.key.toLowerCase()]
+    const key = [event.ctrlKey && 'ctrl', event.shiftKey && 'shift', event.key.toLowerCase()]
       .filter(Boolean)
       .join('+');
-    let handler = this.shortcutsMap[key];
+    const handler = this.shortcutsMap[key];
     if (handler) {
       return handler.call(this, event);
     }
@@ -67,14 +67,14 @@ export class ShortcutsExtension {
   private search(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
-    console.log("Search");
+    console.log('Search');
     return false;
   }
 
   private save(event: KeyboardEvent) {
     event.stopImmediatePropagation();
     event.preventDefault();
-    console.log("Save graph");
+    console.log('Save graph');
     return false;
   }
 
@@ -118,22 +118,22 @@ export class ShortcutsExtension {
   }
 
   private moveUp() {
-    this.graphComponent.moveGraph({x: 0, y: ShortcutsExtension.MOVE_BY});
+    this.graphComponent.moveGraph({x: 0, y: ShortcutsDirective.MOVE_BY});
     return false;
   }
 
   private moveDown() {
-    this.graphComponent.moveGraph({x: 0, y: -ShortcutsExtension.MOVE_BY});
+    this.graphComponent.moveGraph({x: 0, y: -ShortcutsDirective.MOVE_BY});
     return false;
   }
 
   private moveLeft() {
-    this.graphComponent.moveGraph({x: ShortcutsExtension.MOVE_BY, y: 0});
+    this.graphComponent.moveGraph({x: ShortcutsDirective.MOVE_BY, y: 0});
     return false;
   }
 
   private moveRight() {
-    this.graphComponent.moveGraph({x: -ShortcutsExtension.MOVE_BY, y: 0});
+    this.graphComponent.moveGraph({x: -ShortcutsDirective.MOVE_BY, y: 0});
     return false;
   }
 

@@ -2,11 +2,14 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {GraphOptionsDialogComponent} from './graph-options-dialog.component';
 import {
-  MD_DIALOG_DATA, MdCheckboxModule, MdDialogModule, MdDialogRef,
+  MD_DIALOG_DATA,
+  MdCheckboxModule,
+  MdDialogModule,
+  MdDialogRef,
   MdInputModule
-} from "@angular/material";
-import {FormsModule} from "@angular/forms";
-import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+} from '@angular/material';
+import {FormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('GraphOptionsDialogComponent', () => {
   let component: GraphOptionsDialogComponent;

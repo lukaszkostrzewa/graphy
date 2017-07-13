@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
-import {ExportGraphOptions} from "../common/export-graph-options";
-import {ExportFormat} from "../common/export-format";
-import * as moment from "moment";
+import {Component} from '@angular/core';
+import {ExportGraphOptions} from '../common/export-graph-options';
+import {ExportFormat} from '../common/export-format';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-export-dialog',
@@ -18,7 +18,7 @@ export class ExportDialogComponent {
   }
 
   private setDefaultFilename() {
-    let date = moment().format('DD-MM-YYYY-HH-mm-ss');
+    const date = moment().format('DD-MM-YYYY-HH-mm-ss');
     this.options.filename = 'graph-' + date;
   }
 }

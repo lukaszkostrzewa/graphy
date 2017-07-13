@@ -1,8 +1,8 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {MainToolbarComponent} from "./main-toolbar.component";
-import {MdMenuModule, MdToolbarModule, MdTooltipModule} from "@angular/material";
-import {AlgorithmsMenuComponent} from "../algorithms-menu/algorithms-menu.component";
+import {MainToolbarComponent} from './main-toolbar.component';
+import {MdMenuModule, MdToolbarModule, MdTooltipModule} from '@angular/material';
+import {AlgorithmsMenuComponent} from '../algorithms-menu/algorithms-menu.component';
 
 describe('MainToolbarComponent', () => {
   let component: MainToolbarComponent;

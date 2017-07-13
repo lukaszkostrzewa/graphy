@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NewDialogComponent} from './new-dialog.component';
-import {MdDialogModule, MdDialogRef} from "@angular/material";
+import {MdDialogModule, MdDialogRef} from '@angular/material';
 
 describe('NewDialogComponent', () => {
   let component: NewDialogComponent;

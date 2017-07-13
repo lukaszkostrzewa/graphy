@@ -1,16 +1,17 @@
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {EditNodeDialogComponent} from "./edit-node-dialog.component";
+import {EditNodeDialogComponent} from './edit-node-dialog.component';
 import {
   MD_DIALOG_DATA,
   MdButtonToggleModule,
-  MdDialogModule, MdDialogRef,
+  MdDialogModule,
+  MdDialogRef,
   MdInputModule,
   MdSelectModule,
   MdSliderModule
-} from "@angular/material";
-import {FormsModule} from "@angular/forms";
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+} from '@angular/material';
+import {FormsModule} from '@angular/forms';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('EditNodeDialogComponent', () => {
   let component: EditNodeDialogComponent;

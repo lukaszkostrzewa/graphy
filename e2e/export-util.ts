@@ -1,6 +1,6 @@
-import {GraphPromise} from "./graph-promise";
-import {GraphyPage} from "./app.po";
-import * as fs from "fs";
+import {GraphPromise} from './graph-promise';
+import {GraphyPage} from './app.po';
+import * as fs from 'fs';
 
 const TMP_EXPORT_FILE = process.cwd() + '/e2e/tmp/g.json';
 

@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {Exporter} from "./exporter";
+import {Injectable} from '@angular/core';
+import {Exporter} from './exporter';
 
 @Injectable()
 export class PngExporter extends Exporter {

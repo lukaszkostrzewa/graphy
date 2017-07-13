@@ -1,4 +1,4 @@
-import {ExportFormat} from "./export-format";
+import {ExportFormat} from './export-format';
 
 export class ExportGraphOptions {
 

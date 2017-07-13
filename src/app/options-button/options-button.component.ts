@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MdDialog} from "@angular/material";
-import {GraphOptionsDialogComponent} from "../graph-options-dialog/graph-options-dialog.component";
+import {MdDialog} from '@angular/material';
+import {GraphOptionsDialogComponent} from '../graph-options-dialog/graph-options-dialog.component';
 
 @Component({
   selector: 'app-options-button',

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Hint} from "./hint";
+import {Hint} from './hint';
 
 @Injectable()
 export class HintsService {

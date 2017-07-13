@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Layout} from "../layout/layout";
+import {Layout} from './layout';
 
 @Injectable()
 export class LayoutService {

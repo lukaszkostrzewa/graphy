@@ -1,5 +1,5 @@
-import {Inject, Injectable} from "@angular/core";
-import {AlgorithmRunner} from "./algorithm-runner";
+import {Inject, Injectable} from '@angular/core';
+import {AlgorithmRunner} from './algorithm-runner';
 
 @Injectable()
 export class AlgorithmService {

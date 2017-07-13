@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {HintsComponent} from './hints.component';
-import {SlickModule} from "ngx-slick";
+import {SlickModule} from 'ngx-slick';
 
 describe('HintsComponent', () => {
   let component: HintsComponent;

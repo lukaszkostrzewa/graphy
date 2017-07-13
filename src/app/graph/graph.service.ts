@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Subject} from "rxjs/Subject";
-import * as cytoscape from "cytoscape/dist/cytoscape.js";
+import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs/Subject';
+import * as cytoscape from 'cytoscape/dist/cytoscape.js';
 
 @Injectable()
 export class GraphService {
@@ -46,76 +46,76 @@ export class GraphService {
         name: 'grid'
       },
       style: [{
-        "selector": "node",
-        "style": {
-          "content": "data(label)",
+        'selector': 'node',
+        'style': {
+          'content': 'data(label)',
         }
       }, {
-        "selector": "edge",
-        "style": {
-          "text-margin-y": "-12px",
-          "content": "data(weight)",
-          "curve-style": "bezier"
+        'selector': 'edge',
+        'style': {
+          'text-margin-y': '-12px',
+          'content': 'data(weight)',
+          'curve-style': 'bezier'
         }
       }, {
-        "selector": 'node.default-color',
-        "style": {
-          "background-color": "#666666"
+        'selector': 'node.default-color',
+        'style': {
+          'background-color': '#666666'
         }
       }, {
-        "selector": 'node.lighter-color',
-        "style": {
-          "background-color": "#cccccc"
+        'selector': 'node.lighter-color',
+        'style': {
+          'background-color': '#cccccc'
         }
       }, {
-        "selector": 'node.primary-color',
-        "style": {
-          "background-color": "#3f51b5"
+        'selector': 'node.primary-color',
+        'style': {
+          'background-color': '#3f51b5'
         }
       }, {
-        "selector": 'node.secondary-color',
-        "style": {
-          "background-color": "#579cff"
+        'selector': 'node.secondary-color',
+        'style': {
+          'background-color': '#579cff'
         }
       }, {
-        "selector": 'edge.default-color',
-        "style": {
-          "line-color": "#aaaaaa",
+        'selector': 'edge.default-color',
+        'style': {
+          'line-color': '#aaaaaa',
           'target-arrow-color': '#aaaaaa'
         }
       }, {
-        "selector": 'edge.lighter-color',
-        "style": {
-          "line-color": "#dddddd",
+        'selector': 'edge.lighter-color',
+        'style': {
+          'line-color': '#dddddd',
           'target-arrow-color': '#dddddd'
         }
       }, {
-        "selector": 'edge.primary-color',
-        "style": {
-          "line-color": "#7285ee",
+        'selector': 'edge.primary-color',
+        'style': {
+          'line-color': '#7285ee',
           'target-arrow-color': '#7285ee'
         }
       }, {
-        "selector": 'edge.secondary-color',
-        "style": {
-          "line-color": "#bbd7ff",
+        'selector': 'edge.secondary-color',
+        'style': {
+          'line-color': '#bbd7ff',
           'target-arrow-color': '#bbd7ff'
         }
       }, {
-        "selector": '.hover',
-        "style": {
+        'selector': '.hover',
+        'style': {
           'background-color': '#4580e5',
           'line-color': '#4580e5',
           'target-arrow-color': '#4580e5'
         }
       }, {
-        "selector": 'edge.directed',
-        "style": {
-          "target-arrow-shape": "triangle"
+        'selector': 'edge.directed',
+        'style': {
+          'target-arrow-shape': 'triangle'
         }
       }, {
-        "selector": '.highlighted',
-        "style": {
+        'selector': '.highlighted',
+        'style': {
           'background-color': '#61bffc',
           'line-color': '#61bffc',
           'target-arrow-color': '#61bffc',

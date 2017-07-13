@@ -1,6 +1,6 @@
-import {promise} from "selenium-webdriver";
-import {browser} from "protractor";
-import * as fs from "fs";
+import {promise} from 'selenium-webdriver';
+import {browser} from 'protractor';
+import * as fs from 'fs';
 
 export class GraphPromise implements promise.Promise<any> {
 

@@ -1,14 +1,14 @@
-import {Directive} from "@angular/core";
-import {GraphService} from "../graph.service";
-import {EditModeAwareExtension} from "./edit-mode-aware.extension";
+import {Directive} from '@angular/core';
+import {GraphService} from '../graph.service';
+import {EditModeAwareDirective} from './edit-mode-aware.directive';
 
 @Directive({
-  selector: 'app-graph',
+  selector: '[appNodeAddition]',
   providers: [GraphService]
 })
-export class NodeAdditionExtension extends EditModeAwareExtension {
+export class NodeAdditionDirective extends EditModeAwareDirective {
 
-  private wasDeselected: boolean = false;
+  private wasDeselected = false;
 
   editModeActivated() {
     this.graphComponent.getCy().on('tapstart', this.deselectIfThereAreSelectedElements);
@@ -41,7 +41,7 @@ export class NodeAdditionExtension extends EditModeAwareExtension {
 
   private getPosition(event: any) {
     if (event.originalEvent.type === 'touchend') {
-      let touches = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+      const touches = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
       return {x: touches.pageX, y: touches.pageY};
     }
     return {x: event.originalEvent.offsetX, y: event.originalEvent.offsetY};

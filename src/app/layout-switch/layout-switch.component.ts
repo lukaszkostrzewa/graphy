@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
-import {Layout} from "../layout/layout";
-import {LayoutService} from "../layout/layout.service";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Layout} from '../layout/layout';
+import {LayoutService} from '../layout/layout.service';
 
 @Component({
   selector: 'app-layout-switch',

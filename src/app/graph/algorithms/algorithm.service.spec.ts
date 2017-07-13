@@ -1,8 +1,8 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
 import {AlgorithmService} from './algorithm.service';
-import {AlgorithmRunner} from "./algorithm-runner";
-import {GraphService} from "../graph.service";
+import {AlgorithmRunner} from './algorithm-runner';
+import {GraphService} from '../graph.service';
 
 describe('AlgorithmService', () => {
   beforeEach(() => {

@@ -1,6 +1,6 @@
 import CollectionElements = Cy.CollectionElements;
-import {Injectable} from "@angular/core";
-import {GraphService} from "app/graph/graph.service";
+import {Injectable} from '@angular/core';
+import {GraphService} from 'app/graph/graph.service';
 
 @Injectable()
 export class AlgorithmRunner {
@@ -9,10 +9,10 @@ export class AlgorithmRunner {
   }
 
   public run(): Promise<CollectionElements> {
-    throw new Error("Method run not implemented");
+    throw new Error('Method run not implemented');
   }
 
   public name(): string {
-    throw new Error("Method name not implemented");
+    throw new Error('Method name not implemented');
   }
 }
