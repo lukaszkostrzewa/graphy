@@ -1,6 +1,5 @@
 import {GraphService} from "../graph.service";
 import {Injectable} from "@angular/core";
-import {ExportResult} from "./export-result";
 
 @Injectable()
 export class Exporter {
@@ -8,7 +7,7 @@ export class Exporter {
   constructor(protected graphService: GraphService) {
   }
 
-  public doExport(): ExportResult {
+  public doExport(): Blob {
     throw new Error('Method doExport not implemented');
   }
 

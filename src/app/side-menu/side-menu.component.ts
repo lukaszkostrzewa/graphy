@@ -3,7 +3,7 @@ import {MdDialog, MdSidenav} from "@angular/material";
 import {ImportDialogComponent} from "../import-dialog/import-dialog.component";
 import {GraphComponent} from "../graph/graph.component";
 import {NewDialogComponent} from "../new-dialog/new-dialog.component";
-import {ImportGraphResult} from "../common/ImportGraphResult";
+import {ImportGraphResult} from "../common/import-graph-result";
 import {ExportDialogComponent} from "../export-dialog/export-dialog.component";
 import {ShortcutsDialogComponent} from "../shortcuts-dialog/shortcuts-dialog.component";
 import {MainToolbarComponent} from "../main-toolbar/main-toolbar.component";
@@ -36,10 +36,10 @@ export class SideMenuComponent implements OnInit {
   }
 
   exportGraph() {
-    this.dialog.open(ExportDialogComponent, {width: '300px'}).afterClosed()
-      .subscribe(type => {
-        if (type) {
-          this.graphComponent.exportGraph(type);
+    this.dialog.open(ExportDialogComponent, {width: '400px'}).afterClosed()
+      .subscribe(options => {
+        if (options) {
+          this.graphComponent.exportGraph(options);
           this.sideNav.close();
         }
       });

@@ -13,7 +13,6 @@ import {Parser} from "./parsers/parser";
 import {GraphmlParser} from "./parsers/graphml-parser";
 import {MdDialog, MdSnackBar} from "@angular/material";
 import * as FileSaver from "file-saver";
-import * as moment from "moment";
 import * as jquery from "jquery";
 import {I18nPluralPipe} from "@angular/common";
 import {Observable} from "rxjs/Rx";
@@ -24,7 +23,7 @@ import {DfsAlgorithmRunner} from "./algorithms/dfs-algorithm-runner";
 import {KruskalAlgorithmRunner} from "./algorithms/kruskal-algorithm-runner";
 import {DijkstraAlgorithmRunner} from "./algorithms/dijkstra-algorithm-runner";
 import {KargerSteinAlgorithmRunner} from "./algorithms/karger-stein-algorithm-runner";
-import {ImportGraphResult} from "../common/ImportGraphResult";
+import {ImportGraphResult} from "../common/import-graph-result";
 import {ParserService} from "./parsers/parser.service";
 import {JsonGraphParser} from "./parsers/json-graph-parser";
 import {JsonCytoscapeParser} from "./parsers/json-cytoscape-parser";
@@ -46,6 +45,7 @@ import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
 import CollectionFirstNode = Cy.CollectionFirstNode;
 import CollectionNodes = Cy.CollectionNodes;
+import {ExportGraphOptions} from "../common/export-graph-options";
 
 @Component({
   selector: 'app-graph',
@@ -154,11 +154,9 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.parserService.get(result.type).parse(result.content);
   }
 
-  exportGraph(type: string) {
-    let {blob, extension} = this.exportService.doExport(type);
-    let date = moment().format('DD-MM-YYYY-HH-mm-ss');
-    let fileName = `graph-${date}.${extension}`;
-    FileSaver.saveAs(blob, fileName);
+  exportGraph(options: ExportGraphOptions) {
+    let blob = this.exportService.doExport(options.format.id);
+    FileSaver.saveAs(blob, options.getFullName());
   }
 
   locate() {

@@ -1,16 +1,20 @@
 <h1 md-dialog-title>Export Graph</h1>
 <div md-dialog-content>
-  <md-select placeholder="Format" [(ngModel)]="selectedFormat">
+  <md-select placeholder="Format" [(ngModel)]="options.format">
     <md-option *ngFor="let format of supportedFormats" [value]="format">
       {{ format.name }}
     </md-option>
   </md-select>
+  <md-input-container>
+    <input mdInput placeholder="Filename" [(ngModel)]="options.filename">
+    <span mdSuffix>.{{options.format.extension}}</span>
+  </md-input-container>
 </div>
 <div md-dialog-actions align="end">
   <button md-button md-dialog-close>
     Cancel
   </button>
-  <button md-button [md-dialog-close]="selectedFormat?.id">
+  <button md-button [md-dialog-close]="options" id="btn-export">
     Export
   </button>
 </div>

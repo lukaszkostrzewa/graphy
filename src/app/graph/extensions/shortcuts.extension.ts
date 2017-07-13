@@ -8,8 +8,8 @@ import {MainToolbarComponent} from "../../main-toolbar/main-toolbar.component";
 export class ShortcutsExtension {
 
   private shortcutsMap = {
-    '-': this.zoomOut,
-    '=': this.zoomIn,
+    '-': (event) => this.zoomOut(event, false),
+    '=': (event) => this.zoomIn(event, false),
     'delete': this.deleteSelected,
     'backspace': this.deleteSelected,
     'arrowup': this.moveUp,
@@ -54,7 +54,7 @@ export class ShortcutsExtension {
 
   private deleteSelected() {
     this.graphComponent.deleteSelectedElements();
-    return false;
+    return true;
   }
 
   private selectAllNodes(event: KeyboardEvent) {
@@ -137,18 +137,22 @@ export class ShortcutsExtension {
     return false;
   }
 
-  private zoomIn(event: KeyboardEvent) {
-    event.stopImmediatePropagation();
-    event.preventDefault();
+  private zoomIn(event: KeyboardEvent, shouldPreventDefault: boolean = true) {
+    if (shouldPreventDefault) {
+      event.stopImmediatePropagation();
+      event.preventDefault();
+    }
     this.graphComponent.zoomIn();
-    return false;
+    return !shouldPreventDefault;
   }
 
-  private zoomOut(event: KeyboardEvent) {
-    event.stopImmediatePropagation();
-    event.preventDefault();
+  private zoomOut(event: KeyboardEvent, shouldPreventDefault: boolean = true) {
+    if (shouldPreventDefault) {
+      event.stopImmediatePropagation();
+      event.preventDefault();
+    }
     this.graphComponent.zoomOut();
-    return false;
+    return !shouldPreventDefault;
   }
 
   private locate() {

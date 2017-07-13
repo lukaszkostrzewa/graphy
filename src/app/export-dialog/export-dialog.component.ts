@@ -1,29 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from "@angular/core";
+import {ExportGraphOptions} from "../common/export-graph-options";
+import {ExportFormat} from "../common/export-format";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-export-dialog',
   templateUrl: './export-dialog.component.html',
   styleUrls: ['./export-dialog.component.scss']
 })
-export class ExportDialogComponent implements OnInit {
+export class ExportDialogComponent {
 
-  supportedFormats: ExportFormat[] = [
-    {id: 'json-cytoscape', name: 'JSON Cytoscape'},
-    {id: 'graphml', name: 'GraphML'},
-    {id: 'png', name: 'PNG'},
-    {id: 'jpg', name: 'JPG'}
-  ];
-
-  selectedFormat: ExportFormat;
+  supportedFormats: ExportFormat[] = ExportFormat.all();
+  options: ExportGraphOptions = new ExportGraphOptions();
 
   constructor() {
+    this.setDefaultFilename();
   }
 
-  ngOnInit() {
+  private setDefaultFilename() {
+    let date = moment().format('DD-MM-YYYY-HH-mm-ss');
+    this.options.filename = 'graph-' + date;
   }
-}
-
-class ExportFormat {
-  id: string;
-  name: string;
 }
