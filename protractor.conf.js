@@ -13,7 +13,7 @@ exports.config = {
     'platform'     : 'ANY',
     'version'      : 'ANY',
     'chromeOptions': {
-      args : ['--no-sandbox', '--test-type=browser'],
+      args : ['--no-sandbox', '--test-type=browser', '--window-size=800,600'],
       prefs: {
         'download': {
           'prompt_for_download': false,

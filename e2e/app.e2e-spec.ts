@@ -90,8 +90,7 @@ describe('graphy App', () => {
     });
 
     it('should not add node after clicking on graph container in view mode', () => {
-
-      page.graphContainer().click();
+      browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).click().perform();
 
       expect(exportGraph(page).nodesCount()).toEqual(3);
     });
@@ -99,7 +98,7 @@ describe('graphy App', () => {
     it('should add node after clicking on graph container in edit mode', () => {
       page.buttons.edit().click();
 
-      page.graphContainer().click();
+      browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).click().perform();
 
       expect(exportGraph(page).nodesCount()).toEqual(4);
     });
