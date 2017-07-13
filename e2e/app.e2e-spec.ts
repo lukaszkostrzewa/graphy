@@ -90,27 +90,26 @@ describe('graphy App', () => {
     });
 
     it('should not add node after clicking on graph container in view mode', () => {
-      browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).click().perform();
-
-      expect(exportGraph(page).nodesCount()).toEqual(3);
+      browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).perform()
+        .then(() => browser.actions().click().perform())
+        .then(() => expect(exportGraph(page).nodesCount()).toEqual(3));
     });
 
     it('should add node after clicking on graph container in edit mode', () => {
-      page.buttons.edit().click();
-
-      browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).click().perform();
-
-      expect(exportGraph(page).nodesCount()).toEqual(4);
+      page.buttons.edit().click()
+        .then(() => browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).perform())
+        .then(() => browser.actions().click().perform())
+        .then(() => expect(exportGraph(page).nodesCount()).toEqual(4));
     });
 
     it('should remove all nodes and edges after ctrl+a and delete', () => {
-      page.body().sendKeys(protractor.Key.chord(protractor.Key.CONTROL, 'a'));
-      page.body().sendKeys(protractor.Key.DELETE);
-
-      const graph = exportGraph(page);
-
-      expect(graph.nodesCount()).toEqual(0);
-      expect(graph.edgesCount()).toEqual(0);
+      page.body().sendKeys(protractor.Key.chord(protractor.Key.CONTROL, 'a'))
+        .then(() => page.body().sendKeys(protractor.Key.DELETE))
+        .then(() => {
+          const graph = exportGraph(page);
+          expect(graph.nodesCount()).toEqual(0);
+          expect(graph.edgesCount()).toEqual(0);
+        });
     });
   });
 
