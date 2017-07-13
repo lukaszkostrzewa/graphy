@@ -42,7 +42,7 @@ describe('graphy App', () => {
     });
 
     it('should display context menu on right click with proper elements in view mode', () => {
-      browser.actions().mouseMove(page.graphContainer()).perform();
+      browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).perform();
 
       browser.actions().click(protractor.Button.RIGHT).perform();
 
@@ -53,7 +53,7 @@ describe('graphy App', () => {
 
     it('should display context menu on right click with proper elements in edit mode', () => {
       page.buttons.edit().click();
-      browser.actions().mouseMove(page.graphContainer()).perform();
+      browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).perform();
 
       browser.actions().click(protractor.Button.RIGHT).perform();
 
