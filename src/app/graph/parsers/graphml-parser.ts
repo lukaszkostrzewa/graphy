@@ -3,6 +3,7 @@ import cytoscape from 'cytoscape/dist/cytoscape.js';
 import * as graphml from 'cytoscape-graphml';
 import {Injectable} from '@angular/core';
 import {GraphService} from '../graph.service';
+import {GraphFormat} from '../../common/graph-format';
 
 @Injectable()
 export class GraphmlParser extends Parser {
@@ -16,7 +17,11 @@ export class GraphmlParser extends Parser {
     this.graphService.getCy().graphml(content);
   }
 
-  id(): string {
-    return 'graphml';
+  getGraphFormat(): GraphFormat {
+    return {
+      id: 'graphml',
+      name: 'GraphML',
+      extensions: ['.graphml', '.xml']
+    };
   }
 }

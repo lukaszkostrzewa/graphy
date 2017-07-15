@@ -1,12 +1,10 @@
 import cytoscape from 'cytoscape/dist/cytoscape.js';
 import edgehandles from 'cytoscape-edgehandles';
 import {AfterViewInit, Directive} from '@angular/core';
-import {GraphService} from '../graph.service';
 import {EditModeAwareDirective} from './edit-mode-aware.directive';
 
 @Directive({
-  selector: '[appEdgeHandles]',
-  providers: [GraphService]
+  selector: '[appEdgeHandles]'
 })
 export class EdgeHandlesDirective extends EditModeAwareDirective implements AfterViewInit {
 

@@ -5,6 +5,8 @@ import {MdDialogRef, MdSelectModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {FileUploadComponent} from '../file-upload/file-upload.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {Parser} from '../graph/parsers/parser';
+import {GraphService} from '../graph/graph.service';
 
 describe('ImportDialogComponent', () => {
   let component: ImportDialogComponent;
@@ -14,9 +16,11 @@ describe('ImportDialogComponent', () => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, FormsModule, MdSelectModule],
       declarations: [ImportDialogComponent, FileUploadComponent],
-      providers: [{
-        provide: MdDialogRef, useValue: {}
-      }]
+      providers: [
+        GraphService,
+        {provide: MdDialogRef, useValue: {}},
+        {provide: Parser, useValue: []}
+      ]
     })
       .compileComponents();
   }));

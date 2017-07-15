@@ -1,5 +1,6 @@
 import {GraphService} from '../graph.service';
 import {Injectable} from '@angular/core';
+import {GraphFormat} from '../../common/graph-format';
 
 @Injectable()
 export class Exporter {
@@ -11,7 +12,7 @@ export class Exporter {
     throw new Error('Method doExport not implemented');
   }
 
-  public id(): string {
-    throw new Error('Method id not implemented');
+  getGraphFormat(): GraphFormat {
+    throw new Error('Method getGraphFormat not implemented');
   }
 }

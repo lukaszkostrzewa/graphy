@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
-import {GraphFormatsService} from '../graph/formats/graph-formats.service';
-import {GraphFormat} from '../graph/formats/graph-format';
+import {GraphFormat} from '../common/graph-format';
+import {ParserService} from '../graph/parsers/parser.service';
 
 @Component({
   selector: 'app-import-dialog',
   templateUrl: './import-dialog.component.html',
   styleUrls: ['./import-dialog.component.scss'],
-  providers: [GraphFormatsService]
+  providers: [ParserService]
 })
 export class ImportDialogComponent implements OnInit {
 
@@ -15,8 +15,8 @@ export class ImportDialogComponent implements OnInit {
   selectedFormat: GraphFormat;
 
   constructor(public dialogRef: MdDialogRef<ImportDialogComponent>,
-              private graphFormatsService: GraphFormatsService) {
-    this.supportedFormats = this.graphFormatsService.getSupportedFormats();
+              private parserService: ParserService) {
+    this.supportedFormats = this.parserService.getAvailableFormats();
   }
 
   ngOnInit() {

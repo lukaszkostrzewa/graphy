@@ -2,14 +2,12 @@ import * as jquery from 'jquery';
 import cytoscape from 'cytoscape/dist/cytoscape.js';
 import contextMenus from 'cytoscape-context-menus';
 import {AfterViewInit, Directive} from '@angular/core';
-import {GraphService} from '../graph.service';
 import {EditModeAwareDirective} from './edit-mode-aware.directive';
 import ContextMenu = Cy.ContextMenu;
 import Event = JQuery.Event;
 
 @Directive({
-  selector: '[appContextMenus]',
-  providers: [GraphService]
+  selector: '[appContextMenus]'
 })
 export class ContextMenusDirective extends EditModeAwareDirective implements AfterViewInit {
 

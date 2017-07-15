@@ -8,9 +8,6 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-
-import {Parser} from './parsers/parser';
-import {GraphmlParser} from './parsers/graphml-parser';
 import {MdDialog, MdSnackBar} from '@angular/material';
 import * as FileSaver from 'file-saver';
 import * as jquery from 'jquery';
@@ -18,22 +15,9 @@ import {I18nPluralPipe} from '@angular/common';
 import {Observable} from 'rxjs/Rx';
 import {GraphService} from './graph.service';
 import {AlgorithmService} from './algorithms/algorithm.service';
-import {BfsAlgorithmRunner} from './algorithms/bfs-algorithm-runner';
-import {DfsAlgorithmRunner} from './algorithms/dfs-algorithm-runner';
-import {KruskalAlgorithmRunner} from './algorithms/kruskal-algorithm-runner';
-import {DijkstraAlgorithmRunner} from './algorithms/dijkstra-algorithm-runner';
-import {KargerSteinAlgorithmRunner} from './algorithms/karger-stein-algorithm-runner';
 import {ImportGraphResult} from '../common/import-graph-result';
 import {ParserService} from './parsers/parser.service';
-import {JsonGraphParser} from './parsers/json-graph-parser';
-import {JsonCytoscapeParser} from './parsers/json-cytoscape-parser';
-import {AlgorithmRunner} from './algorithms/algorithm-runner';
 import {ExportService} from './export/export.service';
-import {Exporter} from './export/exporter';
-import {JsonCytoscapeExporter} from './export/json-cytoscape-exporter';
-import {GraphmlExporter} from './export/graphml-exporter';
-import {JpgExporter} from 'app/graph/export/jpg-exporter';
-import {PngExporter} from './export/png-exporter';
 import * as cytoscape from 'cytoscape/dist/cytoscape.js';
 import * as undoRedo from 'cytoscape-undo-redo';
 import * as clipboard from 'cytoscape-clipboard';
@@ -52,19 +36,7 @@ import CollectionNodes = Cy.CollectionNodes;
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
   providers: [
-    I18nPluralPipe, GraphService, AlgorithmService, ParserService, ExportService,
-    {provide: AlgorithmRunner, useClass: BfsAlgorithmRunner, multi: true},
-    {provide: AlgorithmRunner, useClass: DfsAlgorithmRunner, multi: true},
-    {provide: AlgorithmRunner, useClass: DijkstraAlgorithmRunner, multi: true},
-    {provide: AlgorithmRunner, useClass: KruskalAlgorithmRunner, multi: true},
-    {provide: AlgorithmRunner, useClass: KargerSteinAlgorithmRunner, multi: true},
-    {provide: Parser, useClass: JsonGraphParser, multi: true},
-    {provide: Parser, useClass: JsonCytoscapeParser, multi: true},
-    {provide: Parser, useClass: GraphmlParser, multi: true},
-    {provide: Exporter, useClass: JsonCytoscapeExporter, multi: true},
-    {provide: Exporter, useClass: GraphmlExporter, multi: true},
-    {provide: Exporter, useClass: PngExporter, multi: true},
-    {provide: Exporter, useClass: JpgExporter, multi: true}
+    I18nPluralPipe, AlgorithmService, ParserService, ExportService
   ]
 })
 export class GraphComponent implements OnInit, AfterViewInit {

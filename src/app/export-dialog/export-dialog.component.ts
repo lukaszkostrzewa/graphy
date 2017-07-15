@@ -1,19 +1,23 @@
 import {Component} from '@angular/core';
 import {ExportGraphOptions} from '../common/export-graph-options';
-import {ExportFormat} from '../common/export-format';
 import * as moment from 'moment';
+import {ExportService} from '../graph/export/export.service';
+import {GraphFormat} from '../common/graph-format';
 
 @Component({
   selector: 'app-export-dialog',
   templateUrl: './export-dialog.component.html',
-  styleUrls: ['./export-dialog.component.scss']
+  styleUrls: ['./export-dialog.component.scss'],
+  providers: [ExportService]
 })
 export class ExportDialogComponent {
 
-  supportedFormats: ExportFormat[] = ExportFormat.all();
+  supportedFormats: GraphFormat[];
   options: ExportGraphOptions = new ExportGraphOptions();
 
-  constructor() {
+  constructor(private exportService: ExportService) {
+    this.supportedFormats = this.exportService.getAvailableFormats();
+    this.options.format = this.supportedFormats[0];
     this.setDefaultFilename();
   }
 

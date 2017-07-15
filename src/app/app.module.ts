@@ -50,6 +50,8 @@ import {GraphOptionsDialogComponent} from './graph-options-dialog/graph-options-
 import {AlgorithmsMenuComponent} from './algorithms-menu/algorithms-menu.component';
 import {EditModeAwareDirective} from './graph/extensions/edit-mode-aware.directive';
 import {FirstLetterPipe} from './common/first-letter.pipe';
+import {GraphService} from './graph/graph.service';
+import {parsers, exporters, algorithms} from './services.config';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,12 @@ import {FirstLetterPipe} from './common/first-letter.pipe';
     ShortcutsDialogComponent,
     GraphOptionsDialogComponent
   ],
-  providers: [],
+  providers: [
+    GraphService,
+    ...parsers,
+    ...exporters,
+    ...algorithms
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

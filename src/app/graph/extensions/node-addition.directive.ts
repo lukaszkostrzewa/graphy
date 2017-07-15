@@ -1,10 +1,8 @@
 import {Directive} from '@angular/core';
-import {GraphService} from '../graph.service';
 import {EditModeAwareDirective} from './edit-mode-aware.directive';
 
 @Directive({
-  selector: '[appNodeAddition]',
-  providers: [GraphService]
+  selector: '[appNodeAddition]'
 })
 export class NodeAdditionDirective extends EditModeAwareDirective {
 

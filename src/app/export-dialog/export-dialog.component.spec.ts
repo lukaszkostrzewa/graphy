@@ -4,6 +4,8 @@ import {ExportDialogComponent} from './export-dialog.component';
 import {FormsModule} from '@angular/forms';
 import {MdDialogModule, MdDialogRef, MdInputModule, MdSelectModule} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {Exporter} from '../graph/export/exporter';
+import {GraphService} from '../graph/graph.service';
 
 describe('ExportDialogComponent', () => {
   let component: ExportDialogComponent;
@@ -13,9 +15,19 @@ describe('ExportDialogComponent', () => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, FormsModule, MdSelectModule, MdDialogModule, MdInputModule],
       declarations: [ExportDialogComponent],
-      providers: [{
-        provide: MdDialogRef, useValue: {}
-      }]
+      providers: [
+        GraphService,
+        {provide: MdDialogRef, useValue: {}},
+        {
+          provide: Exporter, useValue: [{
+          getGraphFormat: () => {
+            return {
+              extensions: []
+            };
+          }
+        }]
+        }
+      ]
     }).compileComponents();
   }));
 

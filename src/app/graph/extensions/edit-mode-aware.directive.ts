@@ -4,8 +4,7 @@ import {GraphService} from '../graph.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Directive({
-  selector: '[appEditModeAware]',
-  providers: [GraphService]
+  selector: '[appEditModeAware]'
 })
 export class EditModeAwareDirective implements OnDestroy {
 

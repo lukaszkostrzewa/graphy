@@ -1,5 +1,6 @@
 import {Parser} from './parser';
 import {Injectable} from '@angular/core';
+import {GraphFormat} from '../../common/graph-format';
 
 @Injectable()
 export class JsonGraphParser extends Parser {
@@ -18,7 +19,11 @@ export class JsonGraphParser extends Parser {
     this.graphService.getCy().json({elements});
   }
 
-  id(): string {
-    return 'json-graph';
+  getGraphFormat(): GraphFormat {
+    return {
+      id: 'json-graph',
+      name: 'JSON Graph',
+      extensions: ['.json', '.txt']
+    };
   }
 }

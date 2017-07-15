@@ -6,6 +6,10 @@ import {OptionsButtonComponent} from '../options-button/options-button.component
 import {LocateButtonComponent} from '../locate-button/locate-button.component';
 import {LayoutSwitchComponent} from '../layout-switch/layout-switch.component';
 import {MdDialogModule, MdMenuModule, MdSnackBarModule, MdTooltipModule} from '@angular/material';
+import {AlgorithmRunner} from './algorithms/algorithm-runner';
+import {GraphService} from './graph.service';
+import {Parser} from './parsers/parser';
+import {Exporter} from './export/exporter';
 
 describe('GraphComponent', () => {
   let component: GraphComponent;
@@ -17,6 +21,12 @@ describe('GraphComponent', () => {
       declarations: [
         GraphComponent, ZoomButtonsComponent, OptionsButtonComponent, LocateButtonComponent,
         LayoutSwitchComponent
+      ],
+      providers: [
+        GraphService,
+        {provide: AlgorithmRunner, useValue: []},
+        {provide: Parser, useValue: []},
+        {provide: Exporter, useValue: []},
       ]
     })
       .compileComponents();

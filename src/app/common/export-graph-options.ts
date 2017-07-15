@@ -1,11 +1,11 @@
-import {ExportFormat} from './export-format';
+import {GraphFormat} from './graph-format';
 
 export class ExportGraphOptions {
 
   filename: string;
-  format: ExportFormat = ExportFormat.jsonCytoscape();
+  format: GraphFormat;
 
   getFullName() {
-    return this.filename + '.' + this.format.extension;
+    return this.filename + this.format.extensions[0];
   }
 }

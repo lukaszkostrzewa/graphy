@@ -21,6 +21,10 @@ import {OptionsButtonComponent} from './options-button/options-button.component'
 import {LocateButtonComponent} from './locate-button/locate-button.component';
 import {LayoutSwitchComponent} from './layout-switch/layout-switch.component';
 import {FirstLetterPipe} from './common/first-letter.pipe';
+import {AlgorithmRunner} from './graph/algorithms/algorithm-runner';
+import {GraphService} from './graph/graph.service';
+import {Parser} from './graph/parsers/parser';
+import {Exporter} from './graph/export/exporter';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -33,6 +37,12 @@ describe('AppComponent', () => {
         AppComponent, AccountButtonComponent, HintsComponent, GraphComponent, MainToolbarComponent,
         SideMenuComponent, AlgorithmsMenuComponent, ZoomButtonsComponent, OptionsButtonComponent,
         LocateButtonComponent, LayoutSwitchComponent, FirstLetterPipe
+      ],
+      providers: [
+        {provide: AlgorithmRunner, useValue: []},
+        {provide: Parser, useValue: []},
+        {provide: Exporter, useValue: []},
+        GraphService
       ]
     }).compileComponents();
   }));

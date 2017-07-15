@@ -1,5 +1,6 @@
 import {Parser} from './parser';
 import {Injectable} from '@angular/core';
+import {GraphFormat} from '../../common/graph-format';
 
 @Injectable()
 export class JsonCytoscapeParser extends Parser {
@@ -9,7 +10,11 @@ export class JsonCytoscapeParser extends Parser {
     this.graphService.getCy().json({elements});
   }
 
-  id(): string {
-    return 'json-cytoscape';
+  getGraphFormat(): GraphFormat {
+    return {
+      id: 'json-cytoscape',
+      name: 'JSON Cytoscape',
+      extensions: ['.json', '.txt']
+    };
   }
 }

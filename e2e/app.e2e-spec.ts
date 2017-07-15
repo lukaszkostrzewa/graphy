@@ -98,7 +98,10 @@ describe('graphy App', () => {
     it('should add node after clicking on graph container in edit mode', () => {
       page.buttons.edit().click()
         .then(() => browser.actions().mouseMove(page.graphContainer(), {x: 0, y: 0}).perform())
-        .then(() => browser.actions().click().perform())
+        .then(() => {
+          browser.sleep(200);
+          return browser.actions().click().perform();
+        })
         .then(() => expect(exportGraph(page).nodesCount()).toEqual(4));
     });
 
