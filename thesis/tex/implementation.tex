@@ -4,7 +4,7 @@ Rozdział ten zawiera wszystkie informacje dotyczące aplikacji noszącej nazwę
 
 Przedstawię w nim użyte narzędzia i biblioteki oraz architekturę systemu. Opiszę również działanie aplikacji: które funkcjonalności udało mi się zaimplementować, a które wymagają dalszej pracy. 
 
-Znajdzie się tutaj również sekcja o testach aplikacji (jednostkowych, \textit{end-to-end} oraz manualnych). Następnie pojawią się bardziej techniczne informacje dla programistów, opisujące w jaki sposób zrealizować typowe zadanie takie jak: dodanie nowego algorytmu, parsera czy skrótu klawiszowego. Na samym końcu przedstawię pomysły, w jaki sposób można dalej rozwijać aplikację.
+Znajdzie się tutaj również sekcja o testach aplikacji (jednostkowych, \textit{end-to-end} oraz manualnych). Następnie pojawią się bardziej techniczne informacje dla programistów, opisujące w jaki sposób zrealizować typowe zadanie takie jak np. dodanie nowego parsera czy algorytmu. Na samym końcu przedstawię pomysły, w jaki sposób można dalej rozwijać aplikację.
 
 \section{Podstawowe informacje}
 
@@ -12,7 +12,7 @@ Aplikacja została napisana w języku TypeScript -- wolnym i otwartym języku pr
 
 Projekt korzysta z systemu kontroli wersji Git i jego repozytorium kodu znajduje się w serwisie GitHub. Wersja demonstracyjna aplikacji jest udostępniona na serwerach GitHub Pages. Adresy repozytorium i wersji demonstracyjnej znajdują się w poniższej tabeli.
 
-\bigskip
+\bigskip\bigskip
 \noindent\begin{tabularx}{\textwidth}{r|X|}
 \cline{2-2}
   Repozytorium kodu & \hyperref[https://github.com/lukaszkostrzewa/graphy]{https://github.com/lukaszkostrzewa/graphy} \\ 
@@ -20,7 +20,7 @@ Projekt korzysta z systemu kontroli wersji Git i jego repozytorium kodu znajduje
  Wersja demonstracyjna & \hyperref[https://lukaszkostrzewa.github.io]{https://lukaszkostrzewa.github.io} \\ 
 \cline{2-2}
 \end{tabularx} 
-\bigskip
+\bigskip\bigskip
 
 Jest to aplikacja \textit{front-endowa}. Oznacza to, że w chwili obecnej nie komunikuje się ona z serwerem ani zewnętrznymi serwisami (np. w celu zapisania czy zaimportowania grafu). Wszystkie operacje są wykonywane po stronie klienta, tzn. po stronie przeglądarki internetowej. Przy dalszym rozwoju aplikacji konieczne może okazać się napisanie drugiej, odseparowanej aplikacji pełniącej rolę \textit{back-endu}, która będzie wystawiać serwisy umożliwiające komunikację z bazą danych czy z innymi użytkownikami (np. udostępnianie grafu w czasie rzeczywistym).
 
@@ -86,7 +86,7 @@ Zarys architektury wraz z zaznaczonymi ważniejszymi komponentami, serwisami i d
 \centerline{\includegraphics[width=1.1\textwidth]{architecture}}
 \captionsetup{justification=centering,aboveskip=24pt}
 \caption{Zarys architektury projektu \\ (niektóre komponenty zostały pominięte)}
-\label{fig:protractor}\label{fig:architecture}
+\label{fig:architecture}
 \end{figure}
 
 \begin{figure}[H]
@@ -106,7 +106,7 @@ Aplikacja Graphy z zaznaczonymi głównymi komponentami:
 \item \texttt{ZoomButtonsComponent}
 \end{enumerate}
 }
-\label{fig:protractor}
+\label{fig:graphy-app}
 \end{figure}
 
 \section{Zaimplementowane funkcjonalności}
@@ -164,22 +164,53 @@ Aby dodać nowy parser należy:
 \setlength\itemsep{0em}
 \item Utworzyć nową klasę \texttt{NowyFormatParser} w pliku o nazwie \\ \texttt{nowy-format-parser.ts} w katalogu \texttt{app/graph/parsers/}.
 
-\item Podziedziczyć po klasie \texttt{Parser} i zaimplementować dwie metody: \\ \texttt{parse()} oraz \texttt{id()}.
+\item Rozszerzyć klasę \texttt{Parser} i zaimplementować dwie metody: \\ \texttt{parse()} oraz \texttt{getGraphFormat()}.
 
-\item Zarejestrować nowego \textit{providera} w \texttt{GraphComponent} poprzez dodanie do tablicy \texttt{providers} nowego obiektu:\\
-\texttt{\{provide: Parser, useClass: NowyFormatParser, multi: true\},}
-
-\item Dodać nowy format w serwisie \texttt{GraphFormatsService} poprzez dodanie do tablicy zwracanej przez metodę \texttt{getSupportedFormats()} nowego obiektu : \\
-\texttt{\{id: '', name: '', extensions: ['']}\}, \\ 
-gdzie: \\
-\texttt{id} -- wartość zwracana przez metodę \texttt{id()} w klasie \texttt{NowyFormatParser}, \texttt{name} -- nazwa wyświetlana na liście w oknie do importowania grafu,\\ \texttt{extensions} -- tablica dopuszczalnych rozszerzeń dla danego formatu.
+\item Zarejestrować nowego \textit{providera} w pliku \texttt{services.config.ts} poprzez dodanie do tablicy \texttt{parsers} nowego obiektu:
+\begin{minted}{js}
+{
+  provide: Parser, 
+  useClass: NowyFormatParser, 
+  multi: true
+},
+\end{minted}
 \end{enumerate}
 
 \subsection*{Dodawanie nowego eksportera}
 
+\begin{enumerate}
+\setlength\itemsep{0em}
+\item Utworzyć nową klasę \texttt{NowyFormatExporter} w pliku o nazwie \\ \texttt{nowy-format-exporter.ts} w katalogu \texttt{app/graph/export/}.
+
+\item Rozszerzyć klasę \texttt{Exporter} i zaimplementować dwie metody: \\ \texttt{doExport()} oraz \texttt{getGraphFormat()}.
+
+\item Zarejestrować nowego \textit{providera} w pliku \texttt{services.config.ts} poprzez dodanie do tablicy \texttt{exporters} nowego obiektu:
+\begin{minted}{js}
+{
+  provide: Exporter, 
+  useClass: NowyFormatExporter, 
+  multi: true
+},
+\end{minted}
+\end{enumerate}
+
 \subsection*{Dodawanie nowego algorytmu}
 
-\subsection*{Dodawanie nowego skrótu klawiszowego}
+\begin{enumerate}
+\setlength\itemsep{0em}
+\item Utworzyć nową klasę \texttt{NowyAlgorytmAlgorithmRunner} w pliku o nazwie \\ \texttt{nowy-algorytm-algorithm-runner.ts} w katalogu \\ \texttt{app/graph/algorithms/}.
+
+\item Rozszerzyć klasę \texttt{AlgorithmRunner} i zaimplementować dwie metody: \\ \texttt{run()} oraz \texttt{name()}.
+
+\item Zarejestrować nowego \textit{providera} w pliku \texttt{services.config.ts} poprzez dodanie do tablicy \texttt{algorithms} nowego obiektu:
+\begin{minted}{js}
+{
+  provide: AlgorithmRunner, 
+  useClass: NowyAlgorytmAlgorithmRunner, 
+  multi: true
+},
+\end{minted}
+\end{enumerate}
 
 \section{Testy}\label{sec:tests}
 
@@ -220,3 +251,121 @@ Jedynym mankamentem jest zaznaczanie przez pole (ang. \textit{box selection}), k
 
 Ponadto aplikacja Graphy została sprawdzona na telefonie o przekątnej ekranu 4,7 cala i rozdzielczości 540$\times$960 px. Korzystanie z niej było również możliwe i wygląda na to, że wszystkie funkcjonalności działają poprawnie. Dzięki zastosowaniu reguły \texttt{@media} z CSS3 możliwe było dostosowanie interfejsu pod tak niską rozdzielczość (główne menu jest ukrywane i wyświetlane w bocznym, rozsuwanym menu). 
 
+\section{Przykład użycia}
+
+W sekcji tej przedstawię, w jaki sposób użytkownik może wczytać graf, dodać do niego wierzchołek i krawędź z wagą, wykonać na grafie algorytm znajdujący najkrótszą ścieżkę, a następnie wyeksportować rezultat.
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=0.8\textwidth]{use-case-1}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item Otwórz boczne menu.
+\end{footnotesize}
+\end{enumerate}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=0.8\textwidth]{use-case-2}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setcounter{enumi}{1}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item Kliknij Otwórz (ang. \textit{Open})
+\item Wybierz format grafu.
+\item Wybierz plik z dysku.
+\end{footnotesize}
+\end{enumerate}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.0\textwidth]{use-case-3}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setcounter{enumi}{4}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item Kliknij Edycja (ang. \textit{Edit})
+\item Kliknij na puste miejsce w obszarze roboczym.
+\item Z nowo powstałego wierzchołka przeciągnij krawędź.
+\end{footnotesize}
+\end{enumerate}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.0\textwidth]{use-case-4}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setcounter{enumi}{7}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item Kliknij prawym przyciskiem myszki na nowo utworzoną krawędź i wybierz Edycja. (ang. \textit{Edit})
+\end{footnotesize}
+\end{enumerate}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.0\textwidth]{use-case-5}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setcounter{enumi}{8}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item W oknie dialogowym wpisz wagę nowej krawędzi (ang. \textit{Weight}).
+\item Kliknij Zapisz (ang. \textit{Save}).
+\end{footnotesize}
+\end{enumerate}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.0\textwidth]{use-case-6}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setcounter{enumi}{10}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item Z głównego menu kliknij Algorytmy (ang. \textit{Algorithms}).
+\item Wybierz Algorytm Dijkstry (ang. \textit{Dijkstra's Algorithm}).
+\end{footnotesize}
+\end{enumerate}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.0\textwidth]{use-case-7}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setcounter{enumi}{12}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item Klikając prawym klawiszem myszki wybierz wierzchołek startowy...
+\item ... oraz wierzchołek końcowy.
+\end{footnotesize}
+\end{enumerate}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.0\textwidth]{use-case-8}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setcounter{enumi}{14}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item Krawędzie najkrótszej ścieżki będą po kolei oznaczane kolorem jasnoniebieskim.
+\end{footnotesize}
+\end{enumerate}
+
+\begin{figure}[H]
+\centerline{\includegraphics[width=1.0\textwidth]{use-case-9}}
+\end{figure}
+\begin{enumerate}
+\begin{footnotesize}
+\setcounter{enumi}{15}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\item Aby wyeksportować rezultat z bocznego menu wybierz opcję Export.
+\item Wybierz format (np. PNG) oraz nazwę pliku, i kliknij Export.
+\end{footnotesize}
+\end{enumerate}
