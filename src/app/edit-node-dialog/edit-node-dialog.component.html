@@ -7,7 +7,7 @@
     <input mdInput placeholder="Parent" value="{{parent}}" disabled>
   </md-input-container>
   <md-input-container>
-    <input mdInput placeholder="Label" value="{{label}}">
+    <input mdInput placeholder="Label" [(ngModel)]="label">
   </md-input-container>
   <md-select placeholder="Shape" [(ngModel)]="selectedShape">
     <md-option *ngFor="let shape of shapes" [value]="shape">
