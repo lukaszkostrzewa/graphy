@@ -22,7 +22,8 @@ export class OptionsButtonComponent implements OnInit {
   openGraphOptionsDialog() {
     this.dialog.open(GraphOptionsDialogComponent, {
       data: this.graphOptions,
-      width: '400px'
+      width: '450px',
+      height: '300px'
     }).afterClosed()
       .subscribe(result => result && this.optionsChanged.emit(result));
   }
