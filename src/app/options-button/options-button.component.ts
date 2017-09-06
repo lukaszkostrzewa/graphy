@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MdDialog} from '@angular/material';
 import {GraphOptionsDialogComponent} from '../graph-options-dialog/graph-options-dialog.component';
+import {GraphOptions} from '../common/graph-options';
 
 @Component({
   selector: 'app-options-button',
@@ -9,8 +10,8 @@ import {GraphOptionsDialogComponent} from '../graph-options-dialog/graph-options
 })
 export class OptionsButtonComponent implements OnInit {
 
-  @Output() directionalityChanged = new EventEmitter<boolean>();
-  @Input() directedGraph: boolean;
+  @Output() optionsChanged = new EventEmitter<boolean>();
+  @Input() graphOptions: GraphOptions;
 
   constructor(private dialog: MdDialog) {
   }
@@ -20,9 +21,9 @@ export class OptionsButtonComponent implements OnInit {
 
   openGraphOptionsDialog() {
     this.dialog.open(GraphOptionsDialogComponent, {
-      data: {directedGraph: this.directedGraph},
+      data: this.graphOptions,
       width: '400px'
     }).afterClosed()
-      .subscribe(result => this.directionalityChanged.emit(result));
+      .subscribe(result => result && this.optionsChanged.emit(result));
   }
 }

@@ -1,13 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import * as cytoscape from 'cytoscape/dist/cytoscape.js';
+import {GraphOptions} from '../common/graph-options';
 
 @Injectable()
 export class GraphService {
 
-  private cy: Cy.Instance;
+  private static readonly DEFAULT_OPTIONS: GraphOptions = {
+    directed: false,
+    showEdgeLabels: false
+  };
 
-  private directed: boolean;
+  private cy: Cy.Instance;
+  private options = GraphService.DEFAULT_OPTIONS;
   private editSubject = new Subject<boolean>();
   editObservable = this.editSubject.asObservable();
 
@@ -114,6 +119,11 @@ export class GraphService {
           'target-arrow-shape': 'triangle'
         }
       }, {
+        'selector': 'edge.labelled',
+        'style': {
+          'content': 'data(label)',
+        }
+      }, {
         'selector': '.highlighted',
         'style': {
           'background-color': '#61bffc',
@@ -153,11 +163,15 @@ export class GraphService {
     };
   }
 
-  setDirected(directed: boolean) {
-    this.directed = directed;
+  setOptions(options: GraphOptions) {
+    this.options = options;
+  }
+
+  getOptions(): GraphOptions {
+    return this.options;
   }
 
   isDirected() {
-    return this.directed;
+    return this.options.directed;
   }
 }

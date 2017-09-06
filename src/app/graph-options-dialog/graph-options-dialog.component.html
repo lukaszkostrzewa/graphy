@@ -4,12 +4,14 @@
     <input mdInput placeholder="Name" value="Graph name">
   </md-input-container>
   <div class="checkbox-container">
-    <md-checkbox [(ngModel)]="directedGraph">Directed Graph</md-checkbox>
+    <md-checkbox [(ngModel)]="options.directed">Directed Graph</md-checkbox>
   </div>
+  <md-slide-toggle [(ngModel)]="options.showEdgeLabels">Show edge labels instead of weights
+  </md-slide-toggle>
 </div>
 <div md-dialog-actions align="end">
   <button md-button md-dialog-close>
     Cancel
   </button>
-  <button md-button [md-dialog-close]="directedGraph">Save</button>
+  <button md-button [md-dialog-close]="options">Save</button>
 </div>

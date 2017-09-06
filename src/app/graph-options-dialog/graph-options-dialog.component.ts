@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MD_DIALOG_DATA} from '@angular/material';
+import {GraphOptions} from '../common/graph-options';
 
 @Component({
   selector: 'app-graph-options-dialog',
@@ -8,10 +9,10 @@ import {MD_DIALOG_DATA} from '@angular/material';
 })
 export class GraphOptionsDialogComponent implements OnInit {
 
-  public directedGraph: boolean;
+  public options: GraphOptions;
 
   constructor(@Inject(MD_DIALOG_DATA) public data: any) {
-    this.directedGraph = data.directedGraph;
+    this.options = Object.assign({}, data);
   }
 
   ngOnInit() {

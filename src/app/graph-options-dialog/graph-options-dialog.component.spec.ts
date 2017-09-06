@@ -6,7 +6,7 @@ import {
   MdCheckboxModule,
   MdDialogModule,
   MdDialogRef,
-  MdInputModule
+  MdInputModule, MdSlideToggleModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -17,10 +17,11 @@ describe('GraphOptionsDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, FormsModule, MdInputModule, MdCheckboxModule, MdDialogModule],
+      imports: [NoopAnimationsModule, FormsModule, MdInputModule, MdCheckboxModule, MdDialogModule,
+        MdSlideToggleModule],
       declarations: [GraphOptionsDialogComponent],
       providers: [{
-        provide: MD_DIALOG_DATA, useValue: {directedGraph: false}
+        provide: MD_DIALOG_DATA, useValue: {directed: false, showEdgeLabels: false}
       }, {
         provide: MdDialogRef, useValue: {}
       }]

@@ -26,10 +26,8 @@ import {EditEdgeDialogComponent} from '../edit-edge-dialog/edit-edge-dialog.comp
 import {MainToolbarComponent} from '../main-toolbar/main-toolbar.component';
 import {ExportGraphOptions} from '../common/export-graph-options';
 import Position = Cy.Position;
-import ElementDefinition = Cy.ElementDefinition;
 import CollectionElements = Cy.CollectionElements;
-import CollectionFirstNode = Cy.CollectionFirstNode;
-import CollectionNodes = Cy.CollectionNodes;
+import {GraphOptions} from '../common/graph-options';
 
 @Component({
   selector: 'app-graph',
@@ -293,18 +291,35 @@ export class GraphComponent implements OnInit, AfterViewInit {
     this.undoRedo.do('remove', elements);
   }
 
-  directionalityChanged(directed) {
-    this.graphService.setDirected(directed);
+  optionsChanged(options: GraphOptions) {
+    this.graphService.setOptions(options);
+    this.updateDirectionality(options.directed);
+    this.updateShowEdgeLabels(options.showEdgeLabels);
+  }
+
+  private updateDirectionality(directed) {
+    this.updateClassBasingOnProperty(directed, 'directed');
+  }
+
+  private updateShowEdgeLabels(showEdgeLabels) {
+    this.updateClassBasingOnProperty(showEdgeLabels, 'labelled');
+  }
+
+  private updateClassBasingOnProperty(property, className) {
     this.cy.batch(() => {
-      if (directed) {
-        this.cy.edges().addClass('directed');
+      if (property) {
+        this.cy.edges().addClass(className);
       } else {
-        this.cy.edges().removeClass('directed');
+        this.cy.edges().removeClass(className);
       }
     });
   }
 
   isDirected(): boolean {
     return this.graphService.isDirected();
+  }
+
+  getGraphOptions(): GraphOptions {
+    return this.graphService.getOptions();
   }
 }

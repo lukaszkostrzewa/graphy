@@ -17,6 +17,7 @@ import {
   MdSelectModule,
   MdSidenavModule,
   MdSliderModule,
+  MdSlideToggleModule,
   MdSnackBarModule,
   MdToolbarModule,
   MdTooltipModule
@@ -51,7 +52,7 @@ import {AlgorithmsMenuComponent} from './algorithms-menu/algorithms-menu.compone
 import {EditModeAwareDirective} from './graph/extensions/edit-mode-aware.directive';
 import {FirstLetterPipe} from './common/first-letter.pipe';
 import {GraphService} from './graph/graph.service';
-import {parsers, exporters, algorithms} from './services.config';
+import {algorithms, exporters, parsers} from './services.config';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import {parsers, exporters, algorithms} from './services.config';
     MdAutocompleteModule,
     MdSelectModule,
     MdSliderModule,
-    MdCheckboxModule
+    MdCheckboxModule,
+    MdSlideToggleModule
   ],
   entryComponents: [
     ImportDialogComponent,
